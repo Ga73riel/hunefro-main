@@ -1,0 +1,885 @@
+:root {
+  --hn-bg: #f5f8f8;
+  --hn-surface: #ffffff;
+  --hn-surface-soft: #f5f8f8;
+  --hn-text-900: #172b35;
+  --hn-text-700: #425b66;
+  --hn-text-500: #5a717b;
+  --hn-text-400: #8092a0;
+  --hn-primary-900: #075550;
+  --hn-primary-800: #075550;
+  --hn-primary-700: #066961;
+  --hn-primary-600: #087f78;
+  --hn-primary-100: #d4efec;
+  --hn-primary-50: #edf8f7;
+  --hn-border: #dbe4e6;
+  --hn-border-strong: #b8c8cd;
+  --hn-danger-strong: #922f37;
+  --hn-danger-soft: #fff0f1;
+  --hn-info-soft: #eef5fa;
+  --hn-success: #24744d;
+  --hn-success-soft: #edf7f1;
+  --hn-success-border: #bcdcc9;
+  --hn-radius-sm: 0.5rem;
+  --hn-radius-md: 0.7rem;
+  --hn-radius-lg: 0.9rem;
+  --hn-shadow-sm: 0 3px 12px rgba(23, 43, 53, 0.05);
+  --hn-shadow-md: 0 14px 34px rgba(23, 43, 53, 0.12);
+  --hn-header-height: 68px;
+}
+
+/* --------------------------------------------------------------------------
+   Cores do design system Hu-Nefro
+   -------------------------------------------------------------------------- */
+
+.btn-primary {
+  --bs-btn-bg: var(--hn-primary-600);
+  --bs-btn-border-color: var(--hn-primary-600);
+  --bs-btn-hover-bg: var(--hn-primary-700);
+  --bs-btn-hover-border-color: var(--hn-primary-700);
+  --bs-btn-active-bg: var(--hn-primary-800);
+  --bs-btn-active-border-color: var(--hn-primary-800);
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--hn-primary-700);
+  --bs-btn-border-color: var(--hn-primary-600);
+  --bs-btn-hover-bg: var(--hn-primary-700);
+  --bs-btn-hover-border-color: var(--hn-primary-700);
+  --bs-btn-hover-color: #fff;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--hn-primary-600);
+  box-shadow: 0 0 0 0.2rem rgba(8, 127, 120, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--hn-bg);
+  color: var(--hn-text-900);
+  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(8, 127, 120, 0.24);
+  outline-offset: 2px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.skip-link {
+  position: absolute;
+  top: -4rem;
+  left: 1rem;
+  z-index: 2000;
+  padding: 0.7rem 0.95rem;
+  border-radius: var(--hn-radius-sm);
+  background: var(--hn-primary-900);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: var(--hn-shadow-md);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   Cabeçalho
+   -------------------------------------------------------------------------- */
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  min-height: var(--hn-header-height);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1.5rem;
+  background: rgba(255, 255, 255, 0.98);
+  border-bottom: 1px solid var(--hn-border);
+  backdrop-filter: blur(8px);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--hn-text-900);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.brand-mark {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 0.6rem;
+  background: var(--hn-primary-700);
+  color: #fff;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.header-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.logout-button {
+  min-height: 40px;
+  min-width: 72px;
+  border-color: var(--hn-border-strong);
+  color: var(--hn-text-700);
+  background: var(--hn-surface);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.logout-button:hover,
+.logout-button:focus-visible {
+  border-color: var(--hn-primary-700);
+  background: var(--hn-primary-50);
+  color: var(--hn-primary-900);
+}
+
+/* --------------------------------------------------------------------------
+   Estrutura principal
+   -------------------------------------------------------------------------- */
+
+.app-main {
+  min-width: 0;
+  width: 100%;
+  max-width: 100rem;
+  padding: 2.5rem 3.5rem 4rem;
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   Página
+   -------------------------------------------------------------------------- */
+
+.breadcrumb {
+  margin-bottom: 1.25rem;
+  font-size: 0.78rem;
+}
+
+.breadcrumb-item.active {
+  color: var(--hn-text-700);
+}
+
+.page-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.35rem;
+}
+
+.page-heading h1 {
+  margin: 0;
+  color: var(--hn-text-900);
+  font-size: clamp(2rem, 3vw, 2.65rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+}
+
+.page-heading p {
+  margin: 0.6rem 0 0;
+  color: var(--hn-text-500);
+  font-size: 0.94rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  color: var(--hn-primary-900);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+
+.page-feedback {
+  margin-bottom: 1rem;
+}
+
+.feedback-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+/* --------------------------------------------------------------------------
+   Lista de pacientes
+   -------------------------------------------------------------------------- */
+
+.patient-list-card {
+  overflow: hidden;
+  border: 1px solid var(--hn-border);
+  border-radius: var(--hn-radius-lg);
+  background: var(--hn-surface);
+  box-shadow: var(--hn-shadow-sm);
+}
+
+.patient-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.2rem 1.35rem;
+  background: var(--hn-surface);
+  border-bottom: 1px solid var(--hn-border);
+}
+
+.patient-list-header h2 {
+  margin: 0;
+  color: var(--hn-text-900);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.patient-list-header p {
+  margin: 0.25rem 0 0;
+  color: var(--hn-text-500);
+  font-size: 0.78rem;
+}
+
+.clear-filters {
+  padding-right: 0;
+  padding-left: 0;
+  color: var(--hn-primary-900);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.clear-filters:hover {
+  color: var(--hn-primary-700);
+  text-decoration: underline;
+}
+
+.patient-filters {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(16rem, 0.8fr);
+  gap: 0.9rem 1rem;
+  padding: 1.2rem 1.35rem;
+  border-bottom: 1px solid var(--hn-border);
+}
+
+.patient-search-field {
+  min-width: 0;
+}
+
+.form-label {
+  margin-bottom: 0.42rem;
+  color: var(--hn-text-700);
+  font-size: 0.73rem;
+  font-weight: 800;
+}
+
+.patient-filters .form-control,
+.patient-filters .form-select {
+  min-height: 46px;
+  border-color: var(--hn-border-strong);
+  border-radius: var(--hn-radius-md);
+  color: var(--hn-text-900);
+  background: #fff;
+  font-size: 0.86rem;
+}
+
+.patient-filters .form-control::placeholder {
+  color: var(--hn-text-400);
+}
+
+.patient-filters .form-control:focus,
+.patient-filters .form-select:focus {
+  border-color: var(--hn-primary-700);
+  box-shadow: 0 0 0 0.2rem rgba(8, 127, 120, 0.12);
+}
+
+.filter-summary {
+  grid-column: 1 / -1;
+  color: var(--hn-text-500);
+  font-size: 0.74rem;
+}
+
+.filter-summary.has-active-filters {
+  color: var(--hn-primary-900);
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   Tabela
+   -------------------------------------------------------------------------- */
+
+.patient-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.patient-table {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  table-layout: fixed;
+}
+
+.patient-table th,
+.patient-table td {
+  vertical-align: middle;
+  border-color: var(--hn-border);
+}
+
+/* Ações permanecem disponíveis mesmo se houver overflow residual. */
+.patient-table th:last-child,
+.patient-table td:last-child {
+  position: sticky;
+  right: 0;
+  z-index: 2;
+  background: var(--hn-surface);
+  box-shadow: -6px 0 12px rgba(23, 43, 53, 0.05);
+}
+
+.patient-table thead th:last-child {
+  z-index: 3;
+  background: var(--hn-surface);
+}
+
+.patient-table thead th {
+  padding: 0.82rem 0.65rem;
+  color: var(--hn-text-500);
+  background: var(--hn-surface);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.patient-table tbody th,
+.patient-table tbody td {
+  padding: 0.9rem 0.65rem;
+  color: var(--hn-text-900);
+  font-size: 0.8rem;
+}
+
+.patient-table tbody tr {
+  transition: background-color 140ms ease;
+}
+
+.patient-table tbody tr:hover {
+  background: var(--hn-surface-soft);
+}
+
+.patient-table tbody tr.is-selected {
+  background: var(--hn-primary-50);
+}
+
+.patient-table tbody tr.is-selected > th:first-child {
+  box-shadow: inset 3px 0 0 var(--hn-primary-700);
+}
+
+.patient-table th:nth-child(1),
+.patient-table td:nth-child(1) { width: 19%; }
+
+.patient-table th:nth-child(2),
+.patient-table td:nth-child(2) { width: 10%; }
+
+.patient-table th:nth-child(3),
+.patient-table td:nth-child(3) { width: 14%; }
+
+.patient-table th:nth-child(4),
+.patient-table td:nth-child(4) { width: 13%; }
+
+.patient-table th:nth-child(5),
+.patient-table td:nth-child(5) { width: 17%; }
+
+.patient-table th:nth-child(6),
+.patient-table td:nth-child(6) { width: 9%; }
+
+.patient-table th:nth-child(7),
+.patient-table td:nth-child(7) { width: 18%; }
+
+.patient-name {
+  display: block;
+  color: var(--hn-text-900);
+  font-weight: 800;
+}
+
+.patient-code {
+  display: block;
+  margin-top: 0.18rem;
+  color: var(--hn-text-500);
+  font-size: 0.7rem;
+}
+
+.patient-identifiers {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.document-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.38rem;
+  white-space: nowrap;
+  line-height: 1.35;
+}
+
+.document-label {
+  min-width: 2.3rem;
+  color: var(--hn-text-400);
+  font-size: 0.63rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.document-value {
+  color: var(--hn-text-700);
+  font-size: 0.74rem;
+}
+
+.program-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--hn-border);
+  border-radius: 999px;
+  background: var(--hn-surface-soft);
+  color: var(--hn-text-700);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.situation-label {
+  color: var(--hn-text-700);
+  font-size: 0.76rem;
+}
+
+.selected-indicator {
+  display: inline-block;
+  margin-top: 0.42rem;
+  border: 1px solid var(--hn-primary-100);
+  background: var(--hn-primary-50);
+  color: var(--hn-primary-900);
+  font-size: 0.65rem;
+}
+
+.patient-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.patient-actions .btn {
+  min-height: 36px;
+  padding-inline: 0.65rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.loading-cell {
+  height: 8rem;
+  color: var(--hn-text-500);
+}
+
+.loading-cell .spinner-border {
+  margin-right: 0.55rem;
+}
+
+.list-state {
+  min-height: 15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2.2rem 1.5rem;
+  color: var(--hn-text-700);
+  text-align: center;
+}
+
+.list-state strong {
+  font-size: 0.96rem;
+  font-weight: 800;
+}
+
+.list-state p {
+  max-width: 36rem;
+  margin: 0;
+  color: var(--hn-text-500);
+  font-size: 0.8rem;
+}
+
+.list-state-error {
+  color: var(--hn-danger-strong);
+}
+
+.patient-list-footer {
+  padding: 0.78rem 1.35rem;
+  background: transparent;
+  color: var(--hn-text-500);
+  font-size: 0.74rem;
+}
+
+/* --------------------------------------------------------------------------
+   Menu de ações
+   -------------------------------------------------------------------------- */
+
+.patient-action-menu {
+  position: fixed;
+  z-index: 1080;
+  width: max-content;
+  min-width: 13rem;
+  padding: 0.35rem;
+  border: 1px solid var(--hn-border);
+  border-radius: var(--hn-radius-md);
+  background: var(--hn-surface);
+  box-shadow: var(--hn-shadow-md);
+}
+
+.destructive-menu-action {
+  width: 100%;
+  min-height: 40px;
+  border: 0;
+  border-radius: var(--hn-radius-sm);
+  background: transparent;
+  padding: 0.62rem 0.7rem;
+  color: var(--hn-danger-strong);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.destructive-menu-action:hover,
+.destructive-menu-action:focus-visible {
+  background: var(--hn-danger-soft);
+}
+
+/* --------------------------------------------------------------------------
+   Modal de exclusão
+   -------------------------------------------------------------------------- */
+
+.delete-dialog {
+  width: min(34rem, calc(100% - 2rem));
+  max-width: none;
+  padding: 0;
+  border: 0;
+  border-radius: var(--hn-radius-lg);
+  color: var(--hn-text-900);
+  box-shadow: var(--hn-shadow-md);
+}
+
+.delete-dialog::backdrop {
+  background: rgba(23, 43, 53, 0.5);
+}
+
+.delete-dialog .modal-content {
+  overflow: hidden;
+  border: 0;
+}
+
+.delete-dialog .modal-header,
+.delete-dialog .modal-footer {
+  border-color: var(--hn-border);
+  padding: 1.2rem 1.3rem;
+}
+
+.delete-dialog .modal-body {
+  padding: 1.3rem;
+}
+
+.delete-dialog .modal-body > p {
+  margin: 0 0 1rem;
+  color: var(--hn-text-700);
+}
+
+.delete-dialog .modal-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.destructive-eyebrow {
+  color: var(--hn-danger-strong);
+}
+
+#dialog-cancel{
+  margin-right: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile / tablet
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1199.98px) {
+  .app-main {
+    padding: 2.25rem 2rem 3.5rem;
+  }
+
+  /* Em tablet, a tabela vira uma sequência de registros legíveis.
+     Isso elimina a necessidade de rolagem horizontal para chegar às ações. */
+  .patient-table-wrap {
+    overflow: visible;
+  }
+
+  .patient-table {
+    min-width: 0;
+  }
+
+  .patient-table thead {
+    display: none;
+  }
+
+  .patient-table,
+  .patient-table tbody,
+  .patient-table tr,
+  .patient-table th,
+  .patient-table td {
+    display: block;
+    width: 100%;
+  }
+
+  /* As larguras em % das colunas (desktop) têm especificidade maior que "width: 100%" acima;
+     sem este reset cada célula ficava espremida (ex.: data quebrando letra por letra). */
+  .patient-table tbody tr > :nth-child(n) {
+    width: 100%;
+  }
+
+  .patient-table tbody tr {
+    padding: 1rem 1.1rem;
+    border-bottom: 1px solid var(--hn-border);
+  }
+
+  .patient-table tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  .patient-table tbody th,
+  .patient-table tbody td {
+    padding: 0.5rem 0;
+  }
+
+  .patient-table > :not(caption) > * > * {
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 1fr);
+    gap: 0.9rem;
+    align-items: start;
+    border: 0;
+  }
+
+  .patient-table > :not(caption) > * > *::before {
+    color: var(--hn-text-500);
+    content: attr(data-label);
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  .patient-table tbody th:first-child {
+    display: block;
+    padding-bottom: 0.85rem;
+  }
+
+  .patient-table tbody th:first-child::before {
+    display: none;
+  }
+
+  .patient-table > :not(caption) > * > .loading-cell {
+    display: flex;
+    height: 8rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .patient-table > :not(caption) > * > .loading-cell::before {
+    display: none;
+  }
+
+  .patient-table th:last-child,
+  .patient-table td:last-child {
+    position: static;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .patient-actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .patient-list-footer {
+    padding: 0.8rem 1rem;
+  }
+
+  .patient-identifiers {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 991.98px) {
+.app-main {
+    max-width: none;
+    padding: 2rem 1.25rem 3rem;
+  }
+
+  .page-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .page-heading .btn {
+    align-self: flex-start;
+  }
+
+  .patient-filters {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .app-header {
+    padding: 0 1rem;
+  }
+
+  .app-main {
+    padding: 1.5rem 0.9rem 2rem;
+  }
+
+  .page-heading h1 {
+    font-size: 2rem;
+  }
+
+  .patient-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-summary {
+    grid-column: auto;
+  }
+
+  .patient-list-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .patient-table > :not(caption) > * > * {
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: 0.6rem;
+    align-items: center;
+  }
+
+  .patient-table tbody tr {
+    padding: 0.9rem 1rem 1rem;
+  }
+
+  .patient-table tbody th,
+  .patient-table tbody td {
+    padding: 0.35rem 0;
+    overflow-wrap: anywhere;
+  }
+
+  /* Nome e código em destaque no topo do cartão */
+  .patient-table tbody th:first-child {
+    padding-bottom: 0.6rem;
+    margin-bottom: 0.25rem;
+    border-bottom: 1px solid var(--hn-border);
+  }
+
+  .patient-table .patient-name {
+    display: block;
+    font-size: 1.05rem;
+  }
+
+  .patient-table .program-label,
+  .patient-table .situation-label {
+    justify-self: start;
+  }
+
+  /* CPF e CNS em linhas separadas, valor alinhado à direita do rótulo */
+  .patient-table .patient-identifiers {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  /* Ações ocupam a largura toda, com alvos de toque confortáveis */
+  .patient-table tbody td:last-child {
+    display: block;
+    padding-top: 0.75rem;
+  }
+
+  .patient-table tbody td:last-child::before {
+    display: none;
+  }
+
+  .patient-actions {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+  }
+
+  .patient-actions .btn {
+    min-height: 44px;
+    padding-inline: 1rem;
+  }
+
+  .page-heading .btn {
+    align-self: stretch;
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

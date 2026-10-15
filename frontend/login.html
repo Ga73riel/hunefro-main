@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Acesso institucional ao Hu-Nefro — gestão integrada de nefrologia.">
+  <title>Login | Hu-Nefro</title>
+
+  <!-- Bootstrap 5: substitua pelo arquivo local do projeto quando disponível. -->
+  <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+  crossorigin="anonymous"
+  >
+  <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+    <main class="login-shell">
+    <section class="login-card" aria-label="Acesso ao Hu-Nefro">
+      <div class="row g-0">
+        <!-- Painel Institucional (Lado Esquerdo) -->
+        <aside class="col-lg-5 brand-panel">
+          <div class="brand-content">
+            <!-- Logo e Marca -->
+            <div class="brand-mark" aria-label="Hu-Nefro">
+              <div class="brand-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 21V5M12 5C9.8 2.3 5 2.8 4.6 6.7C4.3 9.7 6.9 11.5 9.6 11.5M12 5C14.2 2.3 19 2.8 19.4 6.7C19.7 9.7 17.1 11.5 14.4 11.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M9 15.5C10 16.8 14 16.8 15 15.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                </svg>
+              </div>
+              <div>
+                <h1 class="brand-name">Hu-Nefro</h1>
+                <p class="brand-subtitle">GESTÃO INTEGRADA DE NEFROLOGIA</p>
+              </div>
+            </div>
+
+            <!-- Card de Identidade Institucional -->
+            <div class="institution-card" aria-label="Identidade institucional">
+
+                <div class="institution-eyebrow">
+                    IDENTIDADE INSTITUCIONAL
+                </div>
+
+                <div class="institution-logos">
+                    <img
+                        src="assets/UFMA1.png"
+                        alt="Universidade Federal do Maranhão"
+                    >
+
+                    <img
+                        src="assets/HU.png"
+                        alt="Hospital Universitário"
+                    >
+
+                    <img
+                        src="assets/HUBRASIL.png"
+                        alt="Hospital Universitário Federal — HUBRASIL"
+                    >
+                </div>
+
+                <p class="institution-name mb-0">
+                    Hospital Universitário da Universidade Federal do Maranhão
+                </p>
+
+            </div>
+          </div>
+        </aside>
+
+        <!-- Formulário de Login (Lado Direito) -->
+        <section class="col-lg-7 form-panel">
+          <div class="form-wrap">
+            <span class="form-eyebrow">ACESSO INSTITUCIONAL</span>
+            <h2 class="form-title">Entrar no Hu-Nefro</h2>
+            <p class="form-subtitle">
+              Use sua conta institucional para acessar o sistema.
+            </p>
+
+            <form id="loginForm">
+              <!-- Campo Usuário -->
+              <div class="form-group-custom">
+                <label for="username" class="form-label">Usuário</label>
+                <div class="input-container">
+                  <input id="username" name="username" type="email" class="form-control-custom" placeholder="Seu.email@hu.ufma.br" />
+                  <span class="input-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                      <circle cx="12" cy="8" r="4" />
+                      <path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6" stroke-linecap="round" />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+
+              <!-- Campo Senha -->
+              <div class="form-group-custom">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <label for="password" class="form-label mb-0">Senha</label>
+                  <a class="forgot-link" href="#recuperar-senha">Esqueci minha senha</a>
+                </div>
+                <div class="input-container">
+                  <input id="password" name="password" type="password" class="form-control-custom" placeholder="••••••••" />
+                  <button type="button" class="btn-toggle-password" id="togglePassword" aria-label="Mostrar senha">
+                    <svg id="eyeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="alert-area">
+                <div id="loginFeedback" class="alert d-none mb-0" role="status"></div>
+              </div>
+
+              <!-- Botão Entrar -->
+              <button id="loginButton" class="btn login-btn" type="submit">
+                <span class="login-label">Entrar</span>
+                <span class="login-loading d-none">Entrando...</span>
+              </button>
+            </form>
+
+            <!-- Rodapé / Suporte -->
+            <div class="support-area">
+              <p class="support-line">
+                Problemas para acessar? <a href="#suporte">Abrir chamado no suporte do HU-UFMA.</a>
+              </p>
+
+              <div class="restricted">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <rect x="5" y="11" width="14" height="10" rx="2" />
+                  <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                </svg>
+                <span>Acesso restrito a usuários autorizados.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+  <script src="js/login.js"></script>
+</body>
+</html>

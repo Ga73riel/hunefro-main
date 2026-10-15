@@ -1,0 +1,32 @@
+/* Aba Prescrição e Tratamento / Prescrição de Hemodiálise. Reaproveita .ev-*, .hc-*, .md-* e tokens de prontuario.css. */
+.ph-header { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; justify-content: space-between; }
+.ph-chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: .9rem; }
+.ph-chip { display: inline-block; padding: .25rem .7rem; border-radius: 999px; font-size: .75rem; font-weight: 700; background: var(--hn-primary-100); color: var(--hn-primary-800); }
+.ph-chip-warn { background: #fff6e0; color: #8a5a00; border: 1px solid #ecd08a; }
+.ph-group-title { margin: 1rem 0 .5rem; font-size: .8rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: var(--hn-primary-800); }
+.ph-group-title:first-child { margin-top: 0; }
+.ph-dl { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .6rem 1rem; margin: 0; }
+.ph-dl > div { min-width: 0; }
+.ph-dl dt { font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: var(--hn-ink-500); }
+.ph-dl dd { margin: 0; font-size: .85rem; overflow-wrap: anywhere; }
+.ph-notes { margin: 0; font-size: .85rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+.ph-history-actions { justify-content: flex-end; margin-top: .6rem; }
+.ph-dialog { width: min(56rem, calc(100vw - 1.5rem)); }
+.ph-form { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: .8rem 1rem; }
+.ph-f3 { grid-column: span 3; } .ph-f4 { grid-column: span 4; } .ph-f6 { grid-column: span 6; } .ph-f12 { grid-column: 1 / -1; }
+.ph-form h4 { grid-column: 1 / -1; margin: .4rem 0 0; font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: var(--hn-primary-800); }
+.ph-form textarea.form-control { min-height: 5rem; resize: vertical; }
+.ph-print-sheet { display: none; }
+
+@media (max-width: 991.98px) { .ph-dl { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ph-f3, .ph-f4 { grid-column: span 6; } }
+@media (max-width: 575.98px) { .ph-dl { grid-template-columns: 1fr 1fr; } .ph-f3, .ph-f4, .ph-f6 { grid-column: 1 / -1; } .ph-header .btn { min-height: 44px; } }
+
+@media print {
+  body.ph-printing .record-sticky-header, body.ph-printing .record-sidebar, body.ph-printing .record-footer,
+  body.ph-printing .record-view:not(#view-prescricao-hd) { display: none !important; }
+  body.ph-printing #view-prescricao-hd > *:not(.ph-print-sheet) { display: none !important; }
+  body.ph-printing .ph-print-sheet { display: block !important; color: #000; font-size: 11pt; }
+  body.ph-printing .ph-print-sheet dl { display: grid; grid-template-columns: repeat(3, 1fr); gap: .3rem 1rem; }
+  body.ph-printing .ph-print-sheet dt { font-weight: 700; font-size: 9pt; }
+  body.ph-printing .ph-print-sheet dd { margin: 0; }
+}

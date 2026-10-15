@@ -1,0 +1,322 @@
+!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Prévia da seção Dados Clínicos do prontuário Hu-Nefro.">
+  <title>Dados Clínicos | Hu-Nefro</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/dados-clinicos.css">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo-principal">Pular para o conteúdo principal</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="back-link" href="pacientes.html" aria-label="Voltar para a lista de pacientes">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m0 0 6-6m-6 6 6 6"/></svg>
+        <span>Lista de Pacientes</span>
+      </a>
+      <span class="crumb-divider" aria-hidden="true">/</span>
+      <span class="topbar-current">Prontuário</span>
+      <span class="topbar-section">Clínico / Dados Clínicos</span>
+    </div>
+  </header>
+
+  <section class="patient-context" aria-label="Contexto do prontuário">
+    <div class="patient-avatar" aria-hidden="true">P</div>
+    <div class="patient-details">
+      <p class="eyebrow">PRONTUÁRIO ABERTO</p>
+      <h1>Paciente selecionado</h1>
+      <div class="patient-meta">
+        <span>Código: <strong>vinculado ao prontuário</strong></span>
+        <span class="meta-separator" aria-hidden="true"></span>
+        <span>Dados do paciente serão carregados pelo sistema</span>
+      </div>
+    </div>
+    <span class="context-pill"><span class="status-dot" aria-hidden="true"></span>Contexto preservado</span>
+  </section>
+
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegação do prontuário">
+      <nav>
+        <a class="side-link" href="prontuario-identificacao.html">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"/><path d="M5 20v-2a7 7 0 0 1 14 0v2Z"/></svg>
+          <span>Cadastro</span>
+        </a>
+        <a class="side-link" href="#programa-pendente" data-unavailable-link="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M12 4v16"/><circle cx="12" cy="12" r="8"/></svg>
+          <span>Programa de Tratamento</span>
+        </a>
+        <div class="side-group side-group-active">
+          <div class="side-group-heading">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="8"/></svg>
+            <span>Clínico</span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          </div>
+          <a class="side-sub-link is-active" href="dados-clinicos.html" aria-current="page">
+            <span class="active-marker" aria-hidden="true"></span>
+            <span>Dados Clínicos</span>
+          </a>
+          <a class="side-sub-link" href="#eventos-pendentes" data-unavailable-link="true">
+            <span class="active-marker" aria-hidden="true"></span>
+            <span>Eventos e Diagnósticos</span>
+            <span class="planned-tag">não implementado</span>
+          </a>
+        </div>
+        <a class="side-link" href="#prescricao-pendente" data-unavailable-link="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M8 7h8M8 11h8M8 15h5"/></svg>
+          <span>Prescrição e Tratamento</span>
+          <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+        <a class="side-link" href="#resultados-pendente" data-unavailable-link="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16M4 10h16M4 15h10M4 20h10"/></svg>
+          <span>Resultados</span>
+          <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </nav>
+      <div class="sidebar-footnote">
+        <span class="footnote-icon" aria-hidden="true">i</span>
+        <p>Esta prévia está sem integração clínica ou gravação no servidor.</p>
+      </div>
+    </aside>
+
+    <main id="conteudo-principal" class="main-content">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">PRONTUÁRIO <span aria-hidden="true">/</span> CLÍNICO</p>
+          <h2>Dados Clínicos</h2>
+          <p class="page-description">Informações clínicas gerais e registros relacionados ao paciente.</p>
+        </div>
+        <span class="section-badge"><span class="badge-mark" aria-hidden="true"></span> Seção clínica</span>
+      </div>
+
+      <div class="prototype-notice" role="note">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg>
+        <div><strong>Prévia de interface</strong><span>As listas clínicas ainda não estão conectadas e os dados desta tela não são gravados no servidor.</span></div>
+      </div>
+
+      <form id="dadosClinicosForm" novalidate>
+        <section class="data-card" aria-labelledby="dados-gerais-titulo">
+          <div class="card-heading">
+            <div><span class="heading-accent" aria-hidden="true"></span><h3 id="dados-gerais-titulo">Dados Gerais</h3></div>
+            <p>Informações clínicas do prontuário</p>
+          </div>
+          <div class="card-body">
+            <div class="fields-grid fields-grid-4">
+              <div class="field-group">
+                <label for="aboRh">ABO/Rh</label>
+                <select id="aboRh" class="form-select pending-select" data-pending-list="true" aria-describedby="pendingListsHelp" disabled><option value="">— Selecione —</option></select>
+              </div>
+              <div class="field-group">
+                <label for="altura">Altura</label>
+                <input id="altura" class="form-control" type="text" inputmode="decimal" autocomplete="off" placeholder="Preencher">
+              </div>
+              <div class="field-group">
+                <label for="pesoSeco">Peso seco</label>
+                <input id="pesoSeco" class="form-control" type="text" inputmode="decimal" autocomplete="off" placeholder="Preencher">
+              </div>
+              <div class="field-group">
+                <label for="diurese">Diurese</label>
+                <input id="diurese" class="form-control" type="text" autocomplete="off" placeholder="Preencher">
+              </div>
+              <div class="field-group">
+                <label for="gestacoes">Gestações</label>
+                <input id="gestacoes" class="form-control" type="text" inputmode="numeric" autocomplete="off" placeholder="Preencher">
+              </div>
+              <div class="field-group">
+                <label for="gestacoesComplemento">Campo adjacente <span class="label-pending">a definir</span></label>
+                <select id="gestacoesComplemento" class="form-select pending-select" aria-describedby="gestacoesHelp" disabled><option value="">Definição pendente</option></select>
+                <small id="gestacoesHelp" class="field-help">Finalidade do controle adjacente a confirmar.</small>
+              </div>
+              <div class="field-group">
+                <label for="tabagismo">Tabagismo</label>
+                <select id="tabagismo" class="form-select pending-select" data-pending-list="true" aria-describedby="pendingListsHelp" disabled><option value="">— Selecione —</option></select>
+              </div>
+              <div class="field-group">
+                <label for="etilismo">Etilismo</label>
+                <select id="etilismo" class="form-select pending-select" data-pending-list="true" aria-describedby="pendingListsHelp" disabled><option value="">— Selecione —</option></select>
+              </div>
+              <div class="field-group field-span-2">
+                <label for="diagnosticoBase">Diagnóstico de base</label>
+                <select id="diagnosticoBase" class="form-select pending-select" data-pending-list="true" aria-describedby="pendingListsHelp" disabled><option value="">— Selecione —</option></select>
+              </div>
+              <div class="field-group field-span-2">
+                <label for="etiologia">Etiologia</label>
+                <select id="etiologia" class="form-select pending-select" data-pending-list="true" aria-describedby="pendingListsHelp" disabled><option value="">— Selecione —</option></select>
+              </div>
+              <div class="field-group">
+                <label for="drogadicao">Drogadição</label>
+                <select id="drogadicao" class="form-select pending-select" data-pending-list="true" aria-describedby="pendingListsHelp" disabled><option value="">— Selecione —</option></select>
+              </div>
+              <div class="field-group field-span-3">
+                <label for="observacoes">Observações</label>
+                <textarea id="observacoes" class="form-control" rows="2" placeholder="Registrar observações conforme o fluxo institucional"></textarea>
+              </div>
+              <div class="field-group field-span-4">
+                <label for="alertas">Alertas</label>
+                <div id="alertas" class="alert-area" role="status" aria-live="polite">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.8 20h18.4L12 3Z"/><path d="M12 9v5m0 2h.01"/></svg>
+                  <span>Nenhum alerta foi carregado nesta prévia.</span>
+                </div>
+              </div>
+            </div>
+            <p id="pendingListsHelp" class="section-help"><span aria-hidden="true">i</span> As opções dos seletores serão ligadas às listas institucionais depois que suas fontes forem confirmadas.</p>
+          </div>
+        </section>
+
+        <section class="data-card" aria-labelledby="marcadores-titulo">
+          <div class="card-heading">
+            <div><span class="heading-accent" aria-hidden="true"></span><h3 id="marcadores-titulo">Marcadores Virais</h3></div>
+            <p>Selecione o estado correspondente ao registro</p>
+          </div>
+          <div class="card-body">
+            <div class="markers-grid">
+              <fieldset class="marker-group">
+                <legend>Hepatite C</legend>
+                <div class="radio-options">
+                  <label><input type="radio" name="hepatiteC" value="positivo"><span>Positivo</span></label>
+                  <label><input type="radio" name="hepatiteC" value="negativo"><span>Negativo</span></label>
+                  <label><input type="radio" name="hepatiteC" value="coletado"><span>Coletado</span></label>
+                  <label><input type="radio" name="hepatiteC" value="nao-informado"><span>Não Inform.</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="marker-group">
+                <legend>Hepatite B</legend>
+                <div class="radio-options">
+                  <label><input type="radio" name="hepatiteB" value="positivo"><span>Positivo</span></label>
+                  <label><input type="radio" name="hepatiteB" value="negativo"><span>Negativo</span></label>
+                  <label><input type="radio" name="hepatiteB" value="coletado"><span>Coletado</span></label>
+                  <label><input type="radio" name="hepatiteB" value="nao-informado"><span>Não Inform.</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="marker-group">
+                <legend>HIV</legend>
+                <div class="radio-options">
+                  <label><input type="radio" name="hiv" value="positivo"><span>Positivo</span></label>
+                  <label><input type="radio" name="hiv" value="negativo"><span>Negativo</span></label>
+                  <label><input type="radio" name="hiv" value="coletado"><span>Coletado</span></label>
+                  <label><input type="radio" name="hiv" value="nao-informado"><span>Não Inform.</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="marker-group">
+                <legend>Anti-HBs</legend>
+                <div class="radio-options">
+                  <label><input type="radio" name="antiHbs" value="positivo"><span>Positivo</span></label>
+                  <label><input type="radio" name="antiHbs" value="negativo"><span>Negativo</span></label>
+                  <label><input type="radio" name="antiHbs" value="coletado"><span>Coletado</span></label>
+                  <label><input type="radio" name="antiHbs" value="nao-informado"><span>Não Inform.</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="marker-group">
+                <legend>CMV (IgG)</legend>
+                <div class="radio-options">
+                  <label><input type="radio" name="cmvIgg" value="positivo"><span>Positivo</span></label>
+                  <label><input type="radio" name="cmvIgg" value="negativo"><span>Negativo</span></label>
+                  <label><input type="radio" name="cmvIgg" value="coletado"><span>Coletado</span></label>
+                  <label><input type="radio" name="cmvIgg" value="nao-informado"><span>Não Inform.</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="marker-group">
+                <legend>Chagas (IgM)</legend>
+                <div class="radio-options">
+                  <label><input type="radio" name="chagasIgm" value="positivo"><span>Positivo</span></label>
+                  <label><input type="radio" name="chagasIgm" value="negativo"><span>Negativo</span></label>
+                  <label><input type="radio" name="chagasIgm" value="coletado"><span>Coletado</span></label>
+                  <label><input type="radio" name="chagasIgm" value="nao-informado"><span>Não Inform.</span></label>
+                </div>
+              </fieldset>
+            </div>
+            <p class="section-help"><span aria-hidden="true">i</span> Nenhum resultado foi selecionado automaticamente. Os registros não estão vinculados a um serviço clínico nesta prévia.</p>
+          </div>
+        </section>
+
+        <section class="data-card" aria-labelledby="equipe-titulo">
+          <div class="card-heading">
+            <div><span class="heading-accent" aria-hidden="true"></span><h3 id="equipe-titulo">Equipe Vinculada</h3></div>
+            <p>Identificação dos vínculos pendente de configuração</p>
+          </div>
+          <div class="card-body">
+            <div class="fields-grid fields-grid-3">
+              <div class="field-group"><label for="equipe1">Vínculo 1 <span class="label-pending">a definir</span></label><select id="equipe1" class="form-select pending-select" disabled><option value="">Definir tipo de vínculo</option></select></div>
+              <div class="field-group"><label for="equipe2">Vínculo 2 <span class="label-pending">a definir</span></label><select id="equipe2" class="form-select pending-select" disabled><option value="">Definir tipo de vínculo</option></select></div>
+              <div class="field-group"><label for="equipe3">Vínculo 3 <span class="label-pending">a definir</span></label><select id="equipe3" class="form-select pending-select" disabled><option value="">Definir tipo de vínculo</option></select></div>
+              <div class="field-group"><label for="equipe4">Vínculo 4 <span class="label-pending">a definir</span></label><select id="equipe4" class="form-select pending-select" disabled><option value="">Definir tipo de vínculo</option></select></div>
+              <div class="field-group"><label for="equipe5">Vínculo 5 <span class="label-pending">a definir</span></label><select id="equipe5" class="form-select pending-select" disabled><option value="">Definir tipo de vínculo</option></select></div>
+            </div>
+            <p class="section-help"><span aria-hidden="true">i</span> A referência mostra cinco controles, mas não define os rótulos, os tipos de vínculo nem as opções. Nenhum profissional foi incluído como exemplo.</p>
+          </div>
+        </section>
+
+        <section class="data-card" aria-labelledby="vacinas-titulo">
+          <div class="card-heading">
+            <div><span class="heading-accent" aria-hidden="true"></span><h3 id="vacinas-titulo">Vacinas</h3></div>
+            <p>Registros de vacinação do prontuário</p>
+          </div>
+          <div class="card-body">
+            <div class="vaccine-entry-grid">
+              <div class="field-group"><label for="vaccineDate">Data</label><input id="vaccineDate" class="form-control" type="date"></div>
+              <div class="field-group"><label for="vaccineName">Vacina</label><input id="vaccineName" class="form-control" type="text" placeholder="Nome da vacina" autocomplete="off"></div>
+              <div class="field-group"><label for="vaccineComplement">Complemento</label><input id="vaccineComplement" class="form-control" type="text" placeholder="Opcional" autocomplete="off"></div>
+              <div class="field-group"><label for="vaccineLot">Lote</label><input id="vaccineLot" class="form-control" type="text" placeholder="Lote" autocomplete="off"></div>
+              <div class="vaccine-actions">
+                <button type="button" id="addVaccine" class="btn btn-primary-soft" aria-describedby="vaccinePersistenceHelp">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Adicionar</span>
+                </button>
+              </div>
+            </div>
+            <div id="vaccineFeedback" class="inline-feedback" role="status" aria-live="polite" hidden></div>
+            <div class="table-wrap">
+              <table class="table vaccine-table">
+                <caption class="visually-hidden">Registros de vacinas adicionados nesta prévia local</caption>
+                <thead><tr><th scope="col">Data</th><th scope="col">Vacina</th><th scope="col">Complemento</th><th scope="col">Lote</th><th scope="col"><span class="visually-hidden">Ações</span></th></tr></thead>
+                <tbody id="vaccineTableBody"><tr class="empty-row"><td colspan="5"><span class="empty-icon" aria-hidden="true">＋</span>Nenhum registro de vacina nesta prévia.</td></tr></tbody>
+              </table>
+            </div>
+            <p id="vaccinePersistenceHelp" class="section-help"><span aria-hidden="true">i</span> A inclusão e a remoção alteram somente a tabela nesta página; os registros não são salvos no servidor.</p>
+          </div>
+        </section>
+
+        <div class="two-card-grid">
+          <section class="data-card" aria-labelledby="pretratamento-titulo">
+            <div class="card-heading">
+              <div><span class="heading-accent" aria-hidden="true"></span><h3 id="pretratamento-titulo">Dados prévios ao tratamento renal substitutivo</h3></div>
+            </div>
+            <div class="card-body">
+              <div class="fields-grid fields-grid-1">
+                <div class="field-group"><label for="epo">Recebeu EPO ou equivalente</label><select id="epo" class="form-select pending-select" disabled><option value="">— Selecione —</option></select></div>
+                <div class="field-group"><label for="nefrologista">Estava sob cuidados de nefrologista</label><select id="nefrologista" class="form-select pending-select" disabled><option value="">— Selecione —</option></select></div>
+                <div class="field-group"><label for="nutricionista">Estava sob cuidados de nutricionista</label><select id="nutricionista" class="form-select pending-select" disabled><option value="">— Selecione —</option></select></div>
+                <div class="field-group"><label for="primeiroPrograma">1º programa de diálise crônica regular na vida</label><select id="primeiroPrograma" class="form-select pending-select" disabled><option value="">— Selecione —</option></select></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="data-card" aria-labelledby="primeira-sessao-titulo">
+            <div class="card-heading">
+              <div><span class="heading-accent" aria-hidden="true"></span><h3 id="primeira-sessao-titulo">1ª sessão de diálise da vida</h3></div>
+            </div>
+            <div class="card-body">
+              <div class="fields-grid fields-grid-2">
+                <div class="field-group"><label for="realizacao">Sua realização foi</label><select id="realizacao" class="form-select pending-select" disabled><option value="">— Selecione —</option></select></div>
+                <div class="field-group"><label for="local">Local</label><select id="local" class="form-select pending-select" disabled><option value="">— Selecione —</option></select></div>
+                <div class="field-group"><label for="tipoDialise">Tipo de diálise</label><select id="tipoDialise" class="form-select pending-select" disabled><option value="">— Selecione —</option></select></div>
+                <div class="field-group"><label for="acesso">Acesso</label><select id="acesso" class="form-select pending-select" disabled><option value="">— Selecione —</option></select></div>
+                <div class="field-group"><label for="fav">Havia FAV confeccionada presente</label><select id="fav" class="form-select pending-select" disabled><option value="">— Selecione —</option></select></div>
+                <div class="field-group"><label for="enxerto">Havia enxerto venoso confeccionado</label><select id="enxerto" class="form-select pending-select" disabled><option value="">— Selecione —</option></select></div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <footer class="form-footer">
+          <p><span class="footer-status-dot" aria-hidden="true"></span> Prévia local · sem gravação ou integração com a API</p>
+          <button type="button" class="btn btn-primary-soft" id="clearForm">Limpar campos desta prévia</button>
+        </footer>
+      </form>
+      <div id="pageFeedback" class="page-feedback" role="status" aria-live="polite" hidden></div>
+    </main>
+  </div>
+  <script src="js/dados-clinicos.js"></script>
+</body>
+</html>

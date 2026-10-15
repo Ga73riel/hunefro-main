@@ -1,0 +1,16 @@
+# Arquivos de ambiente e possíveis segredos
+.env
+.env.*
+!.env.example
+
+# Dependências
+node_modules/
+
+# Arquivos temporários e logs
+*.log
+.DS_Store
+Thumbs.db
+
+# Arquivos de configuração local do editor
+.vscode/
+.continue/

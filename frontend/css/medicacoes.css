@@ -1,0 +1,39 @@
+/* Aba Prescrição e Tratamento / Medicações. Reaproveita .hc-* (histórico), .ev-* (tabela, diálogo) e tokens de prontuario.css. */
+.md-tabs { display: flex; gap: .25rem; margin-bottom: .9rem; border-bottom: 1px solid var(--hn-border, #d2dfeb); }
+.md-tab { min-height: 44px; padding: .5rem 1rem; border: 1px solid transparent; border-bottom: 0; border-radius: 8px 8px 0 0; background: transparent; font-size: .85rem; font-weight: 700; color: var(--hn-ink-500); }
+.md-tab[aria-selected="true"] { background: #fff; border-color: var(--hn-border, #d2dfeb); color: var(--hn-primary-800); box-shadow: inset 0 3px 0 var(--hn-primary-800); margin-bottom: -1px; }
+.md-tab:focus-visible { outline: 2px solid var(--hn-primary-800); outline-offset: -2px; }
+
+.md-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: .85rem 1rem; align-items: end; }
+.md-c2 { grid-column: span 2; } .md-c3 { grid-column: span 3; } .md-c4 { grid-column: span 4; }
+.md-c5 { grid-column: span 5; } .md-c6 { grid-column: span 6; }
+.md-check { display: inline-flex; align-items: center; gap: .45rem; min-height: 38px; font-size: .82rem; font-weight: 700; }
+.md-check input { width: 1.05rem; height: 1.05rem; }
+.md-submit { display: grid; gap: .4rem; }
+.md-print-row { display: flex; flex-wrap: wrap; gap: .75rem 1rem; align-items: flex-end; }
+.md-print-row .field-block { min-width: 12rem; }
+.md-list-header { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; justify-content: space-between; }
+.md-radios { display: flex; gap: 1.25rem; border: 0; margin: 0; padding: 0; }
+.md-list-header + .record-card-body .hc-history { grid-template-columns: 11rem minmax(0, 1fr); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.md-print-sheet { display: none; }
+
+@media (max-width: 991.98px) {
+  .md-c2, .md-c3, .md-c4, .md-c5, .md-c6 { grid-column: span 6; }
+}
+@media (max-width: 575.98px) {
+  .md-c2, .md-c3, .md-c4, .md-c5, .md-c6 { grid-column: 1 / -1; }
+  .md-list-header + .record-card-body .hc-history { grid-template-columns: 1fr; }
+  .md-submit .btn, .md-print-row .btn { width: 100%; min-height: 44px; }
+  .md-print-row .field-block { width: 100%; }
+}
+
+@media print {
+  body.md-printing .record-sticky-header, body.md-printing .record-sidebar, body.md-printing .record-footer,
+  body.md-printing .record-view:not(#view-medicacoes) { display: none !important; }
+  body.md-printing #view-medicacoes > *:not(.md-print-sheet) { display: none !important; }
+  body.md-printing .md-print-sheet { display: block !important; font-size: 12pt; color: #000; }
+  body.md-printing .md-sign { margin-top: 3rem; border-top: 1px solid #000; display: inline-block; padding-top: .3rem; min-width: 14rem; }
+}
+.md-submit [hidden], .md-print-sheet[hidden] { display: none !important; }

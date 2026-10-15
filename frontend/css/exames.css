@@ -1,0 +1,37 @@
+/* Aba Resultados / Exames. Reaproveita .md-tabs, .md-grid, .ph-*, .ev-*, .hc-* e tokens de prontuario.css. */
+.ex-layout { display: grid; grid-template-columns: minmax(0, 1fr) 18rem; gap: 1rem; align-items: start; }
+.ex-layout-flow { grid-template-columns: minmax(0, 1fr) 14rem; }
+.ex-main { min-width: 0; }
+.ex-filter { max-width: 24rem; margin-bottom: .6rem; }
+.ex-text { border: 1px solid var(--hn-border, #d2dfeb); border-radius: 8px; padding: .75rem 1rem; background: var(--hn-primary-50); min-height: 8rem; }
+.ex-text .ph-group-title { margin-top: 0; }
+.ex-flow-wrap { max-height: 28rem; overflow: auto; }
+.ex-flow th, .ex-flow td { white-space: nowrap; text-align: center; font-size: .78rem; }
+.ex-flow th:first-child, .ex-flow td:first-child { text-align: left; position: sticky; left: 0; background: #fff; z-index: 1; }
+.ex-flow thead th { position: sticky; top: 0; background: var(--hn-primary-50); z-index: 2; }
+.ex-flow thead th:first-child { z-index: 3; }
+.ex-flow tbody tr { cursor: pointer; }
+.ex-flow tbody tr.is-selected td { background: var(--hn-primary-100); font-weight: 800; }
+.ex-flow tbody tr:focus-visible { outline: 2px solid var(--hn-primary-800); outline-offset: -2px; }
+.ex-flow td.is-latest { font-weight: 800; color: var(--hn-primary-800); }
+.ex-flow-bar { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; justify-content: space-between; margin-top: .75rem; }
+.ex-groups ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; }
+.ex-group-btn { width: 100%; min-height: 40px; padding: .35rem .7rem; text-align: left; border: 1px solid var(--hn-border, #d2dfeb); border-radius: 6px; background: #fff; font-size: .82rem; }
+.ex-group-btn[aria-pressed="true"] { background: var(--hn-primary-800); color: #fff; border-color: var(--hn-primary-800); font-weight: 800; }
+.ex-group-btn:focus-visible { outline: 2px solid var(--hn-primary-800); outline-offset: 2px; }
+.ex-count { margin-right: auto; font-size: .8rem; font-weight: 700; color: var(--hn-ink-500); }
+.ex-batch { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem 1.25rem; }
+.ex-batch .field-block { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: .5rem; align-items: center; }
+.ex-batch .field-label { margin: 0; text-align: right; }
+.ex-fast { display: grid; gap: .75rem; }
+.ex-fast-result { padding: .6rem .8rem; border-radius: 8px; background: var(--hn-primary-50); font-size: .85rem; font-weight: 700; }
+.ex-chart { width: 100%; height: auto; }
+.ex-chart text { font-size: 11px; fill: currentColor; }
+.ex-ref-table { font-size: .75rem; }
+@media (max-width: 991.98px) { .ex-layout, .ex-layout-flow { grid-template-columns: 1fr; } }
+@media (max-width: 767.98px) {
+  .ex-batch { grid-template-columns: 1fr; }
+  .ex-batch .field-block { grid-template-columns: 1fr; }
+  .ex-batch .field-label { text-align: left; }
+  .ph-header .ev-actions { width: 100%; }
+}

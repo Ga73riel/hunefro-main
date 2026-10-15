@@ -1,0 +1,1511 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Hu-Nefro — abertura e gerenciamento de prontuário do paciente.">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Prontuário | Hu-Nefro</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    >
+    <link rel="stylesheet" href="css/prontuario.css">
+    <link rel="stylesheet" href="css/dados-clinicos.css">
+    <link rel="stylesheet" href="css/eventos-diagnosticos.css">
+    <link rel="stylesheet" href="css/historia-clinica.css">
+    <link rel="stylesheet" href="css/medicacoes.css">
+    <link rel="stylesheet" href="css/acessos-vasculares.css">
+    <link rel="stylesheet" href="css/prescricao-hd.css">
+    <link rel="stylesheet" href="css/sessoes-dialise.css">
+    <link rel="stylesheet" href="css/exames.css">
+  </head>
+
+  <body>
+    <a class="skip-link" href="#conteudo-principal">Ir para o conteúdo principal</a>
+
+    <div class="record-sticky-header" id="record-sticky-header">
+    <header class="app-topbar">
+      <a class="back-link" href="pacientes.html" aria-label="Voltar para a lista de pacientes">
+        <span aria-hidden="true">←</span>
+        <span>Lista de Pacientes</span>
+      </a>
+      <span class="topbar-separator" aria-hidden="true">/</span>
+      <strong class="topbar-current">Prontuário</strong>
+      <span class="unsaved-indicator" id="unsaved-indicator" hidden>Alterações não salvas</span>
+    </header>
+
+    <section class="patient-context" aria-label="Paciente em atendimento">
+      <div class="patient-context-main">
+        <div class="patient-avatar" aria-hidden="true">A</div>
+        <div class="patient-context-copy">
+          <h1 id="patient-name">ANA MARIA</h1>
+          <div class="patient-context-meta" aria-label="Resumo do paciente">
+            <span id="patient-age">68 anos, 8 meses</span>
+            <span class="meta-divider" aria-hidden="true"></span>
+            <span id="patient-sex">Feminino</span>
+            <span class="meta-divider" aria-hidden="true"></span>
+            <span>Nasc. <strong id="patient-birth">05/02/1958</strong></span>
+            <span class="meta-divider" aria-hidden="true"></span>
+            <span>Cód. <strong id="patient-code">0001440</strong></span>
+            <span class="meta-divider" aria-hidden="true"></span>
+            <span class="program-badge" id="patient-program">Hemodiálise</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="patient-context-flags" aria-label="Indicadores do paciente">
+        <span class="flag flag-success">✓ Sem alergias</span>
+        <span class="flag flag-info">FAV</span>
+        <span class="flag flag-danger">A+</span>
+      </div>
+    </section>
+    </div>
+
+    <div class="record-layout">
+      <aside class="record-sidebar" id="record-sidebar" aria-label="Navegação do prontuário">
+        <button class="sidebar-close d-lg-none" id="sidebar-close" type="button" aria-label="Fechar menu">×</button>
+
+        <nav class="record-menu" aria-label="Seções do prontuário">
+          <button class="record-nav-item active" type="button" data-section="cadastro" aria-current="page">
+            <span class="menu-item-icon" aria-hidden="true">♙</span>
+            <span>Identificação</span>
+          </button>
+
+          <button class="record-nav-item" type="button" data-section="programa">
+            <span class="menu-item-icon" aria-hidden="true">♧</span>
+            <span>Programa de Tratamento</span>
+          </button>
+
+          <div class="record-nav-group" data-group="clinico">
+            <button class="record-nav-item record-nav-group-toggle" type="button" aria-expanded="false" aria-controls="subnav-clinico">
+              <span class="menu-item-icon" aria-hidden="true">⌁</span>
+              <span>Clínico</span>
+              <span class="nav-item-arrow" aria-hidden="true">›</span>
+            </button>
+            <div class="record-subnav" id="subnav-clinico" hidden>
+            <button class="record-nav-item sub-item" type="button" data-section="dados-clinicos">
+              <span>Dados Clínicos</span>
+            </button>
+            <button class="record-nav-item sub-item" type="button" data-section="eventos-diagnosticos">
+              <span>Eventos e Diagnósticos</span>
+            </button>
+            <button class="record-nav-item sub-item" type="button" data-section="historia-clinica">
+              <span>História Clínica e Evolução</span>
+            </button>
+            </div>
+          </div>
+
+          <div class="record-nav-group" data-group="prescricao">
+            <button class="record-nav-item record-nav-group-toggle" type="button" aria-expanded="false" aria-controls="subnav-prescricao">
+              <span class="menu-item-icon" aria-hidden="true">▣</span>
+              <span>Prescrição e Tratamento</span>
+              <span class="nav-item-arrow" aria-hidden="true">›</span>
+            </button>
+            <div class="record-subnav" id="subnav-prescricao" hidden>
+            <button class="record-nav-item sub-item" type="button" data-section="medicacoes">
+              <span>Medicações</span>
+            </button>
+            <button class="record-nav-item sub-item" type="button" data-section="acessos-vasculares">
+              <span>Acessos Vasculares</span>
+            </button>
+            <button class="record-nav-item sub-item" type="button" data-section="prescricao-hd">
+              <span>Prescrição de Hemodiálise</span>
+            </button>
+            <button class="record-nav-item sub-item" type="button" data-section="sessoes-dialise">
+              <span>Sessões de Diálise</span>
+            </button>
+            </div>
+          </div>
+
+          <div class="record-nav-group" data-group="resultados">
+            <button class="record-nav-item record-nav-group-toggle" type="button" aria-expanded="false" aria-controls="subnav-resultados">
+              <span class="menu-item-icon" aria-hidden="true">▤</span>
+              <span>Resultados</span>
+              <span class="nav-item-arrow" aria-hidden="true">›</span>
+            </button>
+            <div class="record-subnav" id="subnav-resultados" hidden>
+            <button class="record-nav-item sub-item" type="button" data-section="exames">
+              <span>Exames</span>
+            </button>
+            <button class="record-nav-item sub-item nav-item-disabled" type="button" disabled aria-disabled="true">
+              <span>Laudos</span>
+              <span class="sub-item-tag">em breve</span>
+            </button>
+            </div>
+          </div>
+        </nav>
+      </aside>
+
+      <button class="sidebar-backdrop d-lg-none" id="sidebar-backdrop" type="button" hidden aria-label="Fechar navegação"></button>
+
+      <main class="record-main" id="conteudo-principal" tabindex="-1">
+        <button class="mobile-nav-trigger d-lg-none" id="sidebar-open" type="button" aria-controls="record-sidebar" aria-expanded="false">
+          ☰ Menu do prontuário
+        </button>
+
+        <!-- ABA: IDENTIFICAÇÃO. Dados cadastrais + Endereço permanecem na mesma tela. -->
+        <section class="record-view active" id="view-cadastro" data-view="cadastro" aria-labelledby="cadastro-title">
+          <div class="section-heading">
+            <div>
+              <span class="section-eyebrow">IDENTIFICAÇÃO DO PACIENTE</span>
+              <h2 id="cadastro-title">Identificação</h2>
+            </div>
+            <p>Identificação e endereço do paciente em uma única etapa.</p>
+          </div>
+
+          <article class="record-card">
+            <header class="record-card-header">
+              <h3>Dados Cadastrais</h3>
+            </header>
+            <div class="record-card-body">
+              <div class="field-grid one-column">
+                <div class="field-block">
+                  <label class="field-label" for="nome-completo">Nome completo do paciente</label>
+                  <input class="form-control" id="nome-completo" name="nome" value="ANA MARIA">
+                </div>
+              </div>
+
+              <div class="field-grid two-columns">
+                <div class="field-block">
+                  <label class="field-label" for="data-nascimento">Data de nascimento</label>
+                  <input class="form-control" id="data-nascimento" name="nascimento" value="1958-02-05" type="date">
+                </div>
+                <div class="field-block">
+                  <label class="field-label" for="sexo">Sexo</label>
+                  <select class="form-select" id="sexo" name="sexo">
+                    <option selected>Feminino</option>
+                    <option>Masculino</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field-grid two-columns">
+                <div class="field-block">
+                  <label class="field-label" for="cpf">CPF</label>
+                  <input class="form-control" id="cpf" name="cpf" value="678.901.234-55" inputmode="numeric">
+                </div>
+                <div class="field-block">
+                  <label class="field-label" for="cns">Cartão SUS (CNS)</label>
+                  <input class="form-control" id="cns" name="cns" value="700 0067 8901 2345" inputmode="numeric">
+                </div>
+              </div>
+
+              <div class="field-grid identity-row">
+                <div class="field-block">
+                  <label class="field-label" for="rg">Nº identidade</label>
+                  <input class="form-control" id="rg" name="rg" value="789012345">
+                </div>
+                <div class="field-block">
+                  <label class="field-label" for="orgao-emissor">Órgão emissor</label>
+                  <input class="form-control" id="orgao-emissor" name="orgao" value="SSP">
+                </div>
+                <div class="field-block">
+                  <label class="field-label" for="uf-identidade">UF</label>
+                  <select class="form-select" id="uf-identidade" name="uf-identidade">
+                    <option selected>CE</option>
+                    <option>MA</option>
+                    <option>PI</option>
+                  </select>
+                </div>
+                <div class="field-block">
+                  <label class="field-label" for="data-identidade">Data identidade</label>
+                  <input class="form-control" id="data-identidade" name="data-identidade" value="12/12/1995">
+                </div>
+              </div>
+
+              <div class="field-grid naturalidade-row">
+                <div class="field-block">
+                  <label class="field-label" for="naturalidade">Naturalidade</label>
+                  <input class="form-control" id="naturalidade" name="naturalidade" value="Iguatu">
+                </div>
+                <div class="field-block">
+                  <label class="field-label" for="uf-naturalidade">UF</label>
+                  <select class="form-select" id="uf-naturalidade" name="uf-naturalidade">
+                    <option selected>CE</option>
+                    <option>MA</option>
+                    <option>PI</option>
+                  </select>
+                </div>
+                <div class="field-block">
+                  <label class="field-label" for="nacionalidade">Nacionalidade</label>
+                  <select class="form-select" id="nacionalidade" name="nacionalidade">
+                    <option selected>Brasileira</option>
+                    <option>Outra</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field-grid one-column">
+                <div class="field-block">
+                  <label class="field-label" for="nome-mae">Nome da mãe</label>
+                  <input class="form-control" id="nome-mae" name="nome-mae" value="MARIA JOSÉ">
+                </div>
+              </div>
+
+              <div class="field-grid contact-row">
+                <div class="field-block">
+                  <label class="field-label" for="telefone">Telefone</label>
+                  <input class="form-control" id="telefone" name="telefone" value="(85) 94321-0987" inputmode="tel">
+                </div>
+                <div class="field-block">
+                  <label class="field-label" for="email">E-mail</label>
+                  <input class="form-control" id="email" name="email" type="email" value="ana.maria@email.com">
+                </div>
+                <div class="field-block">
+                  <label class="field-label" for="cor-raca">Cor / Raça</label>
+                  <select class="form-select" id="cor-raca" name="cor-raca">
+                    <option selected>Branca</option>
+                    <option>Preta</option>
+                    <option>Parda</option>
+                    <option>Amarela</option>
+                    <option>Indígena</option>
+                    <option>Não informado</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="record-card">
+            <header class="record-card-header">
+              <h3>Endereço</h3>
+            </header>
+            <div class="record-card-body">
+              <div class="address-top-grid">
+                <div class="field-block">
+                  <label class="field-label" for="cep">CEP</label>
+                  <div class="input-with-button">
+                    <input class="form-control" id="cep" value="63500-00" inputmode="numeric">
+                    <button class="field-action" type="button" id="cep-search" aria-label="Pesquisar CEP">⌕</button>
+                  </div>
+                </div>
+                <div class="field-block">
+                  <label class="field-label" for="logradouro">Logradouro / Rua</label>
+                  <input class="form-control" id="logradouro" value="Rua Padre Mororó">
+                </div>
+                <div class="field-block">
+                  <label class="field-label" for="numero">Nº</label>
+                  <input class="form-control" id="numero" value="67">
+                </div>
+                <div class="field-block">
+                  <label class="field-label" for="complemento">Complemento</label>
+                  <input class="form-control" id="complemento" placeholder="Apto, casa..." value="">
+                </div>
+              </div>
+
+              <div class="address-bottom-grid">
+                <div class="field-block">
+                  <label class="field-label" for="bairro">Bairro</label>
+                  <input class="form-control" id="bairro" value="Pinto Madeira">
+                </div>
+                <div class="field-block">
+                  <label class="field-label" for="municipio">Município</label>
+                  <div class="input-with-button">
+                    <input class="form-control" id="municipio" value="Iguatu">
+                    <button class="field-action" type="button" id="municipio-search" aria-label="Pesquisar município">⌕</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- ABA: PROGRAMA DE TRATAMENTO. Todos os componentes permanecem juntos. -->
+        <section class="record-view" id="view-programa" data-view="programa" aria-labelledby="programa-title">
+          <div class="section-heading">
+            <div>
+              <span class="section-eyebrow">ACOMPANHAMENTO DO TRATAMENTO</span>
+              <h2 id="programa-title">Programa de Tratamento</h2>
+            </div>
+            <p>Dados do programa, rotina de HD, movimentações e dias previstos na mesma etapa.</p>
+          </div>
+
+          <article class="record-card">
+            <header class="record-card-header">
+              <h3>Dados do programa</h3>
+            </header>
+            <div class="record-card-body">
+              <div class="field-grid two-columns">
+                <div class="field-block">
+                  <label class="field-label" for="inicio-programa">Início programa dialítico na vida</label>
+                  <input class="form-control" id="inicio-programa" name="inicio-programa" placeholder="dd/mm/aaaa" inputmode="numeric">
+                </div>
+                <div class="field-block">
+                  <label class="field-label" for="inicio-clinica">Início diálise na clínica</label>
+                  <input class="form-control" id="inicio-clinica" name="inicio-clinica" placeholder="dd/mm/aaaa" inputmode="numeric">
+                </div>
+              </div>
+
+              <div class="field-grid one-column">
+                <div class="field-block">
+                  <label class="field-label" for="programa-atual">Programa de tratamento atual</label>
+                  <select class="form-select" id="programa-atual" name="programa-atual">
+                    <option selected value="">— Selecione —</option>
+                    <option>Em branco</option>
+                    <option>Abandono</option>
+                    <option>Alta</option>
+                    <option>Hemodiálise</option>
+                    <option>Hemodiálise Pediátrica</option>
+                    <option>Óbito</option>
+                    <option>Transferido</option>
+                    <option>Transplantado</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="program-layout">
+                <div class="program-main-column">
+                  <fieldset class="day-fieldset">
+                    <legend class="field-label">Dias de HD</legend>
+                    <div class="day-options">
+                      <label class="day-option"><input type="checkbox" name="dias-hd" value="diaria"> <span>Diária</span></label>
+                      <label class="day-option"><input type="checkbox" name="dias-hd" value="segunda"> <span>Seg</span></label>
+                      <label class="day-option"><input type="checkbox" name="dias-hd" value="terca"> <span>Ter</span></label>
+                      <label class="day-option"><input type="checkbox" name="dias-hd" value="quarta"> <span>Qua</span></label>
+                      <label class="day-option"><input type="checkbox" name="dias-hd" value="quinta"> <span>Qui</span></label>
+                      <label class="day-option"><input type="checkbox" name="dias-hd" value="sexta"> <span>Sex</span></label>
+                      <label class="day-option"><input type="checkbox" name="dias-hd" value="sabado"> <span>Sáb</span></label>
+                      <label class="day-option"><input type="checkbox" name="dias-hd" value="domingo"> <span>Dom</span></label>
+                    </div>
+                  </fieldset>
+
+                  <div class="field-grid two-columns compact-grid">
+                    <div class="field-block">
+                      <label class="field-label" for="turno">Turno</label>
+                      <select class="form-select" id="turno" name="turno">
+                        <option selected value="">— Selecione —</option>
+                      </select>
+                    </div>
+                    <div class="field-block">
+                      <label class="field-label" for="sala">Sala</label>
+                      <select class="form-select" id="sala" name="sala">
+                        <option selected value="">— Selecione —</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="history-table-wrap">
+                    <table class="table movement-history">
+                      <caption class="visually-hidden">Histórico de movimentações do paciente</caption>
+                      <thead>
+                        <tr>
+                          <th scope="col">Data</th>
+                          <th scope="col">Movimentação</th>
+                          <th scope="col">Responsável</th>
+                        </tr>
+                      </thead>
+                      <tbody id="movement-history-body">
+                        <tr>
+                          <td colspan="3" class="empty-history">Nenhuma movimentação registrada</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <aside class="movement-panel" aria-labelledby="movement-panel-title">
+                  <div class="movement-panel-heading">
+                    <h4 id="movement-panel-title">Lançar Entrada / Saída</h4>
+                    <span class="movement-plus" aria-hidden="true">+</span>
+                  </div>
+
+                  <div class="field-block">
+                    <label class="field-label" for="movement-date">Data</label>
+                    <input
+                      class="form-control"
+                      id="movement-date"
+                      name="movement-date"
+                      type="text"
+                      inputmode="numeric"
+                      placeholder="dd/mm/aaaa"
+                      autocomplete="off"
+                    >
+                  </div>
+
+                  <div class="field-block">
+                    <label class="field-label" for="movement-type">Movimentação</label>
+                    <select class="form-select" id="movement-type" name="movement-type">
+                      <option selected value="">— Selecione —</option>
+                      <option value="abandono">Abandono</option>
+                      <option value="alta-ambulatorial">Alta ambulatorial</option>
+                      <option value="inicio-programa">Início de programa</option>
+                      <option value="obito">Óbito</option>
+                      <option value="rejeicao-perda-transplante">Rejeição/perda de transplante</option>
+                      <option value="retorno">Retorno</option>
+                      <option value="transferencia-centro">Transferência de centro</option>
+                      <option value="transplante">Transplante</option>
+                    </select>
+                  </div>
+
+                  <div id="movement-detail" class="movement-detail" aria-live="polite">
+                    <div class="movement-detail-group" data-movement-detail="abandono" hidden>
+                      <div class="field-block">
+                        <label class="field-label" for="abandono-observacao">Observação</label>
+                        <input class="form-control" id="abandono-observacao" name="abandono-observacao">
+                      </div>
+                    </div>
+
+                    <div class="movement-detail-group" data-movement-detail="alta-ambulatorial" hidden>
+                      <div class="field-block">
+                        <label class="field-label" for="alta-tipo">Tipo de alta</label>
+                        <select class="form-select" id="alta-tipo" name="alta-tipo">
+                          <option selected value="">— Selecione —</option>
+                          <option value="a-pedido">A pedido</option>
+                          <option value="recuperacao-funcao">Recuperação de função</option>
+                        </select>
+                      </div>
+                      <div class="field-block">
+                        <label class="field-label" for="alta-observacao">Observação</label>
+                        <input class="form-control" id="alta-observacao" name="alta-observacao">
+                      </div>
+                    </div>
+
+                    <div class="movement-detail-group" data-movement-detail="inicio-programa" hidden>
+                      <div class="field-block">
+                        <label class="field-label" for="inicio-procedimento">Procedimento</label>
+                        <select class="form-select" id="inicio-procedimento" name="inicio-procedimento">
+                          <option selected value="">— Selecione —</option>
+                          <option value="hemodialise">Hemodiálise</option>
+                          <option value="hemodialise-pediatrica">Hemodiálise Pediátrica</option>
+                        </select>
+                      </div>
+                      <div class="field-block movement-dependent-field" id="inicio-classificacao-field" hidden>
+                        <label class="field-label" for="inicio-cronico-agudo">Crônico/Agudo</label>
+                        <select class="form-select" id="inicio-cronico-agudo" name="inicio-cronico-agudo">
+                          <option selected value="">— Selecione —</option>
+                          <option value="cronico">Crônico</option>
+                          <option value="agudo">Agudo</option>
+                          <option value="transito">Trânsito</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="movement-detail-group" data-movement-detail="obito" hidden>
+                      <div class="field-block">
+                        <label class="field-label" for="obito-tipo">Tipo</label>
+                        <select class="form-select" id="obito-tipo" name="obito-tipo">
+                          <option selected value="">— Selecione —</option>
+                          <option>Decl. de óbito pelo IML</option>
+                          <option>Decl. de óbito pelo médico assistente</option>
+                          <option>Decl. de óbito pelo SVO</option>
+                          <option>Sem informação</option>
+                        </select>
+                      </div>
+                      <div class="field-block">
+                        <label class="field-label" for="causa-mortis">Causa Mortis</label>
+                        <input class="form-control" id="causa-mortis" name="causa-mortis" autocomplete="off">
+                      </div>
+                      <div class="field-block">
+                        <label class="field-label" for="obito-observacao">Observação</label>
+                        <input class="form-control" id="obito-observacao" name="obito-observacao">
+                      </div>
+                      <div class="field-block">
+                        <label class="field-label" for="cid-causa-mortis">CID Causa Mortis</label>
+                        <div class="input-with-button">
+                          <input class="form-control" id="cid-causa-mortis" name="cid-causa-mortis">
+                          <button class="field-action" type="button" id="cid-search" aria-label="Pesquisar CID da causa mortis">⌕</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="movement-detail-group" data-movement-detail="rejeicao-perda-transplante" hidden>
+                      <div class="field-block">
+                        <label class="field-label" for="rejeicao-observacao">Observação</label>
+                        <input class="form-control" id="rejeicao-observacao" name="rejeicao-observacao">
+                      </div>
+                    </div>
+
+                    <div class="movement-detail-group" data-movement-detail="retorno" hidden>
+                      <div class="field-block">
+                        <label class="field-label" for="retorno-procedimento">Procedimento</label>
+                        <select class="form-select" id="retorno-procedimento" name="retorno-procedimento">
+                          <option selected value="">— Selecione —</option>
+                          <option value="hemodialise">Hemodiálise</option>
+                          <option value="hemodialise-pediatrica">Hemodiálise Pediátrica</option>
+                        </select>
+                      </div>
+                      <div class="field-block movement-dependent-field" id="retorno-classificacao-field" hidden>
+                        <label class="field-label" for="retorno-cronico-agudo">Crônico/Agudo</label>
+                        <select class="form-select" id="retorno-cronico-agudo" name="retorno-cronico-agudo">
+                          <option selected value="">— Selecione —</option>
+                          <option value="cronico">Crônico</option>
+                          <option value="agudo">Agudo</option>
+                          <option value="transito">Trânsito</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="movement-detail-group" data-movement-detail="transferencia-centro" hidden>
+                      <div class="field-block">
+                        <label class="field-label" for="transferencia-local">Local</label>
+                        <input class="form-control" id="transferencia-local" name="transferencia-local">
+                      </div>
+                      <div class="field-block">
+                        <label class="field-label" for="transferencia-cidade">Cidade</label>
+                        <input class="form-control" id="transferencia-cidade" name="transferencia-cidade">
+                      </div>
+                      <div class="field-block">
+                        <label class="field-label" for="transferencia-tipo">Tipo</label>
+                        <select class="form-select" id="transferencia-tipo" name="transferencia-tipo">
+                          <option selected value="">— Selecione —</option>
+                          <option>Temporária</option>
+                          <option>Internação</option>
+                          <option>Definitiva</option>
+                          <option>Retorno a clínica de origem</option>
+                          <option>Intercompany</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="movement-detail-group" data-movement-detail="transplante" hidden>
+                      <div class="field-block">
+                        <label class="field-label" for="transplante-historico-hd">Nº Histórico de HD</label>
+                        <input class="form-control" id="transplante-historico-hd" name="transplante-historico-hd">
+                      </div>
+                      <div class="field-block">
+                        <label class="field-label" for="transplante-observacao">Observação</label>
+                        <input class="form-control" id="transplante-observacao" name="transplante-observacao">
+                      </div>
+                      <div class="field-block">
+                        <label class="field-label" for="transplante-tipo">Tipo</label>
+                        <select class="form-select" id="transplante-tipo" name="transplante-tipo">
+                          <option selected value="">— Selecione —</option>
+                          <option>Doador cadáver</option>
+                          <option>Doador vivo relacionado</option>
+                          <option>Doador vivo não relacionado</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button class="btn btn-primary movement-register" id="register-movement" type="button">
+                    Registrar
+                  </button>
+                </aside>
+              </div>
+            </div>
+          </article>
+
+          <article class="record-card">
+            <header class="record-card-header">
+              <h3>Dias de HD Previstos</h3>
+            </header>
+            <div class="record-card-body">
+              <div class="calendar-strip" aria-label="Calendário de dias previstos">
+                <button type="button" class="calendar-nav" aria-label="Mês anterior">‹</button>
+                <span class="calendar-month" id="calendar-month">2026/10</span>
+                <button type="button" class="calendar-nav" aria-label="Próximo mês">›</button>
+                <div class="calendar-days" id="calendar-days"></div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <!-- ABA: CLÍNICO / DADOS CLÍNICOS. Listas (catálogos) são preenchidas por js/dados-clinicos.js. -->
+        <section class="record-view" id="view-dados-clinicos" data-view="dados-clinicos" aria-labelledby="dados-clinicos-title">
+          <div class="section-heading">
+            <div>
+              <span class="section-eyebrow">CLÍNICO</span>
+              <h2 id="dados-clinicos-title">Dados Clínicos</h2>
+            </div>
+            <p>Dados gerais, marcadores virais, equipe, vacinas e histórico prévio ao tratamento.</p>
+          </div>
+
+          <!-- Dados Gerais -->
+          <article class="record-card">
+            <header class="record-card-header"><h3>Dados Gerais</h3></header>
+            <div class="record-card-body">
+              <div class="dc-grid">
+                <div class="field-block dc-span-2">
+                  <label class="field-label" for="dc-abo-rh">ABO/Rh</label>
+                  <select class="form-select" id="dc-abo-rh" name="abo_rh" data-catalog="aboRh"></select>
+                </div>
+                <div class="field-block dc-span-2">
+                  <label class="field-label" for="dc-altura">Altura (cm)</label>
+                  <input class="form-control derived-field" id="dc-altura" name="altura" inputmode="decimal" readonly aria-describedby="dc-altura-help">
+                  <div class="form-text" id="dc-altura-help">Vem da Avaliação Antropométrica.</div>
+                </div>
+                <div class="field-block dc-span-2">
+                  <label class="field-label" for="dc-peso-seco">Peso seco (kg)</label>
+                  <input class="form-control" id="dc-peso-seco" name="peso_seco" inputmode="decimal" autocomplete="off" aria-describedby="dc-peso-seco-erro">
+                  <div class="invalid-feedback" id="dc-peso-seco-erro">Informe um peso entre 1 e 400 kg.</div>
+                </div>
+                <div class="field-block dc-span-2">
+                  <label class="field-label" for="dc-diurese">Diurese</label>
+                  <input class="form-control" id="dc-diurese" name="diurese" autocomplete="off">
+                </div>
+                <div class="field-block dc-span-2">
+                  <label class="field-label" for="dc-gestacoes">Gestações</label>
+                  <input class="form-control" id="dc-gestacoes" name="gestacoes" inputmode="numeric" autocomplete="off" aria-describedby="dc-gestacoes-erro">
+                  <div class="invalid-feedback" id="dc-gestacoes-erro">Informe um número inteiro de 0 a 30.</div>
+                </div>
+                <div class="field-block dc-span-2">
+                  <label class="field-label" for="dc-gestacoes-data">Data (gestações)</label>
+                  <input class="form-control" id="dc-gestacoes-data" name="gestacoes_data" type="date">
+                </div>
+
+                <div class="field-block dc-span-6">
+                  <label class="field-label" for="dc-diag-base">Diagnóstico de base (CID)</label>
+                  <div class="dc-combo" id="dc-diag-base-combo">
+                    <input class="form-control" id="dc-diag-base" data-no-dirty name="diagnostico_base" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="dc-diag-base-list" autocomplete="off" placeholder="Buscar por código ou descrição">
+                    <button class="dc-combo-clear" type="button" aria-label="Limpar diagnóstico de base" hidden>×</button>
+                    <ul class="dc-combo-list" id="dc-diag-base-list" role="listbox" aria-label="Resultados da busca de CID" hidden></ul>
+                  </div>
+                  <div class="form-text" id="dc-diag-base-help">Selecione uma opção da lista.</div>
+                </div>
+                <div class="field-block dc-span-6">
+                  <label class="field-label" for="dc-etiologia">Etiologia</label>
+                  <select class="form-select" id="dc-etiologia" name="etiologia" data-catalog="etiologia"></select>
+                </div>
+
+                <div class="field-block dc-span-4">
+                  <label class="field-label" for="dc-tabagismo">Tabagismo</label>
+                  <select class="form-select" id="dc-tabagismo" name="tabagismo" data-catalog="simNaoSemInfo" data-default="sem-informacao"></select>
+                </div>
+                <div class="field-block dc-span-4">
+                  <label class="field-label" for="dc-etilismo">Etilismo</label>
+                  <select class="form-select" id="dc-etilismo" name="etilismo" data-catalog="simNaoSemInfo" data-default="sem-informacao"></select>
+                </div>
+                <div class="field-block dc-span-4">
+                  <label class="field-label" for="dc-drogadicao">Drogadição</label>
+                  <select class="form-select" id="dc-drogadicao" name="drogadicao" data-catalog="simNaoSemInfo" data-default="sem-informacao"></select>
+                </div>
+
+                <div class="field-block dc-span-6">
+                  <label class="field-label" for="dc-observacoes">Observações</label>
+                  <textarea class="form-control" id="dc-observacoes" name="observacoes" rows="3"></textarea>
+                </div>
+                <div class="field-block dc-span-6">
+                  <label class="field-label" for="dc-alertas">Alertas</label>
+                  <textarea class="form-control" id="dc-alertas" name="alertas" rows="3" aria-describedby="dc-alertas-help"></textarea>
+                  <div class="form-text" id="dc-alertas-help">O texto é exibido como alerta ao abrir o prontuário.</div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Marcadores Virais -->
+          <article class="record-card">
+            <header class="record-card-header"><h3>Marcadores Virais</h3></header>
+            <div class="record-card-body">
+              <div class="dc-markers" id="dc-markers"></div>
+            </div>
+          </article>
+
+          <!-- Equipe + Vacinas -->
+          <div class="dc-pair dc-pair-team">
+            <article class="record-card">
+              <header class="record-card-header"><h3>Equipe Vinculada</h3></header>
+              <div class="record-card-body">
+                <div class="dc-team" id="dc-team"></div>
+                <div class="form-text">Profissionais cadastrados no AGHU. Cada profissional pode ser vinculado uma única vez.</div>
+              </div>
+            </article>
+
+            <article class="record-card">
+              <header class="record-card-header"><h3>Vacinas</h3></header>
+              <div class="record-card-body">
+                <div class="dc-vaccine-form" role="group" aria-label="Registrar vacina">
+                  <div class="field-block">
+                    <label class="field-label" for="dc-vac-data">Data</label>
+                    <input class="form-control" id="dc-vac-data" data-no-dirty type="date">
+                  </div>
+                  <div class="field-block">
+                    <label class="field-label" for="dc-vac-nome">Vacina</label>
+                    <select class="form-select" id="dc-vac-nome" data-no-dirty data-catalog="vacinas"></select>
+                  </div>
+                  <div class="field-block">
+                    <label class="field-label" for="dc-vac-complemento">Complemento</label>
+                    <input class="form-control" id="dc-vac-complemento" data-no-dirty autocomplete="off">
+                  </div>
+                  <div class="field-block">
+                    <label class="field-label" for="dc-vac-lote">Lote</label>
+                    <input class="form-control" id="dc-vac-lote" data-no-dirty autocomplete="off">
+                  </div>
+                  <button class="btn btn-primary dc-vac-add" id="dc-vac-add" type="button">+ Adicionar</button>
+                </div>
+                <div class="dc-vac-feedback" id="dc-vac-feedback" role="alert" hidden></div>
+
+                <div class="history-table-wrap">
+                  <table class="table movement-history dc-vaccine-table">
+                    <caption class="visually-hidden">Vacinas registradas</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">Data</th>
+                        <th scope="col">Vacina</th>
+                        <th scope="col">Complemento</th>
+                        <th scope="col">Lote</th>
+                        <th scope="col"><span class="visually-hidden">Ações</span></th>
+                      </tr>
+                    </thead>
+                    <tbody id="dc-vac-body"></tbody>
+                  </table>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Dados prévios + 1ª sessão -->
+          <div class="dc-pair">
+            <article class="record-card">
+              <header class="record-card-header"><h3>Dados prévios ao tratamento renal substitutivo</h3></header>
+              <div class="record-card-body dc-stack">
+                <div class="field-block">
+                  <label class="field-label" for="dc-epo">Recebeu EPO ou equivalente</label>
+                  <select class="form-select" id="dc-epo" name="previo_epo" data-catalog="tempoCuidado"></select>
+                </div>
+                <div class="field-block">
+                  <label class="field-label" for="dc-nefrologista">Estava sob cuidados de nefrologista</label>
+                  <select class="form-select" id="dc-nefrologista" name="previo_nefrologista" data-catalog="tempoCuidado"></select>
+                </div>
+                <div class="field-block">
+                  <label class="field-label" for="dc-nutricionista">Estava sob cuidados de nutricionista</label>
+                  <select class="form-select" id="dc-nutricionista" name="previo_nutricionista" data-catalog="tempoCuidado"></select>
+                </div>
+                <div class="field-block">
+                  <label class="field-label" for="dc-primeiro-programa">1º programa de diálise crônica regular na vida</label>
+                  <select class="form-select" id="dc-primeiro-programa" name="previo_primeiro_programa" data-catalog="primeiroPrograma"></select>
+                </div>
+              </div>
+            </article>
+
+            <article class="record-card">
+              <header class="record-card-header"><h3>1ª sessão de diálise da vida</h3></header>
+              <div class="record-card-body">
+                <div class="dc-grid dc-grid-halves">
+                  <div class="field-block">
+                    <label class="field-label" for="dc-realizacao">Sua realização foi</label>
+                    <select class="form-select" id="dc-realizacao" name="sessao_realizacao" data-catalog="realizacao"></select>
+                  </div>
+                  <div class="field-block">
+                    <label class="field-label" for="dc-fav">Havia FAV confeccionada presente</label>
+                    <select class="form-select" id="dc-fav" name="sessao_fav" data-catalog="simNaoSemInfo"></select>
+                  </div>
+                  <div class="field-block">
+                    <label class="field-label" for="dc-local">Local</label>
+                    <select class="form-select" id="dc-local" name="sessao_local" data-catalog="localSessao"></select>
+                  </div>
+                  <div class="field-block">
+                    <label class="field-label" for="dc-enxerto">Havia enxerto venoso confeccionado</label>
+                    <select class="form-select" id="dc-enxerto" name="sessao_enxerto" data-catalog="simNaoSemInfo"></select>
+                  </div>
+                  <div class="field-block">
+                    <label class="field-label" for="dc-tipo-dialise">Tipo de diálise</label>
+                    <select class="form-select" id="dc-tipo-dialise" name="sessao_tipo_dialise" data-catalog="tipoDialise"></select>
+                  </div>
+                  <div class="field-block">
+                    <label class="field-label" for="dc-acesso">Acesso</label>
+                    <select class="form-select" id="dc-acesso" name="sessao_acesso" data-catalog="acessoSessao"></select>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ABA: CLÍNICO / EVENTOS E DIAGNÓSTICOS. Formulários e listas são montados por js/eventos-diagnosticos.js. -->
+        <section class="record-view" id="view-eventos-diagnosticos" data-view="eventos-diagnosticos" aria-labelledby="eventos-diagnosticos-title">
+          <div class="section-heading">
+            <div>
+              <span class="section-eyebrow">CLÍNICO</span>
+              <h2 id="eventos-diagnosticos-title">Eventos e Diagnósticos</h2>
+            </div>
+            <p>Problemas, internações, infecções, transfusões, avaliações por outros especialistas e alergias.</p>
+          </div>
+
+          <article class="record-card">
+            <header class="record-card-header"><h3>Registrar novo evento</h3></header>
+            <div class="record-card-body">
+              <div class="ev-add">
+                <div class="field-block">
+                  <label class="field-label" for="ev-new-type">Tipo de evento</label>
+                  <select class="form-select" id="ev-new-type" data-no-dirty></select>
+                </div>
+                <button class="btn btn-primary" type="button" id="ev-add-button">+ Adicionar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="record-card">
+            <header class="record-card-header ev-table-header">
+              <h3 id="ev-list-title">Eventos e diagnósticos registrados</h3>
+              <div class="ev-actions" role="toolbar" aria-label="Ações do evento selecionado">
+                <button class="btn btn-outline-secondary btn-sm" type="button" id="ev-act-edit" disabled>Alterar</button>
+                <button class="btn btn-outline-secondary btn-sm" type="button" id="ev-act-evolution" disabled>Evolução</button>
+                <button class="btn btn-outline-secondary btn-sm" type="button" id="ev-act-medication" disabled>Medicações</button>
+                <button class="btn btn-outline-secondary btn-sm" type="button" id="ev-act-culture" disabled>Cultura</button>
+                <button class="btn btn-outline-secondary btn-sm" type="button" id="ev-act-finish" disabled>Finalizar</button>
+                <button class="btn btn-outline-danger btn-sm" type="button" id="ev-act-delete" disabled>Excluir</button>
+              </div>
+            </header>
+            <div class="record-card-body">
+              <div class="ev-filters">
+                <div class="field-block">
+                  <label class="field-label" for="ev-filter-type">Evento</label>
+                  <select class="form-select form-select-sm" id="ev-filter-type" data-no-dirty></select>
+                </div>
+                <div class="field-block">
+                  <label class="field-label" for="ev-filter-status">Situação</label>
+                  <select class="form-select form-select-sm" id="ev-filter-status" data-no-dirty>
+                    <option value="">Todos</option>
+                    <option value="open">Em andamento</option>
+                    <option value="closed">Finalizados</option>
+                  </select>
+                </div>
+              </div>
+              <div class="history-table-wrap">
+                <table class="table table-sm ev-table" aria-labelledby="ev-list-title">
+                  <thead>
+                    <tr>
+                      <th scope="col">Início</th><th scope="col">Fim</th><th scope="col">Evento</th>
+                      <th scope="col">Tipo</th><th scope="col">Registro</th><th scope="col">Alteração</th>
+                    </tr>
+                  </thead>
+                  <tbody id="ev-tbody"></tbody>
+                </table>
+              </div>
+              <p class="ev-empty" id="ev-empty">Nenhum evento registrado.</p>
+            </div>
+          </article>
+
+          <article class="record-card" aria-live="polite">
+            <header class="record-card-header"><h3>Detalhes do evento selecionado</h3></header>
+            <div class="record-card-body" id="ev-detail">
+              <p class="ev-empty">Selecione um evento na lista para ver os detalhes.</p>
+            </div>
+          </article>
+
+          <dialog class="ev-dialog" id="ev-dialog" aria-labelledby="ev-dialog-title">
+            <form method="dialog" id="ev-dialog-form" novalidate>
+              <header class="ev-dialog-header">
+                <h3 id="ev-dialog-title"></h3>
+                <button class="ev-dialog-close" type="button" id="ev-dialog-close" aria-label="Fechar">×</button>
+              </header>
+              <div class="ev-dialog-body" id="ev-dialog-body"></div>
+              <div class="ev-dialog-error" id="ev-dialog-error" role="alert" hidden></div>
+              <footer class="ev-dialog-footer">
+                <button class="btn btn-outline-secondary" type="button" id="ev-dialog-cancel">Cancelar</button>
+                <button class="btn btn-primary" type="submit" id="ev-dialog-confirm">Gravar</button>
+              </footer>
+            </form>
+          </dialog>
+        </section>
+
+        <!-- ABA: CLÍNICO / HISTÓRIA CLÍNICA E EVOLUÇÃO. Montada por js/historia-clinica.js. -->
+        <section class="record-view" id="view-historia-clinica" data-view="historia-clinica" aria-labelledby="historia-clinica-title">
+          <div class="section-heading">
+            <div>
+              <span class="section-eyebrow">CLÍNICO</span>
+              <h2 id="historia-clinica-title">História Clínica e Evolução</h2>
+            </div>
+            <p>Consulte o histórico clínico e registre anotações, avaliações iniciais e evoluções.</p>
+          </div>
+
+          <article class="record-card">
+            <header class="record-card-header"><h3>Histórico</h3></header>
+            <div class="record-card-body">
+              <div class="hc-filters">
+                <button class="btn btn-outline-secondary btn-sm" type="button" id="hc-show-all">Mostrar tudo</button>
+                <details class="hc-filter" id="hc-cat-filter">
+                  <summary>Categoria profissional</summary>
+                  <div class="hc-filter-panel" id="hc-cat-panel" role="group" aria-label="Filtrar por categoria profissional"></div>
+                </details>
+                <div class="field-block hc-nurse">
+                  <label class="field-label" for="hc-nurse">Enfermeiro</label>
+                  <select class="form-select form-select-sm" id="hc-nurse" data-no-dirty></select>
+                </div>
+                <details class="hc-filter" id="hc-type-filter">
+                  <summary>Tipo de registro</summary>
+                  <div class="hc-filter-panel" id="hc-type-panel" role="group" aria-label="Filtrar por tipo de registro"></div>
+                </details>
+                <label class="hc-check"><input type="checkbox" id="hc-cancelled" data-no-dirty> <span>Ver cancelados</span></label>
+                <button class="btn btn-outline-secondary btn-sm hc-print" type="button" id="hc-print">Imprimir</button>
+              </div>
+
+              <div class="hc-history">
+                <nav class="hc-dates" aria-label="Datas dos registros">
+                  <ul id="hc-dates"></ul>
+                </nav>
+                <div class="hc-entries" id="hc-entries" tabindex="0" aria-label="Registros do histórico" aria-live="polite"></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="record-card">
+            <header class="record-card-header"><h3>Novo registro</h3></header>
+            <div class="record-card-body">
+              <div class="hc-compose">
+                <div class="hc-patterns">
+                  <span class="field-label" id="hc-patterns-label">Padrões</span>
+                  <div id="hc-patterns" role="group" aria-labelledby="hc-patterns-label"></div>
+                </div>
+                <div class="hc-form">
+                  <div class="hc-form-row">
+                    <div class="field-block">
+                      <label class="field-label" for="hc-date">Data</label>
+                      <input class="form-control" type="date" id="hc-date" data-no-dirty>
+                    </div>
+                    <div class="field-block">
+                      <label class="field-label" for="hc-type">Tipo</label>
+                      <select class="form-select" id="hc-type" data-no-dirty></select>
+                    </div>
+                    <label class="hc-check hc-restricted"><input type="checkbox" id="hc-restricted" data-no-dirty> <span>Registro restrito</span></label>
+                    <div class="field-block">
+                      <label class="field-label" for="hc-aux">Funções auxiliares</label>
+                      <select class="form-select" id="hc-aux" data-no-dirty></select>
+                    </div>
+                  </div>
+                  <div class="field-block">
+                    <label class="field-label" for="hc-text">Texto do registro</label>
+                    <textarea class="form-control" id="hc-text" rows="8" data-no-dirty aria-describedby="hc-text-error"></textarea>
+                    <div class="hc-error" id="hc-text-error" role="alert" hidden></div>
+                  </div>
+                  <div class="hc-form-actions">
+                    <button class="btn btn-primary" type="button" id="hc-save">Gravar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <dialog class="ev-dialog" id="hc-dialog" aria-labelledby="hc-dialog-title">
+            <form method="dialog" id="hc-dialog-form" novalidate>
+              <header class="ev-dialog-header">
+                <h3 id="hc-dialog-title"></h3>
+                <button class="ev-dialog-close" type="button" id="hc-dialog-close" aria-label="Fechar">×</button>
+              </header>
+              <div class="ev-dialog-body" id="hc-dialog-body"></div>
+              <div class="ev-dialog-error" id="hc-dialog-error" role="alert" hidden></div>
+              <footer class="ev-dialog-footer">
+                <button class="btn btn-outline-secondary" type="button" id="hc-dialog-cancel">Cancelar</button>
+                <button class="btn btn-primary" type="submit" id="hc-dialog-confirm">Gravar</button>
+              </footer>
+            </form>
+          </dialog>
+        </section>
+
+        <!-- ABA: PRESCRIÇÃO E TRATAMENTO / MEDICAÇÕES. Montada por js/medicacoes.js. -->
+        <section class="record-view" id="view-medicacoes" data-view="medicacoes" aria-labelledby="medicacoes-title">
+          <div class="section-heading">
+            <div>
+              <span class="section-eyebrow">PRESCRIÇÃO E TRATAMENTO</span>
+              <h2 id="medicacoes-title">Medicações</h2>
+            </div>
+            <p>Prescreva medicações, imprima receitas e consulte o histórico.</p>
+          </div>
+
+          <div class="md-tabs" role="tablist" aria-label="Medicações">
+            <button class="md-tab" type="button" role="tab" id="md-tab-presc" aria-controls="md-panel-presc" aria-selected="true">Prescrições de Medicações</button>
+            <button class="md-tab" type="button" role="tab" id="md-tab-receitas" aria-controls="md-panel-receitas" aria-selected="false" tabindex="-1">Receitas Impressas</button>
+          </div>
+
+          <div id="md-panel-presc" role="tabpanel" aria-labelledby="md-tab-presc">
+            <article class="record-card">
+              <header class="record-card-header"><h3 id="md-form-title">Nova prescrição</h3></header>
+              <div class="record-card-body">
+                <div class="md-grid">
+                  <div class="field-block md-c3">
+                    <label class="field-label" for="md-date">Data</label>
+                    <input class="form-control" type="date" id="md-date" data-no-dirty>
+                  </div>
+                  <div class="field-block md-c6">
+                    <label class="field-label" for="md-author">Autor *</label>
+                    <select class="form-select" id="md-author" data-no-dirty></select>
+                  </div>
+                  <label class="md-check md-c3"><input type="checkbox" id="md-hd" data-no-dirty> <span>Ministrar na sessão de HD</span></label>
+
+                  <div class="field-block md-c5">
+                    <label class="field-label" for="md-drug">Droga *</label>
+                    <input class="form-control" id="md-drug" list="md-drug-list" autocomplete="off" placeholder="Digite para buscar" data-no-dirty>
+                    <datalist id="md-drug-list"></datalist>
+                  </div>
+                  <div class="field-block md-c3">
+                    <label class="field-label" for="md-complement">Complemento</label>
+                    <input class="form-control" id="md-complement" autocomplete="off" data-no-dirty>
+                  </div>
+                  <div class="field-block md-c4">
+                    <label class="field-label" for="md-brand">Nome comercial</label>
+                    <input class="form-control" id="md-brand" autocomplete="off" data-no-dirty>
+                  </div>
+
+                  <div class="field-block md-c6">
+                    <label class="field-label" for="md-posology">Posologia *</label>
+                    <input class="form-control" id="md-posology" list="md-posology-list" autocomplete="off" placeholder="Ex.: 1 comprimido VO de 12/12h" data-no-dirty>
+                    <datalist id="md-posology-list"></datalist>
+                  </div>
+                  <div class="field-block md-c2">
+                    <label class="field-label" for="md-qty">Quantidade</label>
+                    <input class="form-control" id="md-qty" inputmode="numeric" autocomplete="off" data-no-dirty>
+                  </div>
+                  <div class="field-block md-c2">
+                    <label class="field-label" for="md-total">Dose total</label>
+                    <input class="form-control" id="md-total" autocomplete="off" data-no-dirty>
+                  </div>
+                  <div class="md-c2 md-submit">
+                    <button class="btn btn-primary" type="button" id="md-prescribe">Prescrever</button>
+                    <button class="btn btn-outline-secondary" type="button" id="md-cancel-edit" hidden>Cancelar alteração</button>
+                  </div>
+                </div>
+                <div class="hc-error" id="md-error" role="alert" hidden></div>
+              </div>
+            </article>
+
+            <article class="record-card">
+              <header class="record-card-header"><h3>Impressão</h3></header>
+              <div class="record-card-body">
+                <div class="md-print-row">
+                  <div class="field-block">
+                    <label class="field-label" for="md-model">Modelo</label>
+                    <select class="form-select" id="md-model" data-no-dirty></select>
+                  </div>
+                  <div class="field-block">
+                    <label class="field-label" for="md-print-author">Autor da receita</label>
+                    <select class="form-select" id="md-print-author" data-no-dirty></select>
+                  </div>
+                  <button class="btn btn-outline-secondary" type="button" id="md-print">Imprimir receita</button>
+                </div>
+                <p class="ev-empty" id="md-print-help">Imprime as medicações em uso da data selecionada na lista.</p>
+              </div>
+            </article>
+
+            <article class="record-card">
+              <header class="record-card-header md-list-header">
+                <fieldset class="md-radios">
+                  <legend class="visually-hidden">Situação</legend>
+                  <label class="hc-check"><input type="radio" name="md-status" value="active" checked data-no-dirty> <span>Medicações em uso</span></label>
+                  <label class="hc-check"><input type="radio" name="md-status" value="history" data-no-dirty> <span>Histórico</span></label>
+                </fieldset>
+                <div class="ev-actions" role="toolbar" aria-label="Ações da medicação selecionada">
+                  <button class="btn btn-outline-secondary btn-sm" type="button" id="md-act-edit" disabled>Alterar</button>
+                  <button class="btn btn-outline-secondary btn-sm" type="button" id="md-act-suspend" disabled>Suspender</button>
+                  <button class="btn btn-outline-danger btn-sm" type="button" id="md-act-delete" disabled>Excluir</button>
+                </div>
+              </header>
+              <div class="record-card-body">
+                <div class="hc-history">
+                  <nav class="hc-dates" aria-label="Datas das prescrições"><ul id="md-dates"></ul></nav>
+                  <div class="history-table-wrap">
+                    <table class="table table-sm ev-table" aria-label="Medicações">
+                      <thead><tr><th scope="col">Medicamento / Droga</th><th scope="col">Posologia / Orientação</th><th scope="col">Sessão HD</th><th scope="col">Status</th></tr></thead>
+                      <tbody id="md-tbody"></tbody>
+                    </table>
+                    <p class="ev-empty" id="md-empty">Nenhuma medicação.</p>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div id="md-panel-receitas" role="tabpanel" aria-labelledby="md-tab-receitas" hidden>
+            <article class="record-card">
+              <header class="record-card-header"><h3>Histórico de receitas impressas</h3></header>
+              <div class="record-card-body">
+                <div class="history-table-wrap">
+                  <table class="table table-sm ev-table" aria-label="Receitas impressas">
+                    <thead><tr><th scope="col">Data</th><th scope="col">Modelo</th><th scope="col">Autor</th><th scope="col">Medicações</th></tr></thead>
+                    <tbody id="md-receipts"></tbody>
+                  </table>
+                  <p class="ev-empty" id="md-receipts-empty">Nenhuma receita impressa.</p>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="md-print-sheet" id="md-print-sheet" aria-hidden="true"></div>
+
+          <dialog class="ev-dialog" id="md-dialog" aria-labelledby="md-dialog-title">
+            <form method="dialog" id="md-dialog-form" novalidate>
+              <header class="ev-dialog-header">
+                <h3 id="md-dialog-title"></h3>
+                <button class="ev-dialog-close" type="button" id="md-dialog-close" aria-label="Fechar">×</button>
+              </header>
+              <div class="ev-dialog-body" id="md-dialog-body"></div>
+              <div class="ev-dialog-error" id="md-dialog-error" role="alert" hidden></div>
+              <footer class="ev-dialog-footer">
+                <button class="btn btn-outline-secondary" type="button" id="md-dialog-cancel">Cancelar</button>
+                <button class="btn btn-primary" type="submit" id="md-dialog-confirm">Confirmar</button>
+              </footer>
+            </form>
+          </dialog>
+        </section>
+
+        <!-- ABA: PRESCRIÇÃO E TRATAMENTO / ACESSOS VASCULARES. Montada por js/acessos-vasculares.js. -->
+        <section class="record-view" id="view-acessos-vasculares" data-view="acessos-vasculares" aria-labelledby="acessos-vasculares-title">
+          <div class="section-heading">
+            <div>
+              <span class="section-eyebrow">PRESCRIÇÃO E TRATAMENTO</span>
+              <h2 id="acessos-vasculares-title">Acessos Vasculares</h2>
+            </div>
+            <p>Acessos vasculares, evolução dos acessos e consultas com cirurgião vascular.</p>
+          </div>
+
+          <article class="record-card">
+            <header class="record-card-header av-header">
+              <h3 id="av-title">Cadastro de acesso vascular</h3>
+              <label class="hc-check"><input type="checkbox" id="av-only-active" data-no-dirty> <span>Ver somente ativos</span></label>
+            </header>
+            <div class="record-card-body">
+              <div class="md-grid">
+                <div class="field-block md-c3"><label class="field-label" for="av-date">Data *</label><input class="form-control" type="date" id="av-date" data-no-dirty></div>
+                <div class="field-block md-c3"><label class="field-label" for="av-kind">Acesso *</label><select class="form-select" id="av-kind" data-no-dirty></select></div>
+                <div class="field-block md-c3"><label class="field-label" for="av-type">Tipo *</label><select class="form-select" id="av-type" data-no-dirty></select></div>
+                <div class="field-block md-c3"><label class="field-label" for="av-loc">Localização *</label><select class="form-select" id="av-loc" data-no-dirty></select></div>
+                <div class="field-block md-c12"><label class="field-label" for="av-obs">Observações</label><input class="form-control" id="av-obs" autocomplete="off" data-no-dirty></div>
+                <div class="field-block md-c5"><label class="field-label" for="av-doctor">Médico responsável *</label><select class="form-select" id="av-doctor" data-no-dirty></select></div>
+                <div class="field-block md-c3"><label class="field-label" for="av-billing">Data de cobrança</label><input class="form-control" type="date" id="av-billing" data-no-dirty></div>
+                <label class="md-check md-c4"><input type="checkbox" id="av-nobill" data-no-dirty> <span>Não cobrar</span></label>
+              </div>
+              <div class="hc-error" id="av-error" role="alert" hidden></div>
+              <div class="av-bar">
+                <div class="ev-actions" role="toolbar" aria-label="Ações">
+                  <button class="btn btn-primary btn-sm" type="button" id="av-save">Incluir</button>
+                  <button class="btn btn-outline-secondary btn-sm" type="button" id="av-edit" disabled>Alterar</button>
+                  <button class="btn btn-outline-secondary btn-sm" type="button" id="av-close" disabled>Encerrar acesso</button>
+                  <button class="btn btn-outline-danger btn-sm" type="button" id="av-delete" disabled>Excluir</button>
+                  <button class="btn btn-outline-secondary btn-sm" type="button" id="av-cancel" hidden>Cancelar alteração</button>
+                </div>
+              </div>
+              <div class="history-table-wrap">
+                <table class="table table-sm ev-table" aria-label="Acessos vasculares">
+                  <thead><tr><th scope="col">Data</th><th scope="col">Acesso</th><th scope="col">Tipo</th><th scope="col">Localização</th><th scope="col">Médico responsável</th><th scope="col">Status</th></tr></thead>
+                  <tbody id="av-tbody"></tbody>
+                </table>
+                <p class="ev-empty" id="av-empty">Nenhum registro.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="record-card">
+            <header class="record-card-header"><h3 id="ev2-title">Evolução dos acessos vasculares</h3></header>
+            <div class="record-card-body">
+              <div class="md-grid">
+                <div class="field-block md-c3"><label class="field-label" for="ae-date">Data *</label><input class="form-control" type="date" id="ae-date" data-no-dirty></div>
+                <div class="field-block md-c4"><label class="field-label" for="ae-event">Evento *</label><select class="form-select" id="ae-event" data-no-dirty></select></div>
+                <div class="field-block md-c5"><label class="field-label" for="ae-obs">Observações</label><input class="form-control" id="ae-obs" autocomplete="off" data-no-dirty></div>
+              </div>
+              <div class="hc-error" id="ae-error" role="alert" hidden></div>
+              <div class="av-bar"><div class="ev-actions" role="toolbar" aria-label="Ações">
+                  <button class="btn btn-primary btn-sm" type="button" id="ae-save">Incluir</button>
+                  <button class="btn btn-outline-secondary btn-sm" type="button" id="ae-edit" disabled>Alterar</button>
+                  
+                  <button class="btn btn-outline-danger btn-sm" type="button" id="ae-delete" disabled>Excluir</button>
+                  <button class="btn btn-outline-secondary btn-sm" type="button" id="ae-cancel" hidden>Cancelar alteração</button>
+                </div></div>
+              <div class="history-table-wrap">
+                <table class="table table-sm ev-table" aria-label="Evolução dos acessos">
+                  <thead><tr><th scope="col">Data</th><th scope="col">Acesso</th><th scope="col">Evento</th><th scope="col">Observações / achados clínicos</th><th scope="col">Responsável</th></tr></thead>
+                  <tbody id="ae-tbody"></tbody>
+                </table>
+                <p class="ev-empty" id="ae-empty">Nenhum registro.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="record-card">
+            <header class="record-card-header"><h3>Consulta com cirurgião vascular</h3></header>
+            <div class="record-card-body">
+              <div class="md-grid">
+                <div class="field-block md-c3"><label class="field-label" for="ac-date">Data *</label><input class="form-control" type="date" id="ac-date" data-no-dirty></div>
+                <div class="field-block md-c9"><label class="field-label" for="ac-obs">Observações da consulta *</label><input class="form-control" id="ac-obs" autocomplete="off" data-no-dirty></div>
+              </div>
+              <div class="hc-error" id="ac-error" role="alert" hidden></div>
+              <div class="av-bar"><div class="ev-actions" role="toolbar" aria-label="Ações">
+                  <button class="btn btn-primary btn-sm" type="button" id="ac-save">Incluir</button>
+                  <button class="btn btn-outline-secondary btn-sm" type="button" id="ac-edit" disabled>Alterar</button>
+                  
+                  <button class="btn btn-outline-danger btn-sm" type="button" id="ac-delete" disabled>Excluir</button>
+                  <button class="btn btn-outline-secondary btn-sm" type="button" id="ac-cancel" hidden>Cancelar alteração</button>
+                </div></div>
+              <div class="history-table-wrap">
+                <table class="table table-sm ev-table" aria-label="Consultas com cirurgião vascular">
+                  <thead><tr><th scope="col">Data</th><th scope="col">Observações da consulta</th><th scope="col">Registrado por</th></tr></thead>
+                  <tbody id="ac-tbody"></tbody>
+                </table>
+                <p class="ev-empty" id="ac-empty">Nenhum registro.</p>
+              </div>
+            </div>
+          </article>
+
+          <dialog class="ev-dialog" id="av-dialog" aria-labelledby="av-dialog-title">
+            <form method="dialog" id="av-dialog-form" novalidate>
+              <header class="ev-dialog-header">
+                <h3 id="av-dialog-title"></h3>
+                <button class="ev-dialog-close" type="button" id="av-dialog-close" aria-label="Fechar">×</button>
+              </header>
+              <div class="ev-dialog-body" id="av-dialog-body"></div>
+              <footer class="ev-dialog-footer">
+                <button class="btn btn-outline-secondary" type="button" id="av-dialog-cancel">Cancelar</button>
+                <button class="btn btn-primary" type="submit" id="av-dialog-confirm">Confirmar</button>
+              </footer>
+            </form>
+          </dialog>
+        </section>
+
+        <!-- ABA: PRESCRIÇÃO E TRATAMENTO / PRESCRIÇÃO DE HEMODIÁLISE. Montada por js/prescricao-hd.js. -->
+        <section class="record-view" id="view-prescricao-hd" data-view="prescricao-hd" aria-labelledby="prescricao-hd-title">
+          <div class="section-heading">
+            <div>
+              <span class="section-eyebrow">PRESCRIÇÃO E TRATAMENTO</span>
+              <h2 id="prescricao-hd-title">Prescrição de Hemodiálise</h2>
+            </div>
+            <p>Parâmetros da sessão de hemodiálise, orientações e histórico de prescrições.</p>
+          </div>
+
+          <article class="record-card">
+            <header class="record-card-header ph-header">
+              <h3 id="ph-detail-title">Prescrição vigente</h3>
+              <div class="ev-actions">
+                <button class="btn btn-outline-secondary btn-sm" type="button" id="ph-print" disabled>Imprimir</button>
+                <button class="btn btn-primary btn-sm" type="button" id="ph-new">Nova prescrição</button>
+              </div>
+            </header>
+            <div class="record-card-body">
+              <div class="ph-chips">
+                <span class="ph-chip" id="ph-access">Acesso atual: —</span>
+                <span class="ph-chip ph-chip-warn" id="ph-na">Último exame Na+: não disponível</span>
+              </div>
+              <div id="ph-detail" aria-live="polite"><p class="ev-empty">Nenhuma prescrição de hemodiálise registrada.</p></div>
+            </div>
+          </article>
+
+          <article class="record-card">
+            <header class="record-card-header"><h3 id="ph-history-title">Histórico de prescrições</h3></header>
+            <div class="record-card-body">
+              <div class="history-table-wrap">
+                <table class="table table-sm ev-table" aria-labelledby="ph-history-title">
+                  <thead><tr><th scope="col">Data</th><th scope="col">Método</th><th scope="col">Dialisador</th><th scope="col">Duração</th><th scope="col">Peso seco</th><th scope="col">UF máx.</th><th scope="col">Registrado por</th></tr></thead>
+                  <tbody id="ph-tbody"></tbody>
+                </table>
+                <p class="ev-empty" id="ph-empty">Nenhuma prescrição.</p>
+              </div>
+              <div class="ev-actions ph-history-actions">
+                <button class="btn btn-outline-danger btn-sm" type="button" id="ph-delete" disabled>Excluir</button>
+              </div>
+            </div>
+          </article>
+
+          <div class="ph-print-sheet" id="ph-print-sheet" aria-hidden="true"></div>
+
+          <dialog class="ev-dialog ph-dialog" id="ph-dialog" aria-labelledby="ph-dialog-title">
+            <form method="dialog" id="ph-dialog-form" novalidate>
+              <header class="ev-dialog-header">
+                <h3 id="ph-dialog-title"></h3>
+                <button class="ev-dialog-close" type="button" id="ph-dialog-close" aria-label="Fechar">×</button>
+              </header>
+              <div class="ev-dialog-body" id="ph-dialog-body"></div>
+              <div class="ev-dialog-error" id="ph-dialog-error" role="alert" hidden></div>
+              <footer class="ev-dialog-footer">
+                <button class="btn btn-outline-secondary" type="button" id="ph-dialog-cancel">Cancelar</button>
+                <button class="btn btn-primary" type="submit" id="ph-dialog-confirm">Prescrever</button>
+              </footer>
+            </form>
+          </dialog>
+        </section>
+
+        <!-- ABA: PRESCRIÇÃO E TRATAMENTO / SESSÕES DE DIÁLISE. Montada por js/sessoes-dialise.js. -->
+        <section class="record-view" id="view-sessoes-dialise" data-view="sessoes-dialise" aria-labelledby="sessoes-dialise-title">
+          <div class="section-heading">
+            <div>
+              <span class="section-eyebrow">PRESCRIÇÃO E TRATAMENTO</span>
+              <h2 id="sessoes-dialise-title">Sessões de Diálise</h2>
+            </div>
+            <p>Histórico e registro detalhado das sessões de hemodiálise do paciente.</p>
+          </div>
+
+          <article class="record-card">
+            <header class="record-card-header ph-header">
+              <h3 id="sd-list-title">Sessões de hemodiálise</h3>
+              <div class="ev-actions">
+                <button class="btn btn-outline-secondary btn-sm" type="button" id="sd-print">Imprimir histórico</button>
+                <button class="btn btn-primary btn-sm" type="button" id="sd-new">Nova sessão</button>
+              </div>
+            </header>
+            <div class="record-card-body">
+              <form class="sd-filters" id="sd-filters" novalidate>
+                <div class="field-block"><label class="field-label" for="sd-from">Período de</label><input class="form-control form-control-sm" type="date" id="sd-from" data-no-dirty></div>
+                <div class="field-block"><label class="field-label" for="sd-to">até</label><input class="form-control form-control-sm" type="date" id="sd-to" data-no-dirty></div>
+                <button class="btn btn-outline-secondary btn-sm" type="submit">Buscar</button>
+                <span class="sd-total" id="sd-total" aria-live="polite"></span>
+              </form>
+              <div class="hc-error" id="sd-filter-error" role="alert" hidden></div>
+              <div class="history-table-wrap sd-wrap">
+                <table class="table table-sm ev-table sd-table" aria-labelledby="sd-list-title">
+                  <thead>
+                    <tr>
+                      <th scope="col">Situação</th><th scope="col">Data</th><th scope="col">Horário</th><th scope="col">PA inicial / final</th>
+                      <th scope="col">Peso seco</th><th scope="col">Peso inicial</th><th scope="col">Peso final</th><th scope="col">UF</th>
+                      <th scope="col">% sobrepeso</th><th scope="col">Ganho interdialítico</th><th scope="col">Dialisador (uso)</th><th scope="col">Acesso</th>
+                      <th scope="col">Complicações</th><th scope="col">Responsável</th><th scope="col">Sala / Turno</th><th scope="col">Duração</th>
+                    </tr>
+                  </thead>
+                  <tbody id="sd-tbody"></tbody>
+                </table>
+                <p class="ev-empty" id="sd-empty">Nenhuma sessão no período.</p>
+              </div>
+              <div class="ev-actions sd-row-actions">
+                <button class="btn btn-outline-secondary btn-sm" type="button" id="sd-edit" disabled>Alterar</button>
+                <button class="btn btn-outline-danger btn-sm" type="button" id="sd-delete" disabled>Excluir</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="record-card sd-detail-card">
+            <header class="record-card-header"><h3 id="sd-detail-title">Detalhes da sessão selecionada</h3></header>
+            <div class="record-card-body" id="sd-detail" aria-live="polite"><p class="ev-empty">Selecione uma sessão na lista para ver os detalhes.</p></div>
+          </article>
+
+          <dialog class="ev-dialog ph-dialog" id="sd-dialog" aria-labelledby="sd-dialog-title">
+            <form method="dialog" id="sd-dialog-form" novalidate>
+              <header class="ev-dialog-header">
+                <h3 id="sd-dialog-title"></h3>
+                <button class="ev-dialog-close" type="button" id="sd-dialog-close" aria-label="Fechar">×</button>
+              </header>
+              <div class="ev-dialog-body" id="sd-dialog-body"></div>
+              <div class="ev-dialog-error" id="sd-dialog-error" role="alert" hidden></div>
+              <footer class="ev-dialog-footer">
+                <button class="btn btn-outline-secondary" type="button" id="sd-dialog-cancel">Cancelar</button>
+                <button class="btn btn-primary" type="submit" id="sd-dialog-confirm">Gravar</button>
+              </footer>
+            </form>
+          </dialog>
+        </section>
+
+        <!-- ABA: RESULTADOS / EXAMES (Lista de Exames e Flow de Exames). Montada por js/exames.js. -->
+        <section class="record-view" id="view-exames" data-view="exames" aria-labelledby="exames-title">
+          <div class="section-heading">
+            <div>
+              <span class="section-eyebrow">RESULTADOS</span>
+              <h2 id="exames-title">Exames</h2>
+            </div>
+            <p>Lista de exames, resultados e evolução (flow) dos exames do paciente.</p>
+          </div>
+
+          <div class="md-tabs" role="tablist" aria-label="Exames">
+            <button class="md-tab" type="button" role="tab" id="ex-tab-list" aria-controls="ex-panel-list" aria-selected="true">Lista de Exames</button>
+            <button class="md-tab" type="button" role="tab" id="ex-tab-flow" aria-controls="ex-panel-flow" aria-selected="false" tabindex="-1">Flow de Exames</button>
+          </div>
+
+          <div id="ex-panel-list" role="tabpanel" aria-labelledby="ex-tab-list">
+            <article class="record-card">
+              <header class="record-card-header ph-header">
+                <h3 id="ex-list-title">Exames registrados (histórico)</h3>
+                <div class="ev-actions" role="toolbar" aria-label="Lançar exames">
+                  <button class="btn btn-outline-secondary btn-sm" type="button" id="ex-hemogram">Hemograma</button>
+                  <button class="btn btn-outline-secondary btn-sm" type="button" id="ex-routine">Rotina</button>
+                  <button class="btn btn-outline-secondary btn-sm" type="button" id="ex-fastpet">Cálculo Fast PET</button>
+                </div>
+              </header>
+              <div class="record-card-body">
+                <div class="ex-layout">
+                  <div class="ex-main">
+                    <div class="field-block ex-filter">
+                      <label class="field-label" for="ex-filter">Filtrar por exame, resultado ou responsável</label>
+                      <input class="form-control form-control-sm" id="ex-filter" autocomplete="off" data-no-dirty>
+                    </div>
+                    <div class="history-table-wrap">
+                      <table class="table table-sm ev-table" aria-labelledby="ex-list-title">
+                        <thead><tr><th scope="col">Data</th><th scope="col">Descrição</th><th scope="col">Resultado</th><th scope="col">Não cobrar</th><th scope="col">Responsável</th></tr></thead>
+                        <tbody id="ex-tbody"></tbody>
+                      </table>
+                      <p class="ev-empty" id="ex-empty">Nenhum exame registrado.</p>
+                    </div>
+                  </div>
+                  <aside class="ex-text" aria-labelledby="ex-text-title">
+                    <h4 class="ph-group-title" id="ex-text-title">Resultado texto</h4>
+                    <p class="ph-notes" id="ex-text" aria-live="polite">Selecione um exame para ver a descrição.</p>
+                  </aside>
+                </div>
+              </div>
+            </article>
+
+            <article class="record-card">
+              <header class="record-card-header"><h3 id="ex-form-title">Lançamento de exame</h3></header>
+              <div class="record-card-body">
+                <div class="md-grid">
+                  <div class="field-block md-c3"><label class="field-label" for="ex-date">Data *</label><input class="form-control" type="date" id="ex-date" data-no-dirty></div>
+                  <div class="field-block md-c4"><label class="field-label" for="ex-name">Exame *</label><select class="form-select" id="ex-name" data-no-dirty></select></div>
+                  <div class="field-block md-c3"><label class="field-label" for="ex-result">Resultado *</label><input class="form-control" id="ex-result" autocomplete="off" maxlength="60" data-no-dirty></div>
+                  <label class="md-check md-c2"><input type="checkbox" id="ex-nocharge" data-no-dirty> <span>Não cobrar</span></label>
+                  <div class="field-block md-c12"><label class="field-label" for="ex-desc">Descrição (texto / laudo)</label><textarea class="form-control" id="ex-desc" rows="3" data-no-dirty></textarea></div>
+                </div>
+                <div class="hc-error" id="ex-error" role="alert" hidden></div>
+                <div class="av-bar">
+                  <div class="ev-actions" role="toolbar" aria-label="Ações do exame">
+                    <button class="btn btn-primary btn-sm" type="button" id="ex-save">Incluir</button>
+                    <button class="btn btn-outline-secondary btn-sm" type="button" id="ex-edit" disabled>Alterar</button>
+                    <button class="btn btn-outline-danger btn-sm" type="button" id="ex-delete" disabled>Excluir</button>
+                    <button class="btn btn-outline-secondary btn-sm" type="button" id="ex-cancel" hidden>Cancelar alteração</button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div id="ex-panel-flow" role="tabpanel" aria-labelledby="ex-tab-flow" hidden>
+            <article class="record-card">
+              <header class="record-card-header"><h3 id="ex-flow-title">Flow de exames</h3></header>
+              <div class="record-card-body">
+                <div class="ex-layout ex-layout-flow">
+                  <div class="ex-main">
+                    <div class="history-table-wrap ex-flow-wrap" tabindex="0" aria-label="Tabela de evolução dos exames por mês">
+                      <table class="table table-sm ev-table ex-flow" id="ex-flow-table" aria-labelledby="ex-flow-title"></table>
+                    </div>
+                    <p class="ev-empty" id="ex-flow-empty" hidden>Nenhum exame neste grupo.</p>
+                    <div class="ex-flow-bar">
+                      <label class="hc-check"><input type="checkbox" id="ex-only-results" data-no-dirty> <span>Mostrar somente meses com resultado</span></label>
+                      <button class="btn btn-primary btn-sm" type="button" id="ex-chart" disabled>Gráfico</button>
+                    </div>
+                    <p class="ev-empty" id="ex-chart-help">Clique em uma linha da tabela para escolher o exame do gráfico.</p>
+                  </div>
+                  <aside class="ex-groups" aria-labelledby="ex-groups-title">
+                    <h4 class="ph-group-title" id="ex-groups-title">Grupos de exames</h4>
+                    <ul id="ex-groups"></ul>
+                  </aside>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <dialog class="ev-dialog ph-dialog" id="ex-dialog" aria-labelledby="ex-dialog-title">
+            <form method="dialog" id="ex-dialog-form" novalidate>
+              <header class="ev-dialog-header">
+                <h3 id="ex-dialog-title"></h3>
+                <button class="ev-dialog-close" type="button" id="ex-dialog-close" aria-label="Fechar">×</button>
+              </header>
+              <div class="ev-dialog-body" id="ex-dialog-body"></div>
+              <div class="ev-dialog-error" id="ex-dialog-error" role="alert" hidden></div>
+              <footer class="ev-dialog-footer">
+                <span class="ex-count" id="ex-count" aria-live="polite"></span>
+                <button class="btn btn-outline-secondary" type="button" id="ex-dialog-cancel">Fechar</button>
+                <button class="btn btn-primary" type="submit" id="ex-dialog-confirm">Salvar</button>
+              </footer>
+            </form>
+          </dialog>
+        </section>
+
+      </main>
+    </div>
+
+    <footer class="record-footer">
+      <div class="footer-status" id="footer-status" aria-live="polite"></div>
+      <div class="footer-actions">
+        <button class="btn btn-outline-secondary footer-button" id="cancel-button" type="button">Cancelar</button>
+        <button class="btn btn-primary footer-button save-button" id="save-button" type="button">▣&nbsp; Salvar</button>
+      </div>
+    </footer>
+
+    <script src="js/prontuario.js" defer></script>
+    <script src="js/dados-clinicos.js" defer></script>
+    <script src="js/catalogos.js" defer></script>
+    <script src="js/componentes.js" defer></script>
+    <script src="js/eventos-diagnosticos.js" defer></script>
+    <script src="js/historia-clinica.js" defer></script>
+    <script src="js/medicacoes.js" defer></script>
+    <script src="js/acessos-vasculares.js" defer></script>
+    <script src="js/prescricao-hd.js" defer></script>
+    <script src="js/sessoes-dialise.js" defer></script>
+    <script src="js/exames.js" defer></script>
+  </body>
+</html>

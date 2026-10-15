@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="Hu-Nefro &mdash; sistema para gerenciamento de pacientes nefrol&oacute;gicos." name="description"/>
+  <meta content="noindex, nofollow" name="robots"/>
+  <title>
+   Pacientes - Prontu&aacute;rios | Hu-Nefro
+  </title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="css/pacientes.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <a class="skip-link" href="#conteudo-principal">
+   Ir para o conte&uacute;do principal
+  </a>
+  <header class="app-header">
+   <a aria-label="Hu-Nefro - ir para o conte&uacute;do principal" class="brand" href="#conteudo-principal">
+    <span aria-hidden="true" class="brand-mark">
+     HN
+    </span>
+    <span>
+     Hu-Nefro
+    </span>
+   </a>
+   <div class="header-actions">
+    <button aria-label="Sair do Hu-Nefro" class="btn btn-outline-secondary logout-button" id="logout-button" type="button">
+     Sair
+    </button>
+   </div>
+  </header>
+  <main class="app-main" id="conteudo-principal" tabindex="-1">
+   <div class="page-heading patients-page-heading">
+    <div>
+     <span class="eyebrow">
+      Gest&atilde;o de pacientes
+     </span>
+     <h1 id="page-title">
+      Pacientes - Prontu&aacute;rios
+     </h1>
+     <p>
+      Localize pacientes e acesse o prontu&aacute;rio com seguran&ccedil;a.
+     </p>
+    </div>
+    <button class="btn btn-primary" id="new-record-button" type="button">
+     Novo prontu&aacute;rio
+    </button>
+   </div>
+   <div aria-atomic="true" aria-live="polite" id="feedback-region">
+   </div>
+   <div aria-atomic="true" class="visually-hidden" id="results-announcer" role="status">
+   </div>
+   <section aria-busy="true" aria-labelledby="patient-list-title" class="card patient-list-card" id="lista-pacientes">
+    <header class="card-header patient-list-header">
+     <div>
+      <h2 id="patient-list-title">
+       Pacientes cadastrados
+      </h2>
+      <p id="result-summary">
+       Carregando registros...
+      </p>
+     </div>
+     <button class="btn btn-link clear-filters" hidden="" id="clear-filters" type="button">
+      Limpar filtros
+     </button>
+    </header>
+    <form class="patient-filters" id="patient-filters" role="search">
+     <div class="patient-search-field">
+      <label class="form-label" for="patient-search">
+       Buscar paciente
+      </label>
+      <input autocomplete="off" class="form-control" id="patient-search" name="query" placeholder="Nome, c&oacute;digo, CPF ou CNS" type="search"/>
+     </div>
+     <div>
+      <label class="form-label" for="situation-filter">
+       Situa&ccedil;&atilde;o
+      </label>
+      <select class="form-select" id="situation-filter" name="situation">
+       <option value="">
+        Todos Clientes
+       </option>
+       <option>
+        Clientes em HD
+       </option>
+       <option>
+        Clientes em DP
+       </option>
+       <option>
+        Clientes em p&oacute;s TX
+       </option>
+       <option>
+        Clientes em pr&eacute; TX
+       </option>
+       <option>
+        Doadores em pr&eacute; TX
+       </option>
+       <option>
+        Doadores em p&oacute;s TX
+       </option>
+       <option>
+        Clientes consult&oacute;rio
+       </option>
+       <option>
+        Clientes Conservador
+       </option>
+      </select>
+     </div>
+     <div class="filter-summary" id="filter-summary">
+      Nenhum filtro aplicado
+     </div>
+    </form>
+    <div class="patient-table-wrap" id="patient-table-wrap">
+     <table class="table align-middle patient-table">
+      <caption class="visually-hidden">
+       Lista de pacientes e a&ccedil;&otilde;es dispon&iacute;veis
+      </caption>
+      <thead>
+       <tr>
+        <th scope="col">
+         Paciente
+        </th>
+        <th scope="col">
+         Nascimento
+        </th>
+        <th scope="col">
+         Programa de tratamento
+        </th>
+        <th scope="col">
+         Situa&ccedil;&atilde;o
+        </th>
+        <th scope="col">
+         CPF / CNS
+        </th>
+        <th scope="col">
+         Telefone
+        </th>
+        <th scope="col">
+         A&ccedil;&otilde;es
+        </th>
+       </tr>
+      </thead>
+      <tbody id="patient-table-body">
+      </tbody>
+     </table>
+    </div>
+    <div class="list-state" hidden="" id="empty-state">
+     <strong id="empty-state-title">
+      Nenhum paciente encontrado
+     </strong>
+     <p id="empty-state-message">
+      Revise a busca ou remova os filtros para consultar todos os registros.
+     </p>
+     <button class="btn btn-outline-primary btn-sm" id="empty-clear-filters" type="button">
+      Limpar busca e filtros
+     </button>
+    </div>
+    <div class="list-state list-state-error" hidden="" id="error-state" role="alert">
+     <strong>
+      N&atilde;o foi poss&iacute;vel carregar os pacientes
+     </strong>
+     <p>
+      Tente carregar a lista novamente.
+     </p>
+     <button class="btn btn-outline-danger btn-sm" id="retry-load" type="button">
+      Tentar novamente
+     </button>
+    </div>
+    <footer class="card-footer patient-list-footer" id="result-footer">
+     Carregando registros...
+    </footer>
+   </section>
+  </main>
+  <div aria-label="A&ccedil;&otilde;es do paciente" class="patient-action-menu" hidden="" id="patient-action-menu" role="menu">
+   <button class="destructive-menu-action" id="delete-menu-item" role="menuitem" type="button">
+    Excluir prontu&aacute;rio
+   </button>
+  </div>
+  <dialog aria-describedby="delete-dialog-description" aria-labelledby="delete-dialog-title" class="delete-dialog" id="delete-dialog">
+   <div class="modal-content">
+    <div class="modal-header">
+     <div>
+      <span class="eyebrow destructive-eyebrow">
+       A&ccedil;&atilde;o destrutiva
+      </span>
+      <h2 class="modal-title" id="delete-dialog-title">
+       Excluir prontu&aacute;rio?
+      </h2>
+     </div>
+     <button aria-label="Fechar confirma&ccedil;&atilde;o" class="btn-close" id="dialog-close" type="button">
+     </button>
+    </div>
+    <div class="modal-body">
+     <p id="delete-dialog-description">
+      Voc&ecirc; est&aacute; prestes a excluir o prontu&aacute;rio de
+      <strong id="delete-patient-name">
+      </strong>
+      , c&oacute;digo
+      <strong id="delete-patient-code">
+      </strong>
+      .
+     </p>
+     <div class="alert alert-danger mb-0" role="alert">
+      <strong>
+       Esta a&ccedil;&atilde;o exige confirma&ccedil;&atilde;o.
+      </strong>
+      O prontu&aacute;rio ser&aacute; removido da lista.
+     </div>
+    </div>
+    <div class="modal-footer">
+     <button class="btn btn-outline-secondary" id="dialog-cancel" type="button">
+      Cancelar
+     </button>
+     <button class="btn btn-danger" id="dialog-confirm-delete" type="button">
+      Excluir prontu&aacute;rio
+     </button>
+    </div>
+   </div>
+  </dialog>
+  <script defer="" src="js/pacientes.js">
+  </script>
+ </body>
+</html>

@@ -1,0 +1,53 @@
+/* Aba Clínico / Eventos e Diagnósticos. Reaproveita tokens e componentes de prontuario.css e do combobox de dados-clinicos.css. */
+
+.ev-add { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .75rem; align-items: end; }
+.ev-table-header { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; justify-content: space-between; }
+.ev-actions { display: flex; flex-wrap: wrap; gap: .4rem; }
+.ev-filters { display: grid; grid-template-columns: repeat(2, minmax(0, 14rem)); gap: .75rem; margin-bottom: .75rem; }
+
+.ev-table { margin: 0; font-size: .8rem; }
+.ev-table th { white-space: nowrap; }
+.ev-table tbody tr { cursor: pointer; }
+.ev-table tbody tr:hover { background: var(--hn-primary-50); }
+.ev-table tbody tr.is-selected { background: var(--hn-primary-100); box-shadow: inset 4px 0 0 var(--hn-primary-800); }
+.ev-table tbody tr:focus-visible { outline: 2px solid var(--hn-primary-800); outline-offset: -2px; }
+.ev-empty { margin: .75rem 0 0; font-size: .8rem; color: var(--hn-ink-500); }
+
+.ev-detail-title { margin: 0 0 .6rem; font-size: 1.15rem; font-weight: 800; }
+.ev-detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 2rem; }
+.ev-line { margin: 0 0 .25rem; font-size: .82rem; overflow-wrap: anywhere; }
+.ev-subtitle { margin: 1rem 0 .4rem; font-size: .85rem; font-weight: 800; }
+.ev-evolutions { margin: 0; padding: 0; list-style: none; display: grid; gap: .6rem; font-size: .8rem; }
+.ev-evolutions li { padding-left: .6rem; border-left: 3px solid var(--hn-primary-100); overflow-wrap: anywhere; }
+
+/* ---------- Diálogo ---------- */
+.ev-dialog { width: min(42rem, calc(100vw - 1.5rem)); max-height: calc(100vh - 2rem); padding: 0; border: 1px solid var(--hn-border, #d2dfeb); border-radius: 12px; box-shadow: 0 20px 50px rgba(0, 30, 40, .25); }
+.ev-dialog::backdrop { background: rgba(10, 30, 40, .45); }
+.ev-dialog form { display: flex; flex-direction: column; max-height: calc(100vh - 2rem); }
+.ev-dialog-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .85rem 1.1rem; border-bottom: 1px solid var(--hn-border, #d2dfeb); }
+.ev-dialog-header h3 { margin: 0; font-size: 1rem; font-weight: 800; }
+.ev-dialog-close { width: 44px; height: 44px; border: 0; background: transparent; font-size: 1.5rem; line-height: 1; border-radius: 8px; }
+.ev-dialog-close:hover, .ev-dialog-close:focus-visible { background: var(--hn-primary-50); }
+.ev-dialog-body { padding: 1rem 1.1rem; overflow-y: auto; }
+.ev-dialog-error { margin: 0 1.1rem .75rem; padding: .5rem .75rem; border-radius: 8px; background: #fdecec; border: 1px solid #e4a3a3; color: #8a1f1f; font-size: .8rem; font-weight: 600; }
+.ev-dialog-error[hidden] { display: none; }
+.ev-dialog-footer { display: flex; justify-content: flex-end; gap: .5rem; padding: .75rem 1.1rem; border-top: 1px solid var(--hn-border, #d2dfeb); }
+
+.ev-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .85rem 1rem; }
+.ev-wide { grid-column: 1 / -1; }
+.ev-form-grid textarea.form-control { min-height: 4.5rem; resize: vertical; }
+.ev-confirm { margin: 0; font-size: .9rem; }
+.ev-two-lists { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.ev-checklist { margin: 0; padding: 0; border: 0; min-width: 0; max-height: 11rem; overflow-y: auto; }
+.ev-checklist legend { float: none; width: auto; padding: 0; margin-bottom: .3rem; }
+.ev-check { display: flex; align-items: center; gap: .5rem; min-height: 32px; font-size: .8rem; }
+.ev-check input { width: 1.05rem; height: 1.05rem; }
+
+@media (max-width: 767.98px) {
+  .ev-add { grid-template-columns: 1fr; }
+  .ev-add .btn { min-height: 44px; }
+  .ev-filters, .ev-detail-grid, .ev-form-grid, .ev-two-lists { grid-template-columns: 1fr; }
+  .ev-actions .btn { min-height: 40px; }
+  #view-eventos-diagnosticos .ev-table th:nth-child(5), #view-eventos-diagnosticos .ev-table td:nth-child(5),
+  #view-eventos-diagnosticos .ev-table th:nth-child(6), #view-eventos-diagnosticos .ev-table td:nth-child(6) { display: none; }
+}

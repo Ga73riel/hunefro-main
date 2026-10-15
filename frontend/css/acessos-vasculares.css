@@ -1,0 +1,9 @@
+/* Aba Prescrição e Tratamento / Acessos Vasculares. Reaproveita .md-grid, .ev-*, .hc-* e tokens de prontuario.css. */
+.av-header { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; justify-content: space-between; }
+.av-bar { display: flex; flex-wrap: wrap; justify-content: flex-end; margin: .75rem 0; }
+.md-c9 { grid-column: span 9; } .md-c12 { grid-column: 1 / -1; }
+.av-bar [hidden] { display: none !important; }
+.av-bar .btn { min-height: 36px; }
+.ev-table tbody tr.is-inactive td { color: var(--hn-ink-500); }
+@media (max-width: 991.98px) { .md-c9 { grid-column: span 6; } }
+@media (max-width: 575.98px) { .md-c9 { grid-column: 1 / -1; } .av-bar .ev-actions { width: 100%; } .av-bar .btn { flex: 1 1 45%; min-height: 44px; } }

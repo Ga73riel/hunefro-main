@@ -1,0 +1,63 @@
+/* Aba Clínico / História Clínica e Evolução. Reaproveita tokens de prontuario.css e o diálogo de eventos-diagnosticos.css. */
+
+.hc-filters { display: flex; flex-wrap: wrap; gap: .6rem .9rem; align-items: flex-end; margin-bottom: .9rem; }
+.hc-filters .hc-nurse { min-width: 12rem; }
+.hc-print { margin-left: auto; }
+.hc-check { display: inline-flex; align-items: center; gap: .45rem; min-height: 32px; font-size: .8rem; cursor: pointer; }
+.hc-check input { width: 1.05rem; height: 1.05rem; }
+
+.hc-filter { position: relative; }
+.hc-filter summary { list-style: none; cursor: pointer; padding: .3rem .7rem; min-height: 32px; display: inline-flex; align-items: center; gap: .4rem; border: 1px solid var(--hn-border, #d2dfeb); border-radius: 6px; font-size: .8rem; background: #fff; }
+.hc-filter summary::after { content: "▾"; }
+.hc-filter summary::-webkit-details-marker { display: none; }
+.hc-filter summary:focus-visible { outline: 2px solid var(--hn-primary-800); outline-offset: 1px; }
+.hc-filter-panel { position: absolute; z-index: 20; top: calc(100% + 4px); left: 0; min-width: 15rem; max-height: 18rem; overflow-y: auto; padding: .5rem .75rem; background: #fff; border: 1px solid var(--hn-border, #d2dfeb); border-radius: 8px; box-shadow: 0 10px 28px rgba(0, 30, 40, .16); display: grid; }
+
+.hc-history { display: grid; grid-template-columns: 13rem minmax(0, 1fr); gap: 1rem; align-items: start; }
+.hc-dates { max-height: 28rem; overflow-y: auto; border: 1px solid var(--hn-border, #d2dfeb); border-radius: 8px; padding: .4rem; background: var(--hn-primary-50); }
+.hc-dates ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .25rem; }
+.hc-date-btn { width: 100%; min-height: 40px; display: flex; justify-content: space-between; align-items: center; gap: .5rem; padding: .35rem .6rem; border: 1px solid transparent; border-radius: 6px; background: transparent; font-size: .8rem; text-align: left; }
+.hc-date-btn:hover { background: #fff; }
+.hc-date-btn[aria-current="true"] { background: var(--hn-primary-100); border-color: var(--hn-primary-800); font-weight: 800; }
+.hc-date-btn:focus-visible { outline: 2px solid var(--hn-primary-800); outline-offset: 1px; }
+.hc-date-type { font-size: .68rem; color: var(--hn-ink-500); }
+
+.hc-entries { max-height: 28rem; overflow-y: auto; border: 1px solid var(--hn-border, #d2dfeb); border-radius: 8px; padding: .75rem 1rem; }
+.hc-entry { padding: .75rem 0; border-bottom: 1px solid var(--hn-border, #d2dfeb); }
+.hc-entry:last-child { border-bottom: 0; }
+.hc-entry.is-selected { background: var(--hn-primary-50); margin: 0 -.5rem; padding-left: .5rem; padding-right: .5rem; border-radius: 6px; }
+.hc-entry.is-cancelled .hc-entry-text, .hc-entry.is-cancelled .hc-entry-title { text-decoration: line-through; color: var(--hn-ink-500); }
+.hc-entry-title { margin: 0 0 .25rem; font-size: .95rem; font-weight: 800; }
+.hc-entry-title span { margin-right: .35rem; }
+.hc-tags { margin: 0 0 .25rem; font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: var(--dc-warning, #8a5a00); }
+.hc-entry-text { margin: 0 0 .4rem; font-size: .85rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+.hc-entry-by { margin: 0; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; font-size: .75rem; font-weight: 700; color: var(--hn-primary-800); }
+.hc-cancel { margin-left: auto; }
+
+.hc-compose { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 1rem; align-items: start; }
+.hc-patterns > div { display: grid; gap: .4rem; margin-top: .3rem; }
+.hc-pattern { text-align: left; min-height: 36px; }
+.hc-form { display: grid; gap: .8rem; min-width: 0; }
+.hc-form-row { display: flex; flex-wrap: wrap; gap: .75rem 1rem; align-items: flex-end; }
+.hc-restricted { padding-bottom: .35rem; }
+#hc-text { min-height: 11rem; resize: vertical; }
+.hc-error { margin-top: .35rem; font-size: .78rem; font-weight: 700; color: #8a1f1f; }
+.hc-error[hidden] { display: none; }
+.hc-form-actions { display: flex; justify-content: flex-end; }
+
+@media (max-width: 767.98px) {
+  .hc-history, .hc-compose { grid-template-columns: 1fr; }
+  .hc-dates { max-height: 12rem; }
+  .hc-print { margin-left: 0; }
+  .hc-filters .btn, .hc-filter summary { min-height: 44px; }
+  .hc-patterns > div { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hc-form-actions .btn { width: 100%; min-height: 44px; }
+  .hc-filter-panel { position: static; box-shadow: none; margin-top: .4rem; }
+}
+
+@media print {
+  .record-sticky-header, .record-sidebar, .record-footer, .section-heading,
+  .hc-filters, .hc-dates, .hc-cancel, #view-historia-clinica .record-card:nth-of-type(2) { display: none !important; }
+  .hc-history { display: block; }
+  .hc-entries { max-height: none; overflow: visible; border: 0; }
+}
