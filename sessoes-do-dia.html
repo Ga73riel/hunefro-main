@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="Hu-Nefro - sess&otilde;es de hemodi&aacute;lise do dia por turno e sala." name="description"/>
+  <meta content="noindex, nofollow" name="robots"/>
+  <title>Sess&otilde;es do dia | Hu-Nefro</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="css/base.css" rel="stylesheet">
+  <link href="css/eventos-diagnosticos.css" rel="stylesheet"/>
+  <link href="css/prescricao-hd.css" rel="stylesheet"/>
+  <link href="css/sessoes-dialise.css" rel="stylesheet"/>
+  <link href="css/sessoes-do-dia.css" rel="stylesheet"/>
+  <script src="js/sessao.js"></script>
+ </head>
+ <body>
+  <a class="skip-link" href="#conteudo-principal">Ir para o conte&uacute;do principal</a>
+  <header class="app-header">
+   <a aria-label="Hu-Nefro, lista de pacientes" class="brand" href="pacientes.html">
+    <img alt="" class="brand-logo" height="34" src="assets/hunefro-logo.png" width="34">
+    <span>Hu-Nefro<small>Gestão em nefrologia</small></span>
+   </a>
+   <nav aria-label="Navegação principal" class="app-nav">
+    <a href="pacientes.html">Pacientes</a>
+    <a href="sessoes-do-dia.html" aria-current="page">Sess&otilde;es do dia</a>
+    <a href="comunicacoes.html">Comunica&ccedil;&otilde;es</a>
+    <a href="gestao.html">Gest&atilde;o</a>
+   </nav>
+   <div class="header-actions">
+    <span class="current-user" id="current-user"></span>
+    <button aria-label="Sair do Hu-Nefro" class="btn btn-sm logout-button" id="logout-button" type="button">Sair</button>
+   </div>
+  </header>
+
+  <main class="app-main" id="conteudo-principal" tabindex="-1">
+   <div class="page-heading">
+    <div>
+     <span class="eyebrow">Hemodi&aacute;lise</span>
+     <h1>Sess&otilde;es do dia</h1>
+     <p>Pacientes previstos pela escala do Programa de Tratamento, por turno e sala. Inicie a sess&atilde;o quando o paciente chegar e conclua ao terminar. Faltas s&atilde;o registradas pelo t&eacute;cnico e remarcadas pela enfermeira.</p>
+    </div>
+    <div class="sdd-date" role="group" aria-label="Data das sess&otilde;es">
+     <button class="btn btn-outline-secondary" id="sdd-prev" type="button" aria-label="Dia anterior">&lsaquo;</button>
+     <input class="form-control" id="sdd-date" type="date" aria-label="Data">
+     <button class="btn btn-outline-secondary" id="sdd-next" type="button" aria-label="Pr&oacute;ximo dia">&rsaquo;</button>
+     <button class="btn btn-outline-primary" id="sdd-today" type="button">Hoje</button>
+    </div>
+   </div>
+
+   <div class="sdd-topline">
+    <p class="sdd-day-label" id="sdd-day-label" aria-live="polite"></p>
+    <p class="sdd-profile-note" id="sdd-profile-note" aria-live="polite"></p>
+   </div>
+
+   <div class="md-tabs sdd-areas" role="tablist" aria-label="&Aacute;reas das sess&otilde;es">
+    <button class="md-tab" type="button" role="tab" id="sdd-area-board" aria-controls="sdd-panel-board" aria-selected="true">Quadro do dia</button>
+    <button class="md-tab" type="button" role="tab" id="sdd-area-moves" aria-controls="sdd-panel-moves" aria-selected="false" tabindex="-1">Faltas e remarca&ccedil;&otilde;es <span class="sdd-area-badge" id="sdd-moves-badge" hidden></span></button>
+    <button class="md-tab" type="button" role="tab" id="sdd-area-extras" aria-controls="sdd-panel-extras" aria-selected="false" tabindex="-1">Sessões extras <span class="sdd-area-badge is-info" id="sdd-extras-badge" hidden></span></button>
+    <button class="md-tab" type="button" role="tab" id="sdd-area-internados" aria-controls="sdd-panel-internados" aria-selected="false" tabindex="-1">Internados (Sala Q) <span class="sdd-area-badge is-info" id="sdd-internados-badge" hidden></span></button>
+   </div>
+
+   <div id="sdd-panel-moves" role="tabpanel" aria-labelledby="sdd-area-moves" hidden>
+    <section class="sdd-pending" id="sdd-pending" aria-labelledby="sdd-pending-title"></section>
+    <section class="sdd-panel-card" id="sdd-moves" aria-labelledby="sdd-moves-title"></section>
+   </div>
+
+   <div id="sdd-panel-extras" role="tabpanel" aria-labelledby="sdd-area-extras" hidden>
+    <section class="sdd-panel-card" id="sdd-extras" aria-labelledby="sdd-extras-title"></section>
+   </div>
+
+   <div id="sdd-panel-internados" role="tabpanel" aria-labelledby="sdd-area-internados" hidden>
+    <section class="sdd-panel-card" id="sdd-internados" aria-labelledby="sdd-internados-title"></section>
+   </div>
+
+   <div id="sdd-panel-board" role="tabpanel" aria-labelledby="sdd-area-board">
+   <p class="sdd-pending-note" id="sdd-pending-note" hidden></p>
+   <ul class="sdd-summary" id="sdd-summary" aria-label="Resumo do dia (clique para filtrar)"></ul>
+
+   <div class="sdd-toolbar">
+    <div class="sdd-tabs" id="sdd-shift-tabs" role="group" aria-label="Turno"></div>
+    <div class="sdd-view-toggle" role="group" aria-label="Forma de exibi&ccedil;&atilde;o">
+     <button type="button" class="btn btn-sm" data-sdd-view="sala" aria-pressed="true">Por sala</button>
+     <button type="button" class="btn btn-sm" data-sdd-view="tabela" aria-pressed="false">Tabela</button>
+    </div>
+   </div>
+
+   <form class="sdd-filters" id="sdd-filters" role="search">
+    <div>
+     <label class="field-label" for="sdd-search">Paciente</label>
+     <input autocomplete="off" class="form-control form-control-sm" id="sdd-search" placeholder="Nome, c&oacute;digo ou m&aacute;quina" type="search">
+    </div>
+    <div>
+     <label class="field-label" for="sdd-room">Sala</label>
+     <select class="form-select form-select-sm" id="sdd-room"><option value="">Todas as salas</option></select>
+    </div>
+    <div>
+     <label class="field-label" for="sdd-status">Situa&ccedil;&atilde;o</label>
+     <select class="form-select form-select-sm" id="sdd-status">
+      <option value="">Todas</option>
+      <option value="aguardando">Aguardando</option>
+      <option value="prevista">Prevista</option>
+      <option value="sem-registro">Sem registro</option>
+      <option value="em-andamento">Em andamento</option>
+      <option value="concluida">Conclu&iacute;da</option>
+      <option value="faltas">Faltas (todas)</option>
+      <option value="a-remarcar">Falta a remarcar</option>
+      <option value="remarcada">Remarcada (adiantada ou adiada)</option>
+      <option value="recebidas">Reposi&ccedil;&otilde;es e remarca&ccedil;&otilde;es recebidas</option>
+     </select>
+    </div>
+    <div class="sdd-filters-clear">
+     <button class="btn btn-sm btn-outline-secondary" id="sdd-clear" type="button">Limpar filtros</button>
+    </div>
+   </form>
+
+   <div id="sdd-board" aria-live="polite"></div>
+   </div>
+  </main>
+
+  <dialog class="ev-dialog ph-dialog" id="sdd-dialog" aria-labelledby="sdd-dialog-title">
+   <form method="dialog" id="sdd-dialog-form" novalidate>
+    <header class="ev-dialog-header">
+     <div>
+      <h3 id="sdd-dialog-title"></h3>
+      <p class="sdd-dialog-sub" id="sdd-dialog-sub"></p>
+     </div>
+     <button class="ev-dialog-close" type="button" id="sdd-dialog-close" aria-label="Fechar">&times;</button>
+    </header>
+    <div class="ev-dialog-body" id="sdd-dialog-body"></div>
+    <div class="ev-dialog-error" id="sdd-dialog-error" role="alert" hidden></div>
+    <footer class="ev-dialog-footer">
+     <button class="btn btn-outline-secondary" type="button" id="sdd-dialog-cancel">Cancelar</button>
+     <button class="btn btn-primary" type="submit" id="sdd-dialog-confirm">Gravar</button>
+    </footer>
+   </form>
+  </dialog>
+
+  <script defer src="js/catalogos.js"></script>
+  <script defer src="js/gestao-store.js"></script>
+  <script defer src="js/componentes.js"></script>
+  <script defer src="js/autosalvamento.js"></script>
+  <script defer src="js/dados-mock.js"></script>
+  <script defer src="js/comunicacoes-store.js"></script>
+  <script defer src="js/sessoes-do-dia.js"></script>
+ </body>
+</html>

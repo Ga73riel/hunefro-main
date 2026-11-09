@@ -1,0 +1,445 @@
+/* ==========================================================================
+   Hu-Nefro: base visual compartilhada por todas as páginas internas.
+   Carregar logo depois do Bootstrap e antes do CSS da página.
+
+   1. Tokens (cores, tipografia, raios, sombras)
+   2. Base (reset, tipografia, foco)
+   3. Bootstrap no padrão Hu-Nefro (botões, campos, tabelas)
+   4. Estrutura das páginas (barra superior, conteúdo, título)
+   5. Componentes compartilhados (campos, abas, selos, alertas, estados vazios)
+   ========================================================================== */
+
+/* 1. Tokens ---------------------------------------------------------------- */
+:root {
+  --hn-font: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  --hn-bg: #f2f5f7;
+  --hn-surface: #ffffff;
+  --hn-surface-soft: #f7f9fb;
+  --hn-surface-sunken: #eef2f5;
+
+  --hn-text-900: #0f2530;
+  --hn-text-700: #3a5260;
+  --hn-text-500: #5c7280;
+  --hn-text-400: #8a9ca7;
+
+  --hn-primary-900: #053f3c;
+  --hn-primary-800: #075550;
+  --hn-primary-700: #0a6b64;
+  --hn-primary-600: #0e7c74;
+  --hn-primary-500: #14958b;
+  --hn-primary-200: #a9dcd5;
+  --hn-primary-100: #d5f0ec;
+  --hn-primary-50: #eef8f6;
+  --hn-brand-gradient: linear-gradient(120deg, #053f3c 0%, #075550 55%, #0a6b64 100%);
+
+  --hn-border: #e1e8ed;
+  --hn-border-strong: #c8d3db;
+
+  --hn-success: #1d7449;
+  --hn-success-soft: #e8f6ee;
+  --hn-success-border: #b5dfc6;
+  --hn-warning: #8a5a00;
+  --hn-warning-strong: #d49516;
+  --hn-warning-soft: #fff6e0;
+  --hn-warning-border: #efd28c;
+  --hn-danger: #a3202b;
+  --hn-danger-strong: #c62f3c;
+  --hn-danger-soft: #fdecee;
+  --hn-danger-border: #f1bcc2;
+  --hn-info: #1f5a92;
+  --hn-info-soft: #edf4fc;
+  --hn-info-border: #bcd3ee;
+
+  --hn-radius-sm: 8px;
+  --hn-radius-md: 12px;
+  --hn-radius-lg: 16px;
+  --hn-radius-pill: 999px;
+
+  --hn-shadow-sm: 0 1px 2px rgba(15, 37, 48, .04), 0 2px 10px rgba(15, 37, 48, .04);
+  --hn-shadow-md: 0 14px 36px rgba(15, 37, 48, .14);
+  --hn-focus-ring: 0 0 0 3px rgba(14, 124, 116, .18);
+
+  --hn-header-height: 60px;
+  --hn-control-height: 38px;
+
+  /* Bootstrap usa estes valores em componentes que não sobrescrevemos. */
+  --bs-body-font-family: var(--hn-font);
+  --bs-body-color: var(--hn-text-900);
+  --bs-border-color: var(--hn-border);
+  --bs-primary: var(--hn-primary-600);
+  --bs-primary-rgb: 14, 124, 116;
+  --bs-link-color: var(--hn-primary-700);
+  --bs-link-hover-color: var(--hn-primary-900);
+}
+
+/* 2. Base ------------------------------------------------------------------ */
+* { box-sizing: border-box; }
+html { min-height: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--hn-bg);
+  color: var(--hn-text-900);
+  font-family: var(--hn-font);
+  font-size: .9rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+h1, h2, h3, h4 { letter-spacing: -.015em; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 2px solid var(--hn-primary-500); outline-offset: 2px; }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--hn-primary-600); }
+
+.skip-link {
+  position: fixed;
+  z-index: 2000;
+  top: -4rem;
+  left: 1rem;
+  padding: .7rem 1rem;
+  border-radius: var(--hn-radius-sm);
+  background: var(--hn-primary-900);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: var(--hn-shadow-md);
+}
+.skip-link:focus { top: 1rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
+}
+
+/* 3. Bootstrap no padrão Hu-Nefro ------------------------------------------ */
+.btn {
+  --bs-btn-padding-x: 1rem;
+  --bs-btn-padding-y: .45rem;
+  --bs-btn-font-size: .82rem;
+  --bs-btn-font-weight: 600;
+  --bs-btn-border-radius: 10px;
+  --bs-btn-focus-box-shadow: var(--hn-focus-ring);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  min-height: var(--hn-control-height);
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease, box-shadow .15s ease;
+}
+.btn-sm {
+  --bs-btn-padding-x: .75rem;
+  --bs-btn-padding-y: .3rem;
+  --bs-btn-font-size: .76rem;
+  --bs-btn-border-radius: 8px;
+  min-height: 32px;
+}
+.btn-lg { --bs-btn-font-size: .95rem; min-height: 46px; }
+.btn-primary {
+  --bs-btn-bg: var(--hn-primary-600);
+  --bs-btn-border-color: var(--hn-primary-600);
+  --bs-btn-hover-bg: var(--hn-primary-700);
+  --bs-btn-hover-border-color: var(--hn-primary-700);
+  --bs-btn-active-bg: var(--hn-primary-800);
+  --bs-btn-active-border-color: var(--hn-primary-800);
+  --bs-btn-disabled-bg: var(--hn-primary-600);
+  --bs-btn-disabled-border-color: var(--hn-primary-600);
+  box-shadow: 0 1px 2px rgba(5, 63, 60, .18), inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+.btn-outline-primary {
+  --bs-btn-color: var(--hn-primary-700);
+  --bs-btn-border-color: var(--hn-primary-200);
+  --bs-btn-bg: var(--hn-surface);
+  --bs-btn-hover-color: var(--hn-primary-800);
+  --bs-btn-hover-bg: var(--hn-primary-50);
+  --bs-btn-hover-border-color: var(--hn-primary-600);
+  --bs-btn-active-color: var(--hn-primary-900);
+  --bs-btn-active-bg: var(--hn-primary-100);
+  --bs-btn-active-border-color: var(--hn-primary-600);
+}
+.btn-outline-secondary {
+  --bs-btn-color: var(--hn-text-700);
+  --bs-btn-border-color: var(--hn-border-strong);
+  --bs-btn-bg: var(--hn-surface);
+  --bs-btn-hover-color: var(--hn-primary-800);
+  --bs-btn-hover-bg: var(--hn-primary-50);
+  --bs-btn-hover-border-color: var(--hn-primary-600);
+  --bs-btn-active-color: var(--hn-primary-900);
+  --bs-btn-active-bg: var(--hn-primary-100);
+  --bs-btn-active-border-color: var(--hn-primary-600);
+  --bs-btn-disabled-color: var(--hn-text-400);
+  --bs-btn-disabled-border-color: var(--hn-border);
+}
+.btn-outline-danger {
+  --bs-btn-color: var(--hn-danger);
+  --bs-btn-border-color: var(--hn-danger-border);
+  --bs-btn-bg: var(--hn-surface);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--hn-danger);
+  --bs-btn-hover-border-color: var(--hn-danger);
+  --bs-btn-disabled-color: #d9a1a7;
+  --bs-btn-disabled-border-color: var(--hn-danger-soft);
+}
+.btn-danger {
+  --bs-btn-bg: var(--hn-danger);
+  --bs-btn-border-color: var(--hn-danger);
+  --bs-btn-hover-bg: #861a23;
+  --bs-btn-hover-border-color: #861a23;
+}
+
+.form-control, .form-select {
+  min-height: var(--hn-control-height);
+  border-color: var(--hn-border-strong);
+  border-radius: 10px;
+  color: var(--hn-text-900);
+  font-size: .84rem;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.form-control:hover, .form-select:hover { border-color: #aebcc6; }
+.form-control::placeholder { color: var(--hn-text-400); }
+.form-control:focus, .form-select:focus { border-color: var(--hn-primary-600); box-shadow: var(--hn-focus-ring); }
+.form-control:disabled, .form-select:disabled, .form-control[readonly] { background-color: var(--hn-surface-soft); }
+.form-control[aria-invalid="true"], .form-select[aria-invalid="true"] { border-color: var(--hn-danger-strong); }
+.form-check-input:checked { background-color: var(--hn-primary-600); border-color: var(--hn-primary-600); }
+.form-check-input:focus { border-color: var(--hn-primary-500); box-shadow: var(--hn-focus-ring); }
+textarea.form-control { min-height: 5rem; }
+
+.table {
+  --bs-table-bg: var(--hn-surface);
+  --bs-table-color: var(--hn-text-900);
+  --bs-table-border-color: var(--hn-border);
+  --bs-table-hover-bg: var(--hn-primary-50);
+  --bs-table-striped-bg: var(--hn-surface-soft);
+  font-size: .82rem;
+}
+.table > thead > tr > th {
+  background: var(--hn-surface-soft);
+  color: var(--hn-text-500);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border-bottom-color: var(--hn-border);
+}
+.table > :not(caption) > * > * { padding: .6rem .75rem; vertical-align: middle; }
+
+/* 4. Estrutura das páginas (lista de pacientes, sessões do dia) ------------- */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  min-height: var(--hn-header-height);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0 1.75rem;
+  background: var(--hn-brand-gradient);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(5, 63, 60, .18);
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -.01em;
+  text-decoration: none;
+}
+.brand:hover { color: #fff; }
+.brand-logo { width: 34px; height: 34px; object-fit: contain; }
+.brand small { display: block; color: rgba(255, 255, 255, .7); font-size: .6rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+.app-nav { display: flex; align-items: center; gap: .25rem; }
+.app-nav a {
+  padding: .45rem .85rem;
+  border-radius: var(--hn-radius-pill);
+  color: rgba(255, 255, 255, .78);
+  font-size: .84rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.app-nav a:hover { color: #fff; background: rgba(255, 255, 255, .1); }
+.app-nav a[aria-current="page"] { color: var(--hn-primary-900); background: #fff; }
+.nav-badge { display: inline-grid; place-items: center; min-width: 1.2rem; height: 1.2rem; margin-left: .35rem; padding: 0 .3rem; border-radius: 999px; background: var(--hn-danger-strong); color: #fff; font-size: .66rem; font-weight: 800; line-height: 1; vertical-align: 1px; }
+.nav-badge[hidden] { display: none; }
+.header-actions { margin-left: auto; display: flex; align-items: center; gap: .85rem; }
+.current-user { display: inline-flex; align-items: center; gap: .5rem; color: rgba(255, 255, 255, .85); font-size: .8rem; font-weight: 600; }
+.current-user::before {
+  content: attr(data-initial);
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .16);
+  color: #fff;
+  font-size: .75rem;
+  font-weight: 800;
+}
+.profile-switch.form-select {
+  width: auto;
+  min-height: 34px;
+  padding-top: .25rem;
+  padding-bottom: .25rem;
+  border-color: rgba(255, 255, 255, .35);
+  background-color: rgba(255, 255, 255, .12);
+  color: #fff;
+  font-size: .78rem;
+  font-weight: 700;
+  --bs-form-select-bg-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+.profile-switch option { color: var(--hn-text-900); background: #fff; }
+.logout-button.btn {
+  --bs-btn-color: #fff;
+  --bs-btn-border-color: rgba(255, 255, 255, .35);
+  --bs-btn-bg: transparent;
+  --bs-btn-hover-color: var(--hn-primary-900);
+  --bs-btn-hover-bg: #fff;
+  --bs-btn-hover-border-color: #fff;
+  min-height: 34px;
+}
+
+.app-main { width: 100%; max-width: 100rem; min-width: 0; margin: 0 auto; padding: 2rem 2.5rem 4rem; }
+.page-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; margin-bottom: 1.5rem; }
+.page-heading h1 { margin: 0; font-size: clamp(1.6rem, 2.4vw, 2.1rem); font-weight: 800; line-height: 1.1; letter-spacing: -.03em; }
+.page-heading p { max-width: 46rem; margin: .45rem 0 0; color: var(--hn-text-500); font-size: .9rem; }
+.page-heading-actions { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: flex-end; }
+.eyebrow {
+  display: inline-block;
+  margin-bottom: .4rem;
+  color: var(--hn-primary-700);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 991.98px) {
+  .app-main { padding: 1.5rem 1.25rem 3rem; }
+  .app-header { gap: 1rem; padding: 0 1.25rem; }
+  .current-user span { display: none; }
+}
+@media (max-width: 767.98px) {
+  .app-header { flex-wrap: wrap; gap: .5rem 1rem; padding: .6rem 1rem; }
+  .app-nav { order: 3; width: 100%; flex-wrap: wrap; overflow-x: auto; }
+  .app-nav a { padding-inline: .6rem; }
+  .page-heading { flex-direction: column; align-items: stretch; }
+  .page-heading-actions { justify-content: stretch; }
+  .page-heading-actions .btn { flex: 1 1 auto; }
+}
+
+/* 5. Componentes compartilhados -------------------------------------------- */
+.field-block { min-width: 0; }
+.field-label {
+  display: block;
+  margin-bottom: .35rem;
+  color: var(--hn-text-700);
+  font-size: .76rem;
+  font-weight: 600;
+}
+.form-text { margin-top: .35rem; color: var(--hn-text-500); font-size: .72rem; }
+.derived-field, .derived-field:focus { background: var(--hn-surface-soft); font-weight: 700; cursor: default; }
+
+/* Select com opção "Outro" (HuNefroUI.createSelectWithOther). */
+.hn-other { display: grid; gap: .4rem; }
+
+/* Abas internas de uma tela (role="tablist"). */
+.md-tabs { display: flex; flex-wrap: wrap; gap: .25rem; margin-bottom: 1rem; padding: .25rem; border: 1px solid var(--hn-border); border-radius: var(--hn-radius-md); background: var(--hn-surface-sunken); width: fit-content; max-width: 100%; }
+.md-tab {
+  min-height: 36px;
+  padding: .4rem 1rem;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--hn-text-500);
+  font-size: .82rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.md-tab:hover { color: var(--hn-primary-800); }
+.md-tab[aria-selected="true"] { background: var(--hn-surface); color: var(--hn-primary-800); box-shadow: var(--hn-shadow-sm); }
+.md-tab:focus-visible { outline: 2px solid var(--hn-primary-500); outline-offset: 1px; }
+
+.md-check { display: inline-flex; align-items: center; gap: .45rem; min-height: var(--hn-control-height); font-size: .84rem; font-weight: 600; }
+.md-check input { width: 1.05rem; height: 1.05rem; }
+
+/* Selos (tipo de acesso, situação, alertas). */
+.hn-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .12rem .6rem;
+  border: 1px solid transparent;
+  border-radius: var(--hn-radius-pill);
+  font-size: .72rem;
+  font-weight: 700;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.hn-badge::before { content: ""; width: .45rem; height: .45rem; border-radius: 50%; background: currentColor; }
+.hn-badge-cateter { color: var(--hn-warning); background: var(--hn-warning-soft); border-color: var(--hn-warning-border); }
+.hn-badge-fav { color: var(--hn-primary-800); background: var(--hn-primary-50); border-color: var(--hn-primary-200); }
+.hn-badge-enxerto { color: var(--hn-info); background: var(--hn-info-soft); border-color: var(--hn-info-border); }
+.hn-badge-info { color: var(--hn-info); background: var(--hn-info-soft); border-color: var(--hn-info-border); }
+.hn-badge-ok { color: var(--hn-success); background: var(--hn-success-soft); border-color: var(--hn-success-border); }
+.hn-badge-off { color: var(--hn-text-500); background: var(--hn-surface-soft); border-color: var(--hn-border); }
+.hn-badge-warn { color: var(--hn-warning); background: var(--hn-warning-soft); border-color: var(--hn-warning-border); }
+.hn-badge-danger { color: #fff; background: var(--hn-danger); border-color: var(--hn-danger); }
+
+/* Alertas em destaque (limite do dialisador, sem acesso, etc.). */
+.hn-alert { display: flex; gap: .7rem; align-items: flex-start; margin: 0 0 1rem; padding: .8rem 1rem; border: 1px solid; border-left-width: 4px; border-radius: var(--hn-radius-md); font-size: .84rem; }
+.hn-alert strong { display: block; }
+.hn-alert-icon { flex: 0 0 auto; display: grid; place-items: center; width: 1.6rem; height: 1.6rem; border-radius: 50%; color: #fff; font-weight: 900; }
+.hn-alert-danger { background: var(--hn-danger-soft); border-color: var(--hn-danger-strong); color: #6e141c; }
+.hn-alert-danger .hn-alert-icon { background: var(--hn-danger-strong); }
+.hn-alert-warn { background: var(--hn-warning-soft); border-color: var(--hn-warning-strong); color: #5e3d00; }
+.hn-alert-warn .hn-alert-icon { background: var(--hn-warning-strong); }
+.hn-alert-info { background: var(--hn-info-soft); border-color: var(--hn-info); color: var(--hn-info); }
+.hn-alert-info .hn-alert-icon { background: var(--hn-info); }
+
+/* Salvamento automático: rascunho dos formulários em janela (js/autosalvamento.js). */
+.hn-draft-banner { align-items: center; flex-wrap: wrap; }
+.hn-draft-banner > div:not(.hn-draft-actions) { flex: 1 1 16rem; }
+.hn-draft-actions { display: flex; gap: .5rem; }
+.hn-draft-status { margin: 0 auto 0 0 !important; color: var(--hn-text-500); font-size: .78rem; }
+
+/* Campo que pode ser editado numa tela somente leitura (ex.: telefone e e-mail na Identificação). */
+.hn-editable-field .field-label::after { content: " · editável"; color: var(--hn-primary-700); font-weight: 700; }
+
+/* Texto de lista vazia. */
+.ev-empty { margin: .75rem 0 0; color: var(--hn-text-500); font-size: .84rem; }
+
+/* Rolagem interna dos cards com listas que crescem (medicações, histórico, sessões, laudos, exames, movimentações etc.).
+   Uso: <div class="history-table-wrap hn-scroll-table" tabindex="0" aria-label="..., com rolagem"><table>...</table></div>.
+   O card fica com altura máxima e a própria barra de rolagem; o cabeçalho da tabela fica fixo ao rolar.
+   A altura muda por card com a variável --hn-scroll-max (ex.: .ld-history-wrap { --hn-scroll-max: 15rem; }).
+   No celular a altura também se limita a 60% da tela, para a página continuar rolando fora do card.
+   Seletor duplo para vencer o "overflow: hidden" de .history-table-wrap (prontuario.css carrega depois). */
+.hn-scroll-table, .history-table-wrap.hn-scroll-table {
+  max-height: min(var(--hn-scroll-max, 24rem), 60vh);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+/* Barra de rolagem visível em toda área com rolagem interna dos cards.
+   A cor do trilho e do polegar precisa de contraste: em tons claros demais, o Chrome no Windows deixa a barra quase invisível. */
+.hn-scroll-table, .ex-flow-wrap, .hc-dates, .hc-entries, .hc-filter-panel, .sd-measure-wrap, .ev-checklist, .dc-combo-list {
+  scrollbar-width: thin;
+  scrollbar-color: var(--hn-text-400) var(--hn-surface-sunken);
+}
+/* Cabeçalho fixo: a linha de baixo é uma sombra, porque a borda da célula some ao rolar (border-collapse). */
+.hn-scroll-table thead th, .sd-measure-wrap thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  box-shadow: inset 0 -1px 0 var(--hn-border);
+}
+.hn-scroll-table:focus-visible { outline: 2px solid var(--hn-primary-500); outline-offset: 2px; }
+
+/* Na impressão a lista sai inteira, sem altura máxima nem barra de rolagem. */
+@media print {
+  .hn-scroll-table, .history-table-wrap.hn-scroll-table, .sd-measure-wrap { max-height: none; overflow: visible; }
+  .hn-scroll-table thead th, .sd-measure-wrap thead th { position: static; box-shadow: none; }
+}

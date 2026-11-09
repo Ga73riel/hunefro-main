@@ -1,0 +1,1275 @@
+/* Ficha nutricional. Reaproveita integralmente os tokens e a estrutura de prontuario.css. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Linha com as etapas da ficha e o botão de impressão. */
+.nutrition-toolbar-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: .75rem;
+  margin-bottom: 1rem;
+}
+
+/* Etapas da ficha: mesmas abas (.md-tabs/.md-tab, base.css) de Medicações e Exames. */
+.nutrition-tabs { flex: 0 1 auto; min-width: 0; margin-bottom: 0; overflow-x: auto; scrollbar-width: thin; }
+.nutrition-tab { flex: 0 0 auto; white-space: nowrap; }
+
+.nutrition-panel[hidden] { display: none; }
+
+.nutrition-grid {
+  display: grid;
+  gap: .8rem 1rem;
+}
+
+.nutrition-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.nutrition-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.nutrition-grid-4 { grid-template-columns: 1.25fr 1.25fr .65fr .9fr; }
+
+/* Subseções sem moldura, com título no padrão dos grupos das outras abas (.ph-group-title). */
+.nutrition-subsection {
+  min-width: 0;
+  margin: 1.1rem 0 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.field-linked-source {
+  background: var(--hn-surface-soft);
+  color: var(--hn-text-700);
+  font-weight: 700;
+  cursor: default;
+}
+
+.nutrition-subsection.compact { margin-top: .8rem; }
+
+.nutrition-subsection > legend,
+.profile-options legend,
+.weight-loss-fields legend {
+  float: none;
+  width: auto;
+  margin: 0 0 .6rem;
+  color: var(--hn-primary-800);
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.nutrition-help {
+  margin: .5rem 0 0;
+  color: var(--hn-text-500);
+  font-size: .7rem;
+}
+
+.nutrition-subsection > .nutrition-help { margin: -.25rem 0 .75rem; }
+
+.cceb-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .6rem 1rem;
+}
+
+.cceb-grid label {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 4rem 2.6rem;
+  align-items: center;
+  gap: .5rem;
+  color: var(--hn-text-700);
+  font-size: .73rem;
+}
+
+.cceb-grid .form-control { min-width: 0; }
+
+.cceb-item-points {
+  color: var(--hn-primary-800);
+  font-size: .68rem;
+  font-weight: 800;
+  text-align: right;
+}
+
+.cceb-definitions {
+  margin-top: .75rem;
+  font-size: .72rem;
+  color: var(--hn-text-700);
+}
+.cceb-definitions summary {
+  cursor: pointer;
+  color: var(--hn-primary-800);
+  font-weight: 700;
+}
+.cceb-definitions dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .35rem 1.5rem;
+  margin: .6rem 0 0;
+}
+.cceb-definitions dl > div { display: flex; gap: .5rem; }
+.cceb-definitions dt { flex: 0 0 9.5rem; color: var(--hn-primary-800); font-weight: 700; }
+.cceb-definitions dd { margin: 0; }
+
+.cceb-result.is-complete {
+  border-color: var(--hn-primary-600);
+  background: var(--hn-primary-50);
+  color: var(--hn-primary-800);
+  font-weight: 800;
+}
+.cceb-result-detail { margin: .5rem 0 0; text-align: right; }
+
+.nutrition-field-hint {
+  display: block;
+  margin-top: .25rem;
+  color: var(--hn-text-500);
+  font-size: .66rem;
+  line-height: 1.3;
+}
+.nutrition-legacy-hint { color: var(--hn-warning-strong); }
+.nutrition-legacy-hint[hidden] { display: none; }
+
+.nutrition-inline-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .65rem 1.2rem;
+  margin-top: .85rem;
+  padding-top: .75rem;
+  border-top: 1px solid var(--hn-border);
+}
+
+.nutrition-inline-options .field-label { margin: 0; }
+
+.nutrition-check {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  min-height: 36px;
+  color: var(--hn-text-700);
+  font-size: .75rem;
+}
+
+.nutrition-check input {
+  width: 1.05rem;
+  height: 1.05rem;
+  accent-color: var(--hn-primary-700);
+}
+
+.pending-result {
+  margin-left: auto;
+  padding: .4rem .7rem;
+  border: 1px solid var(--hn-border-strong);
+  border-radius: 999px;
+  background: var(--hn-surface);
+  color: var(--hn-text-700);
+  font-size: .7rem;
+  font-weight: 800;
+}
+
+.profile-clinical-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(18rem, 1fr);
+  gap: 1.25rem;
+}
+
+.profile-options {
+  display: grid;
+  align-content: start;
+  gap: 1.1rem;
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--hn-border);
+}
+
+.profile-options fieldset { margin: 0; padding: 0; border: 0; }
+.option-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem .75rem; }
+
+.nutrition-card-header {
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nutrition-card-header > div:first-child { min-width: 0; }
+.nutrition-card-header h3 { margin-bottom: .15rem; }
+.nutrition-card-header p { margin: 0 0 0 .8rem; color: var(--hn-text-500); font-size: .7rem; }
+
+.nutrition-toolbar {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex: none;
+}
+
+.nutrition-toolbar label {
+  color: var(--hn-text-700);
+  font-size: .7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.nutrition-toolbar .form-control { width: 6rem; }
+
+.nutrition-table-wrap {
+  max-width: 100%;
+  overflow: auto;
+  border: 1px solid var(--hn-border);
+  border-radius: var(--hn-radius-sm);
+}
+
+.nutrition-table-wrap:focus-visible {
+  outline: 3px solid var(--hn-primary-100);
+  outline-offset: 2px;
+}
+
+.nutrition-table-wrap .table { margin: 0; }
+
+.nutrition-table-wrap th,
+.nutrition-table-wrap td {
+  padding: .42rem .5rem;
+  border-color: var(--hn-border);
+  vertical-align: middle;
+  font-size: .7rem;
+}
+
+.nutrition-table-wrap thead th {
+  background: var(--hn-primary-50);
+  color: var(--hn-text-700);
+  font-size: .64rem;
+  letter-spacing: .035em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.nutrition-monthly-table { min-width: 78rem; }
+.nutrition-monthly-table th:first-child,
+.nutrition-monthly-table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  min-width: 13rem;
+  background: var(--hn-surface);
+}
+
+.nutrition-table-wrap td.nutrition-dual-cell {
+  padding: .25rem .3rem;
+}
+
+.nutrition-dual-input {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  min-width: 5.4rem;
+}
+
+.nutrition-dual-input input {
+  min-width: 0 !important;
+  text-align: center;
+  padding: .25rem .15rem !important;
+}
+
+.nutrition-row-badge {
+  display: inline-block;
+  margin-left: .25rem;
+  font-size: .65rem;
+  font-weight: 600;
+  color: var(--hn-text-500);
+}
+
+.nutrition-calc-row th {
+  font-weight: 800;
+  color: var(--hn-primary-900);
+}
+
+.nutrition-calc-row td input[data-derived-output] {
+  font-weight: 800;
+  color: var(--hn-primary-900);
+  background: var(--hn-surface-soft);
+}
+
+.nutrition-monthly-table thead th:first-child { z-index: 2; background: var(--hn-primary-50); }
+
+.nutrition-group-row th {
+  position: static !important;
+  background: var(--hn-primary-100) !important;
+  color: var(--hn-primary-800);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.nutrition-table-wrap td input {
+  width: 100%;
+  min-width: 4rem;
+  min-height: 30px;
+  padding: .25rem .35rem;
+  border: 1px solid transparent;
+  border-radius: .3rem;
+  background: transparent;
+  color: var(--hn-text-900);
+  font-size: .7rem;
+}
+
+.nutrition-table-wrap td input:disabled {
+  opacity: 1;
+  color: var(--hn-text-400);
+}
+
+.nutrition-table-wrap td input:not(:disabled) {
+  border-color: var(--hn-border-strong);
+  background: var(--hn-surface);
+}
+
+.nutrition-table-wrap td input[data-derived-output] {
+  border-color: transparent;
+  background: var(--hn-surface-soft);
+  color: var(--hn-primary-800);
+  font-weight: 800;
+  cursor: default;
+}
+
+.nutrition-table-wrap td input:focus-visible {
+  outline: 2px solid var(--hn-primary-600);
+  outline-offset: 1px;
+}
+
+/* Diagnóstico calculado (textarea somente leitura): classificações longas quebram em até duas linhas.
+   field-sizing ajusta a altura ao texto onde há suporte; nos demais navegadores valem as duas linhas de `rows`. */
+.nutrition-table-wrap td textarea[data-derived-output] {
+  display: block;
+  width: 100%;
+  min-width: 4rem;
+  min-height: 30px;
+  padding: .25rem .35rem;
+  border: 1px solid transparent;
+  border-radius: .3rem;
+  background: var(--hn-surface-soft);
+  color: var(--hn-primary-800);
+  font: inherit;
+  font-size: .7rem;
+  font-weight: 800;
+  line-height: 1.3;
+  resize: none;
+  overflow: hidden;
+  cursor: default;
+  field-sizing: content;
+}
+.nutrition-table-wrap td textarea[data-derived-output]:focus-visible {
+  outline: 2px solid var(--hn-primary-600);
+  outline-offset: 1px;
+}
+
+/* Antropometria semestral (adulto): mesmo visual das demais tabelas da Nutrição (cabeçalho claro, células brancas).
+   O 1º e o 2º semestre ficam lado a lado, cada um com faixa de título e data própria e um divisor visível entre
+   eles, como pediu o nutricionista. Dentro do bloco: valor, % de adequação, diagnóstico e observação. */
+.anthropometry-table {
+  --anthro-divider: var(--hn-primary-200);
+  width: 100%;
+  min-width: 62rem;
+  table-layout: fixed;
+}
+
+.anthro-col-label { width: 16%; }
+.anthro-col-value { width: 7%; }
+.anthro-col-percent { width: 8%; }
+.anthro-col-diagnosis { width: 18%; }
+.anthro-col-note { width: 9%; }
+
+/* Divisor entre a coluna de métricas e cada semestre. */
+.anthropometry-table .anthro-sem-start { border-left: 4px solid var(--anthro-divider); }
+
+/* Faixa do semestre: título + data da avaliação, no padrão dos cartões de trimestre da ficha pediátrica. */
+.anthropometry-table thead .anthro-semester-head {
+  padding: .55rem .75rem;
+  background: var(--hn-primary-50);
+  color: var(--hn-primary-800);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.anthropometry-table thead .anthro-semester-head > * { vertical-align: middle; }
+.anthro-semester-title {
+  font-size: .82rem;
+  font-weight: 800;
+}
+.anthropometry-table thead label {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  float: right;
+  color: var(--hn-text-700);
+  font-size: .68rem;
+  font-weight: 600;
+}
+.anthropometry-table thead input { width: 8.5rem; min-height: 30px; }
+
+.anthropometry-table thead .anthro-column-row th { background: var(--hn-surface); }
+.anthropometry-table td { background: var(--hn-surface); }
+.anthropometry-table td.anthro-sem-1,
+.anthropometry-table td.anthro-sem-2 { --bs-table-bg: var(--hn-surface); }
+.anthropometry-table tbody th[scope="row"] {
+  text-align: left;
+  white-space: normal;
+}
+/* O diagnóstico ocupa a largura toda da coluna (field-sizing encolheria a caixa ao tamanho do texto). */
+.anthropometry-table td textarea[data-derived-output] { min-width: 100%; }
+.anthropometry-table thead .anthro-semester-head { text-align: left; }
+
+/* Em telas estreitas a tabela rola na horizontal e a coluna de métricas fica fixa. */
+.anthropometry-table .anthro-semester-row th:first-child,
+.anthropometry-table tbody th[scope="row"] {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--hn-surface);
+}
+.anthropometry-table .anthro-semester-row th:first-child {
+  z-index: 3;
+  background: var(--hn-primary-50);
+  vertical-align: bottom;
+}
+
+#adult-anthropometry-card .nutrition-card-header .btn { flex: none; white-space: nowrap; }
+
+.anthro-status[hidden] { display: none; }
+.anthro-status {
+  padding-left: .6rem;
+  border-left: 3px solid var(--hn-primary-600);
+  color: var(--hn-text-700);
+}
+
+.anthro-legend {
+  display: grid;
+  gap: .3rem;
+  margin: .6rem 0 0;
+  color: var(--hn-text-500);
+  font-size: .7rem;
+}
+.anthro-legend > div { display: flex; gap: .75rem; }
+.anthro-legend dt {
+  flex: 0 0 6.5rem;
+  color: var(--hn-primary-800);
+  font-weight: 800;
+}
+.anthro-legend dd { margin: 0; }
+
+.nutrition-mode-card[hidden] { display: none; }
+
+.pediatric-reference-note {
+  display: flex;
+  gap: .4rem;
+  margin-bottom: 1rem;
+  padding: .65rem .8rem;
+  border: 1px solid var(--hn-border);
+  border-radius: var(--hn-radius-sm);
+  background: var(--hn-primary-50);
+  color: var(--hn-text-700);
+  font-size: .72rem;
+}
+
+.pediatric-quarter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.pediatric-quarter-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--hn-border);
+  border-radius: var(--hn-radius-sm);
+  background: var(--hn-surface);
+}
+
+.pediatric-quarter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  padding: .7rem .8rem;
+  border-bottom: 1px solid var(--hn-border);
+  background: var(--hn-primary-50);
+}
+
+.pediatric-quarter-header h4 {
+  margin: 0;
+  color: var(--hn-primary-800);
+  font-size: .78rem;
+  font-weight: 800;
+}
+
+.pediatric-quarter-header label {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  margin: 0;
+  color: var(--hn-text-700);
+  font-size: .68rem;
+  font-weight: 700;
+}
+
+.pediatric-quarter-header input {
+  width: 8.5rem;
+  min-height: 32px;
+}
+
+.pediatric-quarter-table {
+  width: 100%;
+  margin: 0;
+  table-layout: fixed;
+}
+
+.pediatric-quarter-table th,
+.pediatric-quarter-table td {
+  padding: .4rem;
+  border-color: var(--hn-border);
+  vertical-align: middle;
+  font-size: .67rem;
+}
+
+.pediatric-quarter-table thead th {
+  background: var(--hn-surface-soft);
+  color: var(--hn-text-700);
+  font-size: .6rem;
+  letter-spacing: .025em;
+  text-transform: uppercase;
+}
+
+.pediatric-quarter-table th:first-child { width: 28%; }
+.pediatric-quarter-table th:nth-child(2) { width: 17%; }
+.pediatric-quarter-table th:nth-child(3) { width: 16%; }
+.pediatric-quarter-table th:nth-child(4) { width: 16%; }
+.pediatric-quarter-table th:nth-child(5) { width: 23%; }
+
+.pediatric-quarter-table input {
+  width: 100%;
+  min-width: 0;
+  min-height: 30px;
+  padding: .25rem .35rem;
+  border: 1px solid transparent;
+  border-radius: .3rem;
+  background: transparent;
+  color: var(--hn-text-900);
+  font-size: .67rem;
+}
+
+.pediatric-quarter-table input:disabled {
+  opacity: 1;
+  color: var(--hn-text-400);
+}
+
+.pediatric-quarter-table input:not(:disabled) {
+  border-color: var(--hn-border-strong);
+  background: var(--hn-surface);
+}
+
+.pediatric-quarter-table input[data-derived-output] {
+  background: var(--hn-surface-soft);
+  color: var(--hn-primary-800);
+  font-weight: 800;
+}
+
+.pediatric-quarter-table input:focus-visible,
+.pediatric-quarter-header input:focus-visible,
+.pediatric-diagnosis textarea:focus-visible {
+  outline: 2px solid var(--hn-primary-600);
+  outline-offset: 1px;
+}
+
+.pediatric-diagnosis {
+  display: grid;
+  gap: .35rem;
+  padding: .7rem .8rem .8rem;
+  border-top: 1px solid var(--hn-border);
+  color: var(--hn-text-700);
+  font-size: .68rem;
+  font-weight: 800;
+}
+
+.pediatric-diagnosis textarea {
+  min-height: 4.5rem;
+  resize: vertical;
+  font-size: .72rem;
+  font-weight: 400;
+}
+
+.pediatric-diagnoses-container {
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+  padding: .85rem .9rem 1rem;
+  border-top: 1px solid var(--hn-border);
+  background: var(--hn-surface);
+}
+
+.pediatric-diagnosis-block {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+}
+
+.pediatric-diagnosis-block .field-label {
+  margin: 0;
+  color: var(--hn-primary-800);
+  font-size: .72rem;
+  font-weight: 800;
+}
+
+.pediatric-diagnosis-textarea {
+  min-height: 3.5rem;
+  resize: vertical;
+  font-size: .75rem;
+  line-height: 1.4;
+}
+
+.pediatric-quick-fill {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  margin-top: .15rem;
+}
+
+.pediatric-quick-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pediatric-quick-title {
+  color: var(--hn-text-600);
+  font-size: .65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+}
+
+.pediatric-quick-undo {
+  padding: 0;
+  font-size: .65rem;
+}
+
+.pediatric-quick-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem;
+}
+
+.pediatric-quick-chip {
+  padding: .2rem .45rem;
+  font-size: .65rem;
+  line-height: 1.2;
+  border-radius: var(--hn-radius-sm);
+  transition: all .15s ease-in-out;
+}
+
+.pediatric-chip-suggested {
+  border-color: var(--hn-primary-600);
+  background-color: var(--hn-primary-50);
+  color: var(--hn-primary-800);
+  font-weight: 700;
+}
+
+.pediatric-chip-suggested:hover:not(:disabled) {
+  background-color: var(--hn-primary-600);
+  color: #fff;
+}
+
+.pediatric-quick-chip[aria-pressed="true"] {
+  background-color: var(--hn-primary-700);
+  border-color: var(--hn-primary-700);
+  color: #fff;
+}
+
+.complementary-table { min-width: 62rem; }
+.complementary-table th:first-child { min-width: 8rem; }
+
+.annual-exams-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .65rem 1rem;
+}
+
+.annual-exams-grid label,
+.weight-loss-fields label {
+  color: var(--hn-text-700);
+  font-size: .7rem;
+  font-weight: 700;
+}
+
+.annual-exams-grid label {
+  display: grid;
+  grid-template-columns: minmax(7rem, .7fr) minmax(0, 1fr);
+  align-items: center;
+  gap: .5rem;
+}
+
+.annual-exams-grid .form-control { margin-top: 0; }
+.weight-loss-fields .form-control { margin-top: .3rem; }
+
+.asg-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .9rem 2rem;
+}
+
+.weight-loss-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .65rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.weight-loss-fields legend { grid-column: 1 / -1; margin-bottom: -.2rem; }
+
+.asg-result { max-width: 32rem; margin-top: 1rem; }
+.mis-block { margin-top: 1rem; }
+.mis-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem 2rem; }
+.mis-group { display: block; color: var(--hn-primary-700); font-size: .62rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+
+.derived-results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem 2rem;
+  margin-top: 1rem;
+  padding-top: .85rem;
+  border-top: 1px solid var(--hn-border);
+}
+
+.derived-results > div {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+.derived-results span {
+  color: var(--hn-text-500);
+  font-size: .68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.derived-results output {
+  min-width: 8rem;
+  padding: .35rem .65rem;
+  border-radius: 999px;
+  background: var(--hn-surface-soft);
+  color: var(--hn-text-700);
+  text-align: center;
+  font-size: .72rem;
+  font-weight: 800;
+}
+
+.diagnosis-card { border-color: var(--hn-primary-600); }
+
+.diagnosis-final-text {
+  min-height: 5.5rem;
+  resize: vertical;
+  font-size: .78rem;
+}
+
+.diagnosis-quick { margin-top: 1rem; }
+
+.diagnosis-quick-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+}
+.diagnosis-quick-head .field-label { margin: 0; }
+.diagnosis-quick-head .btn-link { padding: 0; font-size: .72rem; }
+
+.diagnosis-quick-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .5rem .75rem;
+  margin: .5rem 0;
+}
+
+.diagnosis-quick-item {
+  text-align: left;
+  white-space: normal;
+  font-size: .72rem;
+  line-height: 1.3;
+}
+.diagnosis-quick-item[aria-pressed="true"] {
+  border-color: var(--hn-primary-600);
+  background: var(--hn-primary-50);
+  color: var(--hn-primary-800);
+  font-weight: 700;
+}
+
+.nutrition-print-sheet { display: none; }
+
+@media (max-width: 1199.98px) {
+  .nutrition-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cceb-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 991.98px) {
+  .profile-clinical-layout { grid-template-columns: 1fr; }
+  .profile-options { padding: 1rem 0 0; border-top: 1px solid var(--hn-border); border-left: 0; }
+  .cceb-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pediatric-quarter-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 767.98px) {
+  .cceb-definitions dl { grid-template-columns: 1fr; }
+  .cceb-definitions dl > div { flex-direction: column; gap: 0; }
+  .cceb-definitions dt { flex: none; }
+  .cceb-result-detail { text-align: left; }
+  .nutrition-toolbar-row { flex-direction: column; align-items: stretch; }
+  .nutrition-notice { display: grid; }
+  .pediatric-reference-note { display: grid; }
+  .nutrition-grid-2,
+  .nutrition-grid-3,
+  .nutrition-grid-4,
+  .annual-exams-grid,
+  .asg-grid,
+  .mis-grid,
+  .diagnosis-quick-list { grid-template-columns: 1fr; }
+  .annual-exams-grid label { grid-template-columns: minmax(7rem, .6fr) minmax(0, 1fr); }
+  .nutrition-card-header { align-items: flex-start; flex-direction: column; }
+  .nutrition-toolbar { width: 100%; flex-wrap: wrap; }
+  .nutrition-toolbar .btn { flex: 1; min-height: 40px; }
+  .cceb-grid { grid-template-columns: 1fr; }
+  .pending-result { width: 100%; margin-left: 0; text-align: center; }
+  .option-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 575.98px) {
+  .nutrition-tab { padding-inline: .7rem; }
+  .weight-loss-fields { grid-template-columns: 1fr; }
+  .derived-results { display: grid; }
+  .derived-results > div { justify-content: space-between; }
+}
+
+@media print {
+  /* Página nomeada: o paisagem vale só para a ficha nutricional, não para as demais impressões do prontuário. */
+  @page nutricao {
+    size: A4 landscape;
+    margin: 5mm 6mm 6mm;
+  }
+
+  body.nutrition-printing {
+    padding: 0;
+    background: #fff;
+    color: #111;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  body.nutrition-printing .skip-link,
+  body.nutrition-printing .record-sticky-header,
+  body.nutrition-printing .record-layout,
+  body.nutrition-printing .record-footer {
+    display: none !important;
+  }
+
+  body.nutrition-printing .nutrition-print-sheet {
+    display: block !important;
+    page: nutricao;
+  }
+
+  .nutrition-print-sheet {
+    font-size: 7pt;
+    line-height: 1.15;
+    color: #111;
+  }
+
+  .print-document-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    margin-bottom: 2mm;
+    border: 0;
+    border-bottom: .45mm solid #222;
+    color: #111;
+    background: #fff;
+  }
+
+  /* Cabeçalho no padrão das receitas: HU Brasil à esquerda, texto da unidade ao centro, HU e UFMA lado a lado à direita. */
+  .print-logo-row {
+    display: grid;
+    grid-template-columns: 48mm minmax(0, 1fr) 44mm;
+    align-items: center;
+    gap: 4mm;
+    min-height: 22mm;
+    padding: 0 0 2.5mm;
+  }
+
+  .print-institution-logo {
+    display: block;
+    width: 100%;
+    height: 20mm;
+    object-fit: contain;
+    object-position: center;
+  }
+
+  .print-logo-hubrasil { width: 48mm; height: auto; max-height: 16mm; object-position: left center; }
+
+  .print-institution-lines {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .45mm;
+    text-align: center;
+    line-height: 1.12;
+  }
+
+  .print-institution-lines strong {
+    max-width: 100%;
+    font-size: 7pt;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  .print-institution-lines span { font-size: 5.6pt; }
+
+  .print-secondary-logos {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 3mm;
+  }
+
+  .print-secondary-logos img { width: 20mm; height: 20mm; }
+
+  .print-document-title {
+    display: grid;
+    place-content: center;
+    padding: 1.2mm 2mm;
+    text-align: center;
+    border-bottom: .2mm solid #777;
+  }
+
+  .print-document-title strong {
+    display: block;
+    font-size: 9pt;
+    text-transform: uppercase;
+  }
+
+  .print-document-title span {
+    display: block;
+    margin-top: .5mm;
+    font-size: 6pt;
+  }
+
+  .print-document-meta {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-content: center;
+    margin: 0;
+  }
+
+  .print-document-meta div {
+    padding: 1.2mm 2mm;
+    border-right: .2mm solid #999;
+  }
+
+  .print-document-meta div:last-child { border-right: 0; }
+  .print-document-meta dt { font-size: 6pt; font-weight: 700; text-transform: uppercase; }
+  .print-document-meta dd { margin: .3mm 0 0; font-size: 7pt; }
+
+  .print-section {
+    margin-bottom: 3mm;
+    break-inside: avoid;
+  }
+
+  .print-section.print-section-flow { break-inside: auto; }
+
+  .print-section h2 {
+    margin: 0;
+    padding: .8mm 1.5mm;
+    border: .25mm solid #333;
+    background: #dceceb;
+    color: #111;
+    font-size: 8pt;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .print-data-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border: .25mm solid #555;
+    border-top: 0;
+  }
+
+  .print-data-grid.print-data-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .print-data-grid.print-data-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .print-data-item {
+    min-height: 7mm;
+    padding: .8mm 1.5mm;
+    border-right: .2mm solid #aaa;
+    border-bottom: .2mm solid #aaa;
+  }
+
+  .print-data-item dt {
+    margin: 0 0 .8mm;
+    color: #333;
+    font-size: 6.2pt;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .print-data-item dd {
+    margin: 0;
+    min-height: 3.2mm;
+    font-size: 8pt;
+    font-weight: 600;
+    white-space: pre-wrap;
+  }
+
+  .print-table-wrap {
+    width: 100%;
+    overflow: visible;
+    border: .25mm solid #555;
+    border-top: 0;
+  }
+
+  .nutrition-print-sheet table {
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 6.1pt;
+  }
+
+  .nutrition-print-sheet thead { display: table-header-group; }
+  .nutrition-print-sheet tr { break-inside: avoid; }
+
+  .nutrition-print-sheet th,
+  .nutrition-print-sheet td {
+    height: 4.1mm;
+    padding: .35mm .7mm;
+    border: .18mm solid #999;
+    color: #111;
+    text-align: center;
+    vertical-align: middle;
+    overflow-wrap: anywhere;
+  }
+
+  .nutrition-print-sheet th:first-child,
+  .nutrition-print-sheet td:first-child {
+    width: 39mm;
+    text-align: left;
+    font-weight: 700;
+  }
+
+  .nutrition-print-sheet thead th {
+    background: #e8efef;
+    font-size: 5.8pt;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .nutrition-print-sheet .nutrition-group-row th {
+    background: #dceceb !important;
+    color: #111;
+    text-align: left;
+  }
+
+  .print-monthly-table { font-size: 5.5pt !important; }
+  .print-monthly-table th:first-child,
+  .print-monthly-table td:first-child { width: 37mm; }
+
+  .print-monthly-table td.nutrition-dual-cell {
+    padding: 0 !important;
+    vertical-align: middle;
+  }
+
+  /* min-width 0: na tela o par pré/pós tem largura mínima (5.4rem), que na folha A4 passava da célula e sobrepunha os meses. */
+  .print-monthly-table .nutrition-dual-input {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    min-width: 0;
+    height: 100%;
+    min-height: 5.2mm;
+    align-items: center;
+  }
+
+  .print-monthly-table .nutrition-dual-input span {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: .3mm .5mm;
+    font-size: 5.2pt;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .print-monthly-table .nutrition-dual-input span:first-child {
+    border-right: .18mm solid #999;
+  }
+
+  .print-monthly-table .nutrition-calc-row th,
+  .print-monthly-table .nutrition-calc-row td {
+    font-weight: 700;
+    background-color: #f7f9f9;
+  }
+
+  .print-monthly-table .nutrition-calc-row .nutrition-dual-input span {
+    font-weight: 700;
+  }
+
+  .print-monthly-table .nutrition-row-badge {
+    margin-left: .5mm;
+    font-size: 4.8pt;
+    font-weight: 600;
+    color: #444;
+  }
+
+  .print-anthropometry-table th:first-child,
+  .print-anthropometry-table td:first-child { width: 48mm; }
+
+  .print-anthropometry-table col.anthro-col-label { width: 48mm; }
+  .print-anthropometry-table col.anthro-col-value { width: 20mm; }
+  .print-anthropometry-table col.anthro-col-percent { width: 22mm; }
+  .print-anthropometry-table col.anthro-col-diagnosis { width: 32mm; }
+  .print-anthropometry-table col.anthro-col-note { width: 42mm; }
+
+  /* Sem depender de fundo colorido (a impressão pode omiti-lo): divisor grosso e título do semestre em destaque. */
+  .print-anthropometry-table .anthro-sem-start { border-left: .7mm solid #111; }
+  .print-anthropometry-table .anthro-semester-head {
+    padding: 1mm 1.5mm;
+    border-bottom: .5mm solid #111;
+    font-size: 6pt;
+    text-transform: none;
+  }
+  .print-anthropometry-table .anthro-semester-title {
+    margin-right: 3mm;
+    font-size: 8pt;
+    font-weight: 800;
+  }
+  .print-anthropometry-table .anthro-semester-head label { display: inline; font-weight: 600; }
+
+  .print-anthropometry-table th,
+  .print-anthropometry-table td {
+    height: 4.3mm;
+    padding: .35mm .7mm;
+    font-size: 5.35pt;
+    line-height: 1.08;
+  }
+
+  /* Os quatro trimestres ficam na mesma linha; A4 paisagem oferece largura útil. */
+  .print-pediatric-quarter-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2mm;
+    align-items: start;
+    width: 100%;
+  }
+
+  .print-pediatric-quarter-card {
+    min-width: 0;
+    border: .25mm solid #8b969f;
+    padding: 1mm;
+    break-inside: avoid;
+  }
+
+  .print-pediatric-quarter-card h2 {
+    margin: 0 0 .8mm;
+    padding: .8mm 1mm;
+    background: #eaf0f4;
+    border-bottom: .25mm solid #8b969f;
+    font-size: 6.5pt;
+    line-height: 1.1;
+  }
+
+  .print-pediatric-quarter-summary {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: .6mm;
+    margin: 0 0 1mm;
+    font-size: 4.6pt;
+    line-height: 1.08;
+  }
+
+  .print-pediatric-quarter-summary > div { min-width: 0; }
+  .print-pediatric-quarter-summary dt { font-weight: 700; }
+  .print-pediatric-quarter-summary dd {
+    margin: 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .print-pediatric-quarter-card .print-table-wrap { margin: 0; }
+  .print-pediatric-quarter-table { width: 100%; table-layout: fixed; font-size: 4.4pt !important; }
+  .print-pediatric-quarter-table th:first-child,
+  .print-pediatric-quarter-table td:first-child { width: 29%; }
+  .print-pediatric-quarter-table th,
+  .print-pediatric-quarter-table td {
+    padding: .45mm .5mm;
+    font-size: 4.4pt !important;
+    line-height: 1.04;
+    overflow-wrap: anywhere;
+  }
+
+  .print-pediatric-quarter-table th,
+  .print-pediatric-quarter-table td {
+    height: 3.8mm;
+    padding: .3mm .4mm;
+    font-size: 4.4pt !important;
+  }
+
+  .print-diagnosis-text {
+    min-height: 12mm;
+    margin: 0;
+    padding: 2mm;
+    border: .25mm solid #555;
+    border-top: 0;
+    font-size: 9pt;
+    white-space: pre-wrap;
+  }
+
+  /* Espaço vertical para assinar e carimbar acima das linhas. */
+  .print-signatures {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20mm;
+    margin-top: 4mm;
+    padding-top: 18mm;
+    break-inside: avoid;
+  }
+
+  .print-signature {
+    padding-top: 2mm;
+    border-top: .25mm solid #222;
+    text-align: center;
+    font-size: 7pt;
+  }
+
+  .print-document-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 5mm;
+    margin-top: 2mm;
+    padding-top: 1mm;
+    border-top: .2mm solid #777;
+    color: #333;
+    font-size: 6pt;
+  }
+
+  .print-page-break { break-before: auto !important; }
+  .nutrition-print-sheet .print-section-flow,
+  .nutrition-print-sheet .print-table-wrap { break-inside: auto; }
+  .nutrition-print-sheet .print-data-grid,
+  .nutrition-print-sheet .print-document-meta { break-inside: avoid; }
+  .nutrition-print-sheet .print-document-footer { break-inside: avoid; }
+}
+
+/* Comorbidades e hábitos; exames de referência (somente leitura, vindos da aba Exames). */
+.nutrition-habits { display: grid; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); gap: .5rem 1rem; }
+.nt-exams-help { margin: 0 0 .8rem; }
+.nt-exams dd small { display: block; color: var(--hn-text-500); font-size: .7rem; }
+.nt-exams .is-empty { color: var(--hn-text-400); }
+
+/* Campos do Perfil clínico-social: o select do grau de instrução (opções longas) não invade a coluna vizinha. */
+.nutrition-grid > .field-block { min-width: 0; }
+.nutrition-grid > .field-block .form-select { width: 100%; text-overflow: ellipsis; }

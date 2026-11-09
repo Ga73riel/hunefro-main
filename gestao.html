@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="Hu-Nefro - gest&atilde;o do setor: painel de gest&atilde;o, unidade, salas, turnos, m&aacute;quinas, dialisadores, cadastros cl&iacute;nicos e modelos de texto." name="description"/>
+  <meta content="noindex, nofollow" name="robots"/>
+  <title>Gest&atilde;o | Hu-Nefro</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="css/base.css" rel="stylesheet">
+  <link href="css/eventos-diagnosticos.css" rel="stylesheet"/>
+  <link href="css/gestao.css" rel="stylesheet"/>
+  <script src="js/sessao.js"></script>
+ </head>
+ <body class="adm-body">
+  <a class="skip-link" href="#adm-content">Ir para o conte&uacute;do principal</a>
+  <header class="app-header">
+   <a aria-label="Hu-Nefro, lista de pacientes" class="brand" href="pacientes.html">
+    <img alt="" class="brand-logo" height="34" src="assets/hunefro-logo.png" width="34">
+    <span>Hu-Nefro<small>Gestão em nefrologia</small></span>
+   </a>
+   <nav aria-label="Navegação principal" class="app-nav">
+    <a href="pacientes.html">Pacientes</a>
+    <a href="sessoes-do-dia.html">Sess&otilde;es do dia</a>
+    <a href="comunicacoes.html">Comunica&ccedil;&otilde;es</a>
+    <a href="gestao.html" aria-current="page">Gest&atilde;o</a>
+   </nav>
+   <div class="header-actions">
+    <span class="current-user" id="current-user"></span>
+    <button aria-label="Sair do Hu-Nefro" class="btn btn-sm logout-button" id="logout-button" type="button">Sair</button>
+   </div>
+  </header>
+
+  <div class="adm-layout">
+   <aside class="adm-side" aria-label="Áreas da Gestão">
+    <nav class="adm-menu" id="adm-menu"></nav>
+    <div class="adm-side-tools" id="adm-side-tools">
+     <span class="adm-menu-group">Configuração</span>
+     <button class="btn btn-sm btn-outline-secondary" type="button" id="adm-export">Exportar configuração</button>
+     <label class="btn btn-sm btn-outline-secondary adm-import" id="adm-import-label">Importar configuração<input type="file" accept="application/json,.json" id="adm-import" hidden></label>
+     <button class="btn btn-sm btn-outline-danger" type="button" id="adm-reset">Restaurar configuração inicial</button>
+    </div>
+   </aside>
+
+   <main class="adm-main" id="adm-content" tabindex="-1">
+    <div class="adm-heading" id="adm-heading"></div>
+    <div class="hn-alert hn-alert-warn" id="adm-readonly" role="status" hidden>
+     <span class="hn-alert-icon" aria-hidden="true">!</span>
+     <div><strong>Somente leitura</strong><span id="adm-readonly-text"></span></div>
+    </div>
+    <div id="adm-view"></div>
+   </main>
+  </div>
+
+  <div class="adm-toast" id="adm-toast" role="status" aria-live="polite" hidden></div>
+  <div class="adm-tip" id="adm-tip" role="tooltip" hidden></div>
+
+  <dialog class="ev-dialog adm-dialog" id="adm-dialog" aria-labelledby="adm-dialog-title">
+   <form method="dialog" id="adm-dialog-form" novalidate>
+    <header class="ev-dialog-header">
+     <h3 id="adm-dialog-title"></h3>
+     <button class="ev-dialog-close" type="button" id="adm-dialog-close" aria-label="Fechar">&times;</button>
+    </header>
+    <div class="ev-dialog-body" id="adm-dialog-body"></div>
+    <div class="ev-dialog-error" id="adm-dialog-error" role="alert" hidden></div>
+    <footer class="ev-dialog-footer">
+     <button class="btn btn-outline-secondary" type="button" id="adm-dialog-cancel">Cancelar</button>
+     <button class="btn btn-primary" type="submit" id="adm-dialog-confirm">Gravar</button>
+    </footer>
+   </form>
+  </dialog>
+
+  <script defer src="js/catalogos.js"></script>
+  <script defer src="js/gestao-store.js"></script>
+  <script defer src="js/componentes.js"></script>
+  <script defer src="js/autosalvamento.js"></script>
+  <script defer src="js/dados-mock.js"></script>
+  <script defer src="js/comunicacoes-store.js"></script>
+  <script defer src="js/evolucao-modelos.js"></script>
+  <script defer src="js/laudos-modelos.js"></script>
+  <script defer src="js/gestao-painel.js"></script>
+  <script defer src="js/gestao.js"></script>
+ </body>
+</html>

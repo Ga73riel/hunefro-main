@@ -1,0 +1,119 @@
+/* Aba Clínico / Dados Clínicos do prontuário.
+   Usa os tokens de base.css e os componentes de prontuario.css (.record-card...). */
+
+/* ---------- Grades ---------- */
+.dc-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: .9rem 1rem;
+}
+.dc-span-2 { grid-column: span 2; }
+.dc-span-4 { grid-column: span 4; }
+.dc-span-6 { grid-column: span 6; }
+.dc-grid-halves { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.dc-stack { display: grid; gap: .9rem; align-content: start; }
+
+.dc-pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: stretch;
+  margin-bottom: 1.25rem;
+}
+/* Mesma divisão de colunas em todas as linhas e cards da mesma linha com a mesma altura. */
+.dc-pair > .record-card { margin-bottom: 0; }
+
+#view-dados-clinicos textarea.form-control { min-height: 76px; resize: vertical; }
+#view-dados-clinicos .form-control[readonly] { color: var(--hn-text-700); }
+#view-dados-clinicos .invalid-feedback { font-size: .68rem; }
+
+/* ---------- Combobox (CID) ---------- */
+.dc-combo { position: relative; }
+.dc-combo .form-control { padding-right: 2rem; }
+.dc-combo-clear {
+  position: absolute; top: 50%; right: .35rem; transform: translateY(-50%);
+  width: 26px; height: 26px; border: 0; border-radius: .3rem;
+  background: transparent; color: var(--hn-text-500); font-size: 1.15rem; line-height: 1;
+}
+.dc-combo-clear:hover, .dc-combo-clear:focus-visible { background: var(--hn-primary-50); color: var(--hn-primary-800); }
+.dc-combo-list {
+  position: absolute; z-index: 30; left: 0; right: 0; top: calc(100% + 4px);
+  max-height: 260px; overflow-y: auto; margin: 0; padding: .25rem 0; list-style: none;
+  background: #fff; border: 1px solid var(--hn-border-strong); border-radius: .5rem;
+  box-shadow: 0 10px 24px rgba(23, 43, 53, .14);
+}
+.dc-combo-list[hidden] { display: none; }
+.dc-combo-option {
+  display: flex; gap: .75rem; align-items: baseline; padding: .45rem .75rem;
+  font-size: .78rem; cursor: pointer; color: var(--hn-text-900);
+}
+.dc-combo-option .dc-code { flex: 0 0 4.6rem; font-weight: 800; color: var(--hn-primary-800); font-variant-numeric: tabular-nums; }
+.dc-combo-option[aria-selected="true"] { background: var(--hn-primary-100); }
+.dc-combo-option:hover { background: var(--hn-primary-50); }
+.dc-combo-empty { padding: .6rem .75rem; font-size: .76rem; color: var(--hn-text-500); }
+
+/* ---------- Marcadores virais ---------- */
+.dc-markers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .85rem 1rem; }
+.dc-marker { margin: 0; padding: .7rem .8rem .8rem; border: 1px solid var(--hn-border); border-radius: .6rem; background: var(--hn-surface-soft); min-width: 0; }
+.dc-marker legend { float: none; width: auto; margin: 0 0 .5rem; padding: 0; font-size: .78rem; font-weight: 800; color: var(--hn-text-900); }
+.dc-marker-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .35rem; }
+.dc-marker-option {
+  display: flex; align-items: center; gap: .4rem; min-height: 32px; padding: .25rem .5rem;
+  border: 1px solid var(--hn-border); border-radius: .4rem; background: #fff;
+  font-size: .75rem; cursor: pointer; user-select: none;
+}
+.dc-marker-option input { accent-color: var(--hn-primary-700); margin: 0; }
+.dc-marker-option:hover { border-color: var(--hn-border-strong); }
+.dc-marker-option:has(input:focus-visible) { outline: 3px solid var(--hn-warning-strong); outline-offset: 1px; }
+.dc-marker-option:has(input:checked) { font-weight: 800; }
+
+.dc-tone-danger:has(input:checked)  { background: var(--hn-danger-soft); border-color: var(--hn-danger-border); color: var(--hn-danger); }
+.dc-tone-success:has(input:checked) { background: var(--hn-success-soft); border-color: var(--hn-success-border); color: var(--hn-success); }
+.dc-tone-info:has(input:checked)    { background: var(--hn-info-soft); border-color: var(--hn-info-border); color: var(--hn-info); }
+.dc-tone-warning:has(input:checked) { background: var(--hn-warning-soft); border-color: var(--hn-warning-border); color: var(--hn-warning); }
+
+/* ---------- Equipe ---------- */
+.dc-team { display: grid; gap: .6rem; }
+.dc-team .form-select { min-height: 36px; }
+
+/* ---------- Vacinas ---------- */
+.dc-vaccine-form { display: flex; flex-wrap: wrap; gap: .75rem; align-items: flex-end; }
+.dc-vaccine-form > .field-block:nth-child(1) { flex: 0 0 9.5rem; }
+.dc-vaccine-form > .field-block:nth-child(2) { flex: 1 1 12rem; }
+.dc-vaccine-form > .field-block:nth-child(3) { flex: 1 1 9rem; }
+.dc-vaccine-form > .field-block:nth-child(4) { flex: 0 1 7.5rem; }
+.dc-vaccine-form > .dc-vac-add { flex: 0 0 auto; margin-left: auto; }
+.dc-vac-add { white-space: nowrap; }
+.dc-vac-count { margin: .5rem 0 0; color: var(--hn-text-500); font-size: .74rem; }
+.dc-vac-count:empty { display: none; }
+.dc-vac-feedback {
+  margin-top: .7rem; padding: .5rem .75rem; border: 1px solid var(--hn-danger-border); border-radius: .45rem;
+  background: var(--hn-danger-soft); color: var(--hn-danger); font-size: .76rem; font-weight: 600;
+}
+.dc-vac-feedback[hidden] { display: none; }
+.dc-vaccine-table td, .dc-vaccine-table th { white-space: nowrap; }
+.dc-vaccine-table td:nth-child(3), .dc-vaccine-table td:nth-child(2) { white-space: normal; }
+.dc-vac-remove {
+  width: 28px; height: 28px; border: 1px solid transparent; border-radius: .35rem;
+  background: transparent; color: var(--hn-danger); font-size: 1.1rem; line-height: 1;
+}
+.dc-vac-remove:hover, .dc-vac-remove:focus-visible { background: var(--hn-danger-soft); border-color: var(--hn-danger-border); }
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 1199.98px) {
+  .dc-markers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dc-grid .dc-span-2 { grid-column: span 4; }
+}
+@media (max-width: 991.98px) {
+  .dc-pair { grid-template-columns: 1fr; }
+  .dc-grid .dc-span-2 { grid-column: span 6; }
+  .dc-grid .dc-span-4, .dc-grid .dc-span-6 { grid-column: span 12; }
+}
+@media (max-width: 575.98px) {
+  .dc-markers, .dc-grid-halves { grid-template-columns: 1fr; }
+  .dc-vaccine-form > .field-block:nth-child(n), .dc-vaccine-form > .dc-vac-add { flex: 1 1 100%; margin-left: 0; }
+  .dc-grid .dc-span-2 { grid-column: span 12; }
+}
+.dc-vaccine-scroll { --hn-scroll-max: 15rem; }
+.dc-sero-alert { margin-top: .75rem; }
+.dc-sero-alert ul { margin: .25rem 0 0; padding-left: 1.1rem; }

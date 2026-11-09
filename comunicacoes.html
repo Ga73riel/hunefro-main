@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="Hu-Nefro - quadro de comunica&ccedil;&otilde;es da unidade: solicita&ccedil;&otilde;es de avalia&ccedil;&atilde;o, avisos e tarefas." name="description"/>
+  <meta content="noindex, nofollow" name="robots"/>
+  <title>Comunica&ccedil;&otilde;es | Hu-Nefro</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="css/base.css" rel="stylesheet">
+  <link href="css/eventos-diagnosticos.css" rel="stylesheet"/>
+  <link href="css/comunicacoes.css" rel="stylesheet"/>
+  <script src="js/sessao.js"></script>
+ </head>
+ <body>
+  <a class="skip-link" href="#conteudo-principal">Ir para o conte&uacute;do principal</a>
+  <header class="app-header">
+   <a aria-label="Hu-Nefro, lista de pacientes" class="brand" href="pacientes.html">
+    <img alt="" class="brand-logo" height="34" src="assets/hunefro-logo.png" width="34">
+    <span>Hu-Nefro<small>Gestão em nefrologia</small></span>
+   </a>
+   <nav aria-label="Navegação principal" class="app-nav">
+    <a href="pacientes.html">Pacientes</a>
+    <a href="sessoes-do-dia.html">Sess&otilde;es do dia</a>
+    <a href="comunicacoes.html" aria-current="page">Comunica&ccedil;&otilde;es</a>
+    <a href="gestao.html">Gest&atilde;o</a>
+   </nav>
+   <div class="header-actions">
+    <span class="current-user" id="current-user"></span>
+    <button aria-label="Sair do Hu-Nefro" class="btn btn-sm logout-button" id="logout-button" type="button">Sair</button>
+   </div>
+  </header>
+
+  <main class="app-main" id="conteudo-principal" tabindex="-1">
+   <div class="page-heading">
+    <div>
+     <span class="eyebrow">Unidade de hemodi&aacute;lise</span>
+     <h1>Comunica&ccedil;&otilde;es</h1>
+     <p>Solicita&ccedil;&otilde;es de avalia&ccedil;&atilde;o, avisos e tarefas da equipe. Envie para um ou mais grupos profissionais, perfis ou usu&aacute;rios. As solicita&ccedil;&otilde;es de avalia&ccedil;&atilde;o feitas na evolu&ccedil;&atilde;o tamb&eacute;m chegam aqui.</p>
+    </div>
+    <div class="page-heading-actions">
+     <button class="btn btn-primary" id="cm-new" type="button">+ Nova comunica&ccedil;&atilde;o</button>
+    </div>
+   </div>
+
+   <ul class="cm-summary" id="cm-summary" aria-label="Resumo das comunica&ccedil;&otilde;es"></ul>
+
+   <div class="md-tabs" role="tablist" aria-label="Caixas de comunica&ccedil;&otilde;es">
+    <button class="md-tab" type="button" role="tab" id="cm-box-recebidas" data-box="recebidas" aria-controls="cm-panel" aria-selected="true">Para mim <span class="cm-tab-badge" id="cm-badge-recebidas" hidden></span></button>
+    <button class="md-tab" type="button" role="tab" id="cm-box-enviadas" data-box="enviadas" aria-controls="cm-panel" aria-selected="false" tabindex="-1">Enviadas por mim</button>
+    <button class="md-tab" type="button" role="tab" id="cm-box-todas" data-box="todas" aria-controls="cm-panel" aria-selected="false" tabindex="-1">Todas da unidade</button>
+   </div>
+
+   <section class="cm-panel" id="cm-panel" role="tabpanel" aria-labelledby="cm-box-recebidas">
+    <div class="cm-filters">
+     <div><label class="field-label" for="cm-search">Buscar</label><input class="form-control" id="cm-search" type="search" placeholder="T&iacute;tulo, texto, paciente ou autor" autocomplete="off"></div>
+     <div><label class="field-label" for="cm-type">Tipo</label><select class="form-select" id="cm-type"><option value="">Todos</option></select></div>
+     <div><label class="field-label" for="cm-status">Situa&ccedil;&atilde;o</label><select class="form-select" id="cm-status"><option value="abertas">Em aberto</option><option value="nao-lidas">N&atilde;o lidas</option><option value="vencidas">Vencidas</option><option value="concluidas">Conclu&iacute;das</option><option value="">Todas</option></select></div>
+    </div>
+    <p class="cm-patient-filter" id="cm-patient-filter" hidden></p>
+    <ul class="cm-list" id="cm-list" aria-live="polite"></ul>
+    <p class="cm-empty" id="cm-empty" hidden></p>
+   </section>
+  </main>
+
+  <dialog class="ev-dialog cm-dialog" id="cm-dialog" aria-labelledby="cm-dialog-title">
+   <form method="dialog" id="cm-dialog-form" novalidate>
+    <header class="ev-dialog-header">
+     <div>
+      <h3 id="cm-dialog-title"></h3>
+      <p class="cm-dialog-sub" id="cm-dialog-sub"></p>
+     </div>
+     <button class="ev-dialog-close" type="button" id="cm-dialog-close" aria-label="Fechar">&times;</button>
+    </header>
+    <div class="ev-dialog-body" id="cm-dialog-body"></div>
+    <div class="ev-dialog-error" id="cm-dialog-error" role="alert" hidden></div>
+    <footer class="ev-dialog-footer" id="cm-dialog-footer">
+     <button class="btn btn-outline-secondary" type="button" id="cm-dialog-cancel">Cancelar</button>
+     <button class="btn btn-primary" type="submit" id="cm-dialog-confirm">Enviar</button>
+    </footer>
+   </form>
+  </dialog>
+
+  <script defer src="js/catalogos.js"></script>
+  <script defer src="js/componentes.js"></script>
+  <script defer src="js/autosalvamento.js"></script>
+  <script defer src="js/dados-mock.js"></script>
+  <script defer src="js/comunicacoes-store.js"></script>
+  <script defer src="js/comunicacoes.js"></script>
+ </body>
+</html>

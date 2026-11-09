@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Acesso institucional ao Hu-Nefro - gestão integrada de nefrologia.">
+  <title>Login | Hu-Nefro</title>
+
+  <!-- Bootstrap 5: substitua pelo arquivo local do projeto quando disponível. -->
+  <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet">
+
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <main class="login-shell">
+    <section class="login-card" aria-label="Acesso ao Hu-Nefro">
+      <div class="row g-0">
+        <!-- Painel Institucional (Lado Esquerdo) -->
+        <aside class="col-lg-5 brand-panel">
+          <div class="brand-content">
+            <!-- Logo e Marca -->
+            <div class="brand-mark" aria-label="Hu-Nefro">
+              <div class="brand-icon" aria-hidden="true">
+                <img src="assets/hunefro-logo.png" alt="Logo Hu-Nefro" class="img-fluid" style="width: 100%; height: 100%; object-fit: contain;">
+              </div>
+              <div>
+                <h1 class="brand-name">Hu-Nefro</h1>
+                <p class="brand-subtitle">GESTÃO INTEGRADA DE NEFROLOGIA</p>
+              </div>
+            </div>
+
+            <!-- Descrição e Destaques do Sistema -->
+            <div class="brand-description">
+              <p class="brand-lead">
+                Plataforma especializada em acompanhamento dialítico, controle de acessos e prontuário eletrônico nefrológico.
+              </p>
+              
+              <div class="brand-features">
+                <div class="feature-item">
+                  <div class="feature-icon" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <span>Gestão de salas, turnos e sessões de HD</span>
+                </div>
+
+                <div class="feature-item">
+                  <div class="feature-icon" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <span>Acompanhamento contínuo de acessos vasculares</span>
+                </div>
+
+                <div class="feature-item">
+                  <div class="feature-icon" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <span>Ergonomia cognitiva e segurança médica</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card de Identidade Institucional -->
+            <div class="institution-card" aria-label="Identidade institucional">
+
+                <div class="institution-eyebrow">
+                    IDENTIDADE INSTITUCIONAL
+                </div>
+
+                <div class="institution-logos">
+                    <img
+                        src="assets/UFMA1.png"
+                        alt="Universidade Federal do Maranhão"
+                    >
+
+                    <img
+                        src="assets/HU.png"
+                        alt="Hospital Universitário"
+                    >
+
+                    <img
+                        src="assets/HUBRASIL.png"
+                        alt="Hospital Universitário Federal - HUBRASIL"
+                    >
+                </div>
+
+                <p class="institution-name mb-0">
+                    Hospital Universitário da Universidade Federal do Maranhão
+                </p>
+
+            </div>
+          </div>
+        </aside>
+
+        <!-- Formulário de Login (Lado Direito) -->
+        <section class="col-lg-7 form-panel">
+          <div class="form-wrap">
+            <span class="form-eyebrow">ACESSO INSTITUCIONAL</span>
+            <h2 class="form-title">Entrar no Hu-Nefro</h2>
+            <p class="form-subtitle">
+              Use sua conta institucional para acessar o sistema.
+            </p>
+
+            <form id="loginForm">
+              <!-- Campo Usuário -->
+              <div class="form-group-custom">
+                <label for="username" class="form-label">Usuário</label>
+                <div class="input-container">
+                  <input id="username" name="username" type="email" class="form-control-custom" placeholder="Seu.email@ebserh.gov.br" autocomplete="username"/>
+                  <span class="input-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                      <circle cx="12" cy="8" r="4" />
+                      <path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6" stroke-linecap="round" />
+                    </svg>
+                  </span>
+                </div>
+              </div>
+
+              <!-- Campo Senha -->
+              <div class="form-group-custom">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <label for="password" class="form-label mb-0">Senha</label>
+                  <a class="forgot-link" href="#recuperar-senha">Esqueci minha senha</a>
+                </div>
+                <div class="input-container">
+                  <input id="password" name="password" type="password" class="form-control-custom" placeholder="••••••••" autocomplete="current-password"/>
+                  <button type="button" class="btn-toggle-password" id="togglePassword" aria-label="Mostrar senha">
+                    <svg id="eyeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="alert-area">
+                <div id="loginFeedback" class="alert d-none mb-0" role="status"></div>
+              </div>
+
+              <!-- Botão Entrar -->
+              <button id="loginButton" class="btn login-btn" type="submit">
+                <span class="login-label">Entrar</span>
+                <span class="login-loading d-none">Entrando...</span>
+              </button>
+            </form>
+
+            <!-- Rodapé / Suporte -->
+            <div class="support-area">
+              <p class="support-line">
+                Problemas para acessar? <a href="#suporte">Abrir chamado no suporte do HU-UFMA.</a>
+              </p>
+
+              <div class="restricted">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <rect x="5" y="11" width="14" height="10" rx="2" />
+                  <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                </svg>
+                <span>Acesso restrito a usuários autorizados.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+  <script src="js/catalogos.js"></script>
+  <script src="js/gestao-store.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

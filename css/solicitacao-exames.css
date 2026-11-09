@@ -1,0 +1,67 @@
+/* Aba Resultados / Exames > Solicitação de Exames. Reaproveita .md-grid, .ev-*, .ex-* e .hn-badge; tokens vêm de base.css. */
+.sx-summary { display: block; background: var(--hn-primary-50); border-color: var(--hn-primary-200); color: var(--hn-primary-800); }
+.sx-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem; margin: 1rem 0; }
+.sx-groups > :first-child { grid-column: 1 / -1; }
+.sx-group { display: flex; flex-direction: column; gap: .6rem; padding: .75rem; border: 1px solid var(--hn-border); border-radius: var(--hn-radius-sm); background: var(--hn-surface-soft); min-width: 0; }
+.sx-group-head { display: flex; align-items: center; justify-content: space-between; gap: .5rem; flex-wrap: wrap; }
+.sx-group-head h4 { margin: 0; font-size: .85rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: var(--hn-primary-800); }
+.sx-group .ev-empty { margin: 0; }
+.sx-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: .45rem; margin: 0; padding: 0; list-style: none; }
+.sx-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "name remove" "badge remove"; align-items: center; gap: .25rem .5rem; padding: .45rem .3rem .45rem .6rem; border: 1px solid var(--hn-border); border-radius: var(--hn-radius-sm); background: var(--hn-surface); }
+.sx-item-name { grid-area: name; display: grid; min-width: 0; }
+.sx-item .hn-badge { grid-area: badge; justify-self: start; }
+.sx-remove { grid-area: remove; }
+.sx-item-name strong { font-size: .8rem; font-weight: 600; overflow-wrap: anywhere; }
+.sx-item-name small { color: var(--hn-text-500); font-size: .68rem; }
+.sx-item .hn-badge { font-size: .64rem; }
+.sx-remove { min-width: 32px; min-height: 32px; border: 1px solid transparent; border-radius: 6px; background: transparent; color: var(--hn-text-500); font-size: 1.1rem; line-height: 1; }
+.sx-remove:hover { color: var(--hn-danger); border-color: var(--hn-danger-border); background: var(--hn-danger-soft); }
+.sx-remove:focus-visible { outline: 2px solid var(--hn-primary-800); outline-offset: 1px; }
+.sx-bar { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: .75rem 1rem; margin-top: .9rem; }
+.sx-print-opts { display: flex; flex-wrap: wrap; align-items: end; gap: .5rem 1rem; }
+.sx-print-opts .form-select { min-width: 16rem; }
+.sx-help { font-size: .76rem; }
+.sx-history { grid-template-columns: minmax(0, 1fr) 22rem; }
+.sx-history tbody tr { cursor: pointer; }
+.sx-history tbody tr.is-selected > * { --bs-table-bg: var(--hn-primary-100); font-weight: 700; }
+.sx-detail-meta { margin: 0 0 .5rem; font-size: .78rem; color: var(--hn-text-500); }
+.sx-detail-group { display: block; margin: .5rem 0 .25rem; font-size: .74rem; text-transform: uppercase; letter-spacing: .04em; color: var(--hn-primary-800); }
+.sx-detail-list { display: grid; gap: .2rem; margin: 0; padding: 0; list-style: none; font-size: .8rem; }
+.sx-detail-list li { display: flex; justify-content: space-between; gap: .5rem; }
+.sx-detail-list small { color: var(--hn-text-500); text-align: right; }
+.sx-detail-list small.is-done { color: var(--hn-success); font-weight: 700; }
+/* Diálogo "Selecionar exames" */
+.sx-d-help { margin: 0 0 .5rem; }
+.sx-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .1rem 1rem; max-height: 22rem; overflow: auto; margin: .75rem 0; padding: .25rem .5rem; border: 1px solid var(--hn-border); border-radius: var(--hn-radius-sm); }
+.sx-option { display: flex; align-items: center; gap: .45rem; }
+.sx-option span { flex: 1; }
+.sx-option small { color: var(--hn-text-500); font-size: .68rem; white-space: nowrap; }
+.sx-option[hidden] { display: none; }
+.sx-d-other-row { display: flex; gap: .5rem; }
+@media (max-width: 767.98px) { .sx-groups { grid-template-columns: 1fr; } }
+@media (max-width: 991.98px) { .sx-history { grid-template-columns: 1fr; } }
+@media (max-width: 575.98px) { .sx-options { grid-template-columns: 1fr; } .sx-print-opts .form-select { min-width: 0; width: 100%; } }
+
+/* Rotinas de exames com um clique (mensal, trimestral, semestral, anual). */
+.sx-routines { margin: 0 0 1rem; padding: .75rem; border: 1px solid var(--hn-primary-200); border-radius: var(--hn-radius-md); background: var(--hn-primary-50); }
+.sx-routines h4 { margin: 0 0 .55rem; font-size: .8rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--hn-primary-800); }
+.sx-routine-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); gap: .5rem; }
+.sx-routine { display: grid; grid-template-columns: auto 1fr; grid-template-areas: "check name" "check count"; align-items: center; gap: 0 .55rem; padding: .55rem .7rem; border: 1px solid var(--hn-border-strong); border-radius: var(--hn-radius-sm); background: var(--hn-surface); color: var(--hn-text-900); text-align: left; cursor: pointer; }
+.sx-routine:hover { border-color: var(--hn-primary-500); }
+.sx-routine:focus-visible { outline: none; box-shadow: var(--hn-focus-ring); border-color: var(--hn-primary-600); }
+.sx-routine strong { grid-area: name; font-size: .86rem; }
+.sx-routine small { grid-area: count; color: var(--hn-text-500); font-size: .72rem; }
+.sx-routine-check { grid-area: check; display: grid; place-items: center; width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 1px solid var(--hn-primary-200); color: var(--hn-primary-700); font-weight: 800; }
+.sx-routine.is-partial .sx-routine-check { background: var(--hn-primary-100); }
+.sx-routine.is-on { border-color: var(--hn-primary-600); background: var(--hn-primary-100); }
+.sx-routine.is-on .sx-routine-check { background: var(--hn-primary-700); border-color: var(--hn-primary-700); color: #fff; }
+.sx-routine-help { margin: .5rem 0 0; color: var(--hn-text-500); font-size: .74rem; }
+.sx-apac-note span { display: block; }
+.sx-apac-badge { margin-left: .35rem; font-size: .64rem; }
+.sx-apac-detail { margin: .25rem 0 .6rem; font-size: .78rem; }
+.sx-apac-detail span { display: block; }
+.sx-apac-form { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; margin-top: .45rem; }
+.sx-apac-form .field-label { margin: 0; }
+.sx-apac-form .form-control { width: 10rem; }
+.sx-send { flex-wrap: wrap; }
+.sx-groups > :last-child { grid-column: 1 / -1; }
