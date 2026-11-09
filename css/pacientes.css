@@ -1,0 +1,619 @@
+/* Lista de pacientes. Tokens, botões, cabeçalho e título da página ficam em base.css. */
+
+.page-feedback {
+  margin-bottom: 1rem;
+}
+
+.feedback-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+/* --------------------------------------------------------------------------
+   Lista de pacientes
+   -------------------------------------------------------------------------- */
+
+.patient-list-card {
+  overflow: hidden;
+  border: 1px solid var(--hn-border);
+  border-radius: var(--hn-radius-lg);
+  background: var(--hn-surface);
+  box-shadow: var(--hn-shadow-sm);
+}
+
+.patient-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.2rem 1.35rem;
+  background: var(--hn-surface);
+  border-bottom: 1px solid var(--hn-border);
+}
+
+.patient-list-header h2 {
+  margin: 0;
+  color: var(--hn-text-900);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.patient-list-header p {
+  margin: 0.25rem 0 0;
+  color: var(--hn-text-500);
+  font-size: 0.78rem;
+}
+
+.clear-filters {
+  padding-right: 0;
+  padding-left: 0;
+  color: var(--hn-primary-900);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.clear-filters:hover {
+  color: var(--hn-primary-700);
+  text-decoration: underline;
+}
+
+.patient-filters {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(16rem, 0.8fr);
+  gap: 0.9rem 1rem;
+  padding: 1.2rem 1.35rem;
+  border-bottom: 1px solid var(--hn-border);
+}
+
+.patient-search-field {
+  min-width: 0;
+}
+
+.form-label {
+  margin-bottom: 0.35rem;
+  color: var(--hn-text-700);
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.patient-filters .form-control,
+.patient-filters .form-select {
+  min-height: 42px;
+}
+
+.filter-summary {
+  grid-column: 1 / -1;
+  color: var(--hn-text-500);
+  font-size: 0.74rem;
+}
+
+.filter-summary.has-active-filters {
+  color: var(--hn-primary-900);
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   Tabela
+   -------------------------------------------------------------------------- */
+
+.patient-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.patient-table {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  table-layout: fixed;
+}
+
+.patient-table th,
+.patient-table td {
+  vertical-align: middle;
+  border-color: var(--hn-border);
+}
+
+/* Ações permanecem disponíveis mesmo se houver overflow residual. */
+.patient-table th:last-child,
+.patient-table td:last-child {
+  position: sticky;
+  right: 0;
+  z-index: 2;
+  background: var(--hn-surface);
+  box-shadow: -6px 0 12px rgba(23, 43, 53, 0.05);
+}
+
+.patient-table thead th:last-child {
+  z-index: 3;
+  background: var(--hn-surface-soft);
+}
+
+.patient-table thead th {
+  padding: 0.82rem 0.75rem;
+  color: var(--hn-text-500);
+  background: var(--hn-surface-soft);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.patient-table tbody th,
+.patient-table tbody td {
+  padding: 0.9rem 0.65rem;
+  color: var(--hn-text-900);
+  font-size: 0.8rem;
+}
+
+.patient-table tbody tr {
+  transition: background-color 140ms ease;
+}
+
+.patient-table tbody tr:hover > * {
+  --bs-table-bg: var(--hn-surface-soft);
+}
+
+.patient-table tbody tr.is-selected > * {
+  --bs-table-bg: var(--hn-primary-50);
+}
+
+.patient-table tbody tr.is-selected > th:first-child {
+  box-shadow: inset 3px 0 0 var(--hn-primary-700);
+}
+
+.patient-table th:nth-child(1),
+.patient-table td:nth-child(1) { width: 19%; }
+
+.patient-table th:nth-child(2),
+.patient-table td:nth-child(2) { width: 10%; }
+
+.patient-table th:nth-child(3),
+.patient-table td:nth-child(3) { width: 14%; }
+
+.patient-table th:nth-child(4),
+.patient-table td:nth-child(4) { width: 13%; }
+
+.patient-table th:nth-child(5),
+.patient-table td:nth-child(5) { width: 17%; }
+
+.patient-table th:nth-child(6),
+.patient-table td:nth-child(6) { width: 9%; }
+
+.patient-table th:nth-child(7),
+.patient-table td:nth-child(7) { width: 18%; }
+
+.patient-name {
+  display: block;
+  color: var(--hn-text-900);
+  font-weight: 800;
+}
+
+.patient-code {
+  display: block;
+  margin-top: 0.18rem;
+  color: var(--hn-text-500);
+  font-size: 0.7rem;
+}
+
+.patient-identifiers {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.document-line {
+  display: flex;
+  align-items: baseline;
+  gap: 0.38rem;
+  white-space: nowrap;
+  line-height: 1.35;
+}
+
+.document-label {
+  min-width: 2.3rem;
+  color: var(--hn-text-400);
+  font-size: 0.63rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.document-value {
+  color: var(--hn-text-700);
+  font-size: 0.74rem;
+}
+
+.program-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--hn-border);
+  border-radius: 999px;
+  background: var(--hn-surface-soft);
+  color: var(--hn-text-700);
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.situation-label {
+  color: var(--hn-text-700);
+  font-size: 0.76rem;
+}
+
+.selected-indicator {
+  display: inline-block;
+  margin-top: 0.42rem;
+  border: 1px solid var(--hn-primary-100);
+  background: var(--hn-primary-50);
+  color: var(--hn-primary-900);
+  font-size: 0.65rem;
+}
+
+.patient-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.patient-actions .btn {
+  min-height: 34px;
+  padding-inline: 0.75rem;
+  font-size: 0.76rem;
+  white-space: nowrap;
+}
+
+.loading-cell {
+  height: 8rem;
+  color: var(--hn-text-500);
+}
+
+.loading-cell .spinner-border {
+  margin-right: 0.55rem;
+}
+
+.list-state {
+  min-height: 15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2.2rem 1.5rem;
+  color: var(--hn-text-700);
+  text-align: center;
+}
+
+.list-state strong {
+  font-size: 0.96rem;
+  font-weight: 800;
+}
+
+.list-state p {
+  max-width: 36rem;
+  margin: 0;
+  color: var(--hn-text-500);
+  font-size: 0.8rem;
+}
+
+.list-state-error {
+  color: var(--hn-danger);
+}
+
+.patient-list-footer {
+  padding: 0.78rem 1.35rem;
+  background: transparent;
+  color: var(--hn-text-500);
+  font-size: 0.74rem;
+}
+
+/* --------------------------------------------------------------------------
+   Menu de ações
+   -------------------------------------------------------------------------- */
+
+.patient-action-menu {
+  position: fixed;
+  z-index: 1080;
+  width: max-content;
+  min-width: 13rem;
+  padding: 0.35rem;
+  border: 1px solid var(--hn-border);
+  border-radius: var(--hn-radius-md);
+  background: var(--hn-surface);
+  box-shadow: var(--hn-shadow-md);
+}
+
+.destructive-menu-action {
+  width: 100%;
+  min-height: 40px;
+  border: 0;
+  border-radius: var(--hn-radius-sm);
+  background: transparent;
+  padding: 0.62rem 0.7rem;
+  color: var(--hn-danger);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: left;
+}
+
+.destructive-menu-action:hover,
+.destructive-menu-action:focus-visible {
+  background: var(--hn-danger-soft);
+}
+
+/* --------------------------------------------------------------------------
+   Modal de exclusão
+   -------------------------------------------------------------------------- */
+
+.delete-dialog {
+  width: min(34rem, calc(100% - 2rem));
+  max-width: none;
+  padding: 0;
+  border: 0;
+  border-radius: var(--hn-radius-lg);
+  color: var(--hn-text-900);
+  box-shadow: var(--hn-shadow-md);
+}
+
+.delete-dialog::backdrop {
+  background: rgba(23, 43, 53, 0.5);
+}
+
+.delete-dialog .modal-content {
+  overflow: hidden;
+  border: 0;
+}
+
+.delete-dialog .modal-header,
+.delete-dialog .modal-footer {
+  border-color: var(--hn-border);
+  padding: 1.2rem 1.3rem;
+}
+
+.delete-dialog .modal-body {
+  padding: 1.3rem;
+}
+
+.delete-dialog .modal-body > p {
+  margin: 0 0 1rem;
+  color: var(--hn-text-700);
+}
+
+.delete-dialog .modal-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.destructive-eyebrow {
+  color: var(--hn-danger);
+}
+
+/* Novo prontuário */
+.new-record-dialog { width: min(44rem, calc(100% - 2rem)); }
+.new-record-note { color: var(--hn-text-500) !important; font-size: .85rem; }
+.new-record-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem 1rem; }
+.new-record-grid .nr-wide { grid-column: 1 / -1; }
+.new-record-hint { min-height: 1.2rem; margin: .75rem 0 .5rem !important; color: var(--hn-text-500) !important; font-size: .82rem; }
+.new-record-dialog .modal-footer { display: flex; justify-content: flex-end; gap: .6rem; }
+/* Incluir paciente: busca pelo CPF no AGHU e confirmação dos dados encontrados. */
+.nr-search { display: flex; align-items: flex-end; gap: .6rem; }
+.nr-search-field { flex: 1; }
+.nr-test-cpfs { margin: .45rem 0 0 !important; color: var(--hn-text-500) !important; font-size: .78rem; }
+.nr-test-cpfs button { border: 0; background: none; padding: 0 .15rem; color: var(--hn-primary-700); font: inherit; text-decoration: underline; cursor: pointer; }
+.nr-status { margin-top: .8rem; padding: .6rem .8rem; border-radius: var(--hn-radius-sm); border: 1px solid var(--hn-info-border); background: var(--hn-info-soft); color: var(--hn-info); font-size: .85rem; }
+.nr-status.is-warn { border-color: var(--hn-warning-border); background: var(--hn-warning-soft); color: var(--hn-warning); }
+.nr-status a { color: inherit; font-weight: 700; }
+.nr-result { margin-top: .9rem; padding: .9rem 1rem; border: 1px solid var(--hn-primary-200); border-radius: var(--hn-radius-md); background: var(--hn-primary-50); }
+.nr-result h3 { margin: 0 0 .6rem; font-size: .8rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--hn-primary-800); }
+.nr-data { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem 1rem; margin: 0; }
+.nr-data .nr-wide { grid-column: 1 / -1; }
+.nr-data dt { font-size: .74rem; font-weight: 600; color: var(--hn-text-500); }
+.nr-data dd { margin: 0; font-weight: 700; color: var(--hn-text-900); }
+.nr-result .new-record-hint { margin-bottom: 0 !important; }
+@media (max-width: 575.98px) { .new-record-grid, .nr-data { grid-template-columns: 1fr; } .nr-search { flex-wrap: wrap; } }
+
+#dialog-cancel{
+  margin-right: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile / tablet
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 1199.98px) {
+
+  /* Em tablet, a tabela vira uma sequência de registros legíveis.
+     Isso elimina a necessidade de rolagem horizontal para chegar às ações. */
+  .patient-table-wrap {
+    overflow: visible;
+  }
+
+  .patient-table {
+    min-width: 0;
+  }
+
+  .patient-table thead {
+    display: none;
+  }
+
+  .patient-table,
+  .patient-table tbody,
+  .patient-table tr,
+  .patient-table th,
+  .patient-table td {
+    display: block;
+    width: 100%;
+  }
+
+  /* As larguras em % das colunas (desktop) têm especificidade maior que "width: 100%" acima;
+     sem este reset cada célula ficava espremida (ex.: data quebrando letra por letra). */
+  .patient-table tbody tr > :nth-child(n) {
+    width: 100%;
+  }
+
+  .patient-table tbody tr {
+    padding: 1rem 1.1rem;
+    border-bottom: 1px solid var(--hn-border);
+  }
+
+  .patient-table tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  .patient-table tbody th,
+  .patient-table tbody td {
+    padding: 0.5rem 0;
+  }
+
+  .patient-table > :not(caption) > * > * {
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 1fr);
+    gap: 0.9rem;
+    align-items: start;
+    border: 0;
+  }
+
+  .patient-table > :not(caption) > * > *::before {
+    color: var(--hn-text-500);
+    content: attr(data-label);
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  .patient-table tbody th:first-child {
+    display: block;
+    padding-bottom: 0.85rem;
+  }
+
+  .patient-table tbody th:first-child::before {
+    display: none;
+  }
+
+  .patient-table > :not(caption) > * > .loading-cell {
+    display: flex;
+    height: 8rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .patient-table > :not(caption) > * > .loading-cell::before {
+    display: none;
+  }
+
+  .patient-table th:last-child,
+  .patient-table td:last-child {
+    position: static;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .patient-actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .patient-list-footer {
+    padding: 0.8rem 1rem;
+  }
+
+  .patient-identifiers {
+    white-space: normal;
+  }
+
+  .patient-table .program-label,
+  .patient-table .situation-label {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 991.98px) {
+
+  .patient-filters {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 767.98px) {
+
+  .patient-filters {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-summary {
+    grid-column: auto;
+  }
+
+  .patient-list-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .patient-table > :not(caption) > * > * {
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: 0.6rem;
+    align-items: center;
+  }
+
+  .patient-table tbody tr {
+    padding: 0.9rem 1rem 1rem;
+  }
+
+  .patient-table tbody th,
+  .patient-table tbody td {
+    padding: 0.35rem 0;
+    overflow-wrap: anywhere;
+  }
+
+  /* Nome e código em destaque no topo do cartão */
+  .patient-table tbody th:first-child {
+    padding-bottom: 0.6rem;
+    margin-bottom: 0.25rem;
+    border-bottom: 1px solid var(--hn-border);
+  }
+
+  .patient-table .patient-name {
+    display: block;
+    font-size: 1.05rem;
+  }
+
+  .patient-table .program-label,
+  .patient-table .situation-label {
+    justify-self: start;
+  }
+
+  /* CPF e CNS em linhas separadas, valor alinhado à direita do rótulo */
+  .patient-table .patient-identifiers {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  /* Ações ocupam a largura toda, com alvos de toque confortáveis */
+  .patient-table tbody td:last-child {
+    display: block;
+    padding-top: 0.75rem;
+  }
+
+  .patient-table tbody td:last-child::before {
+    display: none;
+  }
+
+  .patient-actions {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+  }
+
+  .patient-actions .btn {
+    min-height: 44px;
+    padding-inline: 1rem;
+  }
+
+}

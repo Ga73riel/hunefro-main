@@ -1,0 +1,98 @@
+/* Aba Prescrição e Tratamento / Medicações. Abas (.md-tabs) e caixas (.md-check) ficam em base.css; reaproveita .hc-* (histórico) e .ev-* (tabela, diálogo). */
+.md-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: .85rem 1rem; align-items: end; }
+.md-c2 { grid-column: span 2; } .md-c3 { grid-column: span 3; } .md-c4 { grid-column: span 4; }
+.md-c5 { grid-column: span 5; } .md-c6 { grid-column: span 6; }
+.md-submit { display: grid; gap: .4rem; }
+.md-print-row { display: flex; flex-wrap: wrap; gap: .75rem 1rem; align-items: flex-end; }
+
+/* Tipo de uso: botões segmentados (contínuo / por tempo / por dose) */
+.md-usage { border: 0; margin: 0; padding: 0; min-width: 0; }
+.md-segmented { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--hn-border-strong); border-radius: var(--hn-radius-sm); overflow: hidden; background: var(--hn-surface); }
+.md-segmented label { position: relative; margin: 0; }
+.md-segmented input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.md-segmented span { display: flex; align-items: center; justify-content: center; min-height: 38px; padding: .3rem .5rem; font-size: .85rem; font-weight: 600; color: var(--hn-text-700); text-align: center; }
+.md-segmented label + label span { border-left: 1px solid var(--hn-border-strong); }
+.md-segmented input:checked + span { background: var(--hn-primary-700); color: #fff; }
+.md-segmented input:focus-visible + span { outline: 3px solid var(--hn-primary-200); outline-offset: -3px; }
+.md-duration { display: grid; grid-template-columns: minmax(0, 1fr) 7.5rem; gap: .4rem; }
+.md-qty { display: flex; align-items: center; gap: .5rem; }
+.md-qty .form-control { max-width: 7rem; }
+.md-qty-unit { font-size: .82rem; color: var(--hn-text-500); white-space: nowrap; }
+.md-summary { display: flex; flex-wrap: wrap; gap: .35rem .5rem; align-items: center; min-height: 38px; padding: .35rem .7rem; border-radius: var(--hn-radius-sm); background: var(--hn-primary-50); color: var(--hn-primary-900); font-size: .85rem; }
+.md-summary:empty { background: transparent; }
+.md-summary-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--hn-primary-700); }
+.md-hint { margin: .6rem 0 0; font-size: .8rem; color: var(--hn-text-500); }
+.md-tag { margin-left: .4rem; font-size: .68rem; padding: .05rem .45rem; vertical-align: middle; }
+.md-summary .md-tag { margin-left: 0; }
+
+.md-form-warning { margin: .6rem 0 0; }
+
+/* Seleção na lista: a caixa de cada linha marca a medicação para imprimir, alterar, suspender ou excluir. */
+.md-pick-col { width: 2.25rem; text-align: center; }
+.md-pick { width: 1.05rem; height: 1.05rem; margin: 0; vertical-align: middle; accent-color: var(--hn-primary-700); cursor: pointer; }
+.md-table tbody tr.is-selected > * { font-weight: 400; }
+.md-table tbody tr.is-selected > :nth-child(2) > span:first-child { font-weight: 700; }
+.md-pick-count { align-self: center; margin-right: .25rem; font-size: .8rem; font-weight: 700; color: var(--hn-primary-800); }
+.md-pick-count:empty { display: none; }
+
+/* Impressão: documentos gerados a partir das medicações marcadas (ou de todas em uso). */
+.md-print { margin-top: 1.1rem; padding-top: 1rem; border-top: 1px solid var(--hn-border); }
+.md-print[hidden] { display: none; }
+.md-print-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: .75rem 1.25rem; margin-bottom: .75rem; }
+.md-print-title { margin: 0 0 .2rem; font-size: .95rem; font-weight: 700; color: var(--hn-text-900); }
+.md-print-help { margin: 0; font-size: .85rem; color: var(--hn-text-700); }
+.md-docs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: .5rem; }
+.md-doc { display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: .5rem; padding: .6rem .8rem; border: 1px solid var(--hn-border); border-radius: var(--hn-radius-md); background: var(--hn-surface-soft); }
+.md-doc .btn { flex: 0 0 auto; }
+.md-doc-text { display: grid; gap: .15rem; min-width: 0; }
+.md-doc-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem; color: var(--hn-text-900); font-size: .9rem; }
+.md-doc-kind { font-size: .72rem; font-weight: 700; color: var(--hn-text-500); text-transform: uppercase; letter-spacing: .04em; }
+.md-doc-items { font-size: .82rem; color: var(--hn-text-700); overflow-wrap: anywhere; }
+.md-doc-note { font-size: .76rem; color: var(--hn-success); }
+.md-doc-note.is-warning { color: var(--hn-warning); font-weight: 600; }
+.md-warnings { list-style: none; margin: .75rem 0 0; padding: 0; }
+.md-warnings .hn-alert { margin-bottom: .5rem; }
+.md-print-actions { display: flex; justify-content: flex-end; align-items: center; gap: .75rem; margin-top: .9rem; }
+
+/* Revisão do LME */
+.md-lme-dialog { width: min(880px, calc(100vw - 2rem)); }
+.md-lme-dialog .ev-dialog-body { display: grid; gap: .9rem; max-height: 70vh; overflow-y: auto; }
+.md-lme-intro { margin: 0; font-size: .85rem; color: var(--hn-text-700); }
+.md-lme-exams { padding: .75rem .9rem; border-radius: var(--hn-radius-md); background: var(--hn-surface-soft); border: 1px solid var(--hn-border); }
+.md-lme-exams h4 { margin: 0 0 .4rem; font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--hn-text-700); }
+.md-lme-exams ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .25rem; font-size: .84rem; }
+.md-lme-exam-mark { display: inline-grid; place-items: center; width: 1.1rem; height: 1.1rem; margin-right: .4rem; border-radius: 50%; font-size: .7rem; font-weight: 800; color: #fff; }
+.md-lme-exams .is-ok .md-lme-exam-mark { background: var(--hn-success); }
+.md-lme-exams .is-late .md-lme-exam-mark { background: var(--hn-warning-strong); }
+.md-lme-exams .is-late { color: var(--hn-warning); }
+.md-lme-exam-rule { color: var(--hn-text-500); }
+.md-lme-docs { margin: .5rem 0 0; font-size: .78rem; color: var(--hn-text-500); }
+.md-lme-items { margin: 0; }
+.md-lme-items input { max-width: 7rem; }
+.md-lme-radios { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem 1rem; align-items: center; }
+.md-lme-radios legend { width: 100%; }
+.md-lme-radios .form-control { flex: 1 1 100%; }
+.md-print-row .field-block { min-width: 11rem; }
+.md-list-header { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; justify-content: space-between; }
+.md-radios { display: flex; gap: 1.25rem; border: 0; margin: 0; padding: 0; }
+.md-list-header + .record-card-body .hc-history { grid-template-columns: 11rem minmax(0, 1fr); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+
+@media (max-width: 991.98px) {
+  .md-c2, .md-c3, .md-c4, .md-c5, .md-c6 { grid-column: span 6; }
+}
+@media (max-width: 575.98px) {
+  .md-c2, .md-c3, .md-c4, .md-c5, .md-c6 { grid-column: 1 / -1; }
+  .md-list-header + .record-card-body .hc-history { grid-template-columns: 1fr; }
+  .md-submit .btn, .md-print-row .btn, .md-print-actions .btn-primary { width: 100%; min-height: 44px; }
+  .md-print-actions { flex-direction: column-reverse; align-items: stretch; }
+  .md-doc { flex-direction: column; align-items: stretch; }
+  .md-print-top { flex-direction: column; align-items: stretch; }
+  .md-print-row .field-block { width: 100%; }
+}
+
+.md-submit [hidden], .md-grid [hidden] { display: none !important; }
+/* Grade com campos alinhados pelo topo (quando algum campo tem texto de ajuda embaixo). */
+.md-grid-top { align-items: start; }
+.md-author-help { margin: .25rem 0 0; font-size: .78rem; }

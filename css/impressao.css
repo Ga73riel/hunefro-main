@@ -1,0 +1,209 @@
+/* Padrão de impressão do HU-UFMA (receituários, receita de controle especial, LME, APAC e laudos). Montado por js/receituarios.js.
+   Folha de impressão: usa tons de cinza e preto, sem tokens de tela. */
+.hn-print-root { display: none; }
+
+/* Peças comuns do padrão. Ficam fora do @media print porque a aba Laudos mostra a folha na pré-visualização;
+   na tela as folhas dos receituários continuam ocultas dentro de .hn-print-root. */
+.pr-page { position: relative; display: flex; flex-direction: column; min-height: 268mm; break-after: page; page-break-after: always; font-family: Arial, Helvetica, sans-serif; font-size: 10.5pt; line-height: 1.35; color: #000; }
+.pr-page:last-child { break-after: auto; page-break-after: auto; }
+.pr-page img { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+
+/* Cabeçalho com as logos */
+.pr-head { display: grid; grid-template-columns: 34mm 1fr auto; align-items: center; gap: 4mm; padding-bottom: 3mm; border-bottom: 1.5pt solid #000; }
+.pr-logo-hubrasil { width: 36mm; height: auto; }
+.pr-head-logos { display: flex; align-items: center; gap: 2.5mm; }
+.pr-logo-round { width: 17mm; height: 17mm; object-fit: contain; }
+.pr-head-text { display: grid; gap: .3mm; text-align: center; font-size: 8pt; color: #222; }
+.pr-head-text strong { font-size: 9.5pt; color: #000; letter-spacing: .02em; }
+.pr-head-text span:empty { display: none; }
+
+.pr-title { margin: 5mm 0 1mm; font-size: 14pt; font-weight: 700; letter-spacing: .08em; text-align: center; }
+.pr-via { margin: 0 0 2mm; text-align: center; font-size: 9pt; font-weight: 700; text-transform: uppercase; }
+.pr-note { margin: 2mm 0; font-size: 9pt; }
+
+/* Paciente */
+.pr-patient { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5mm 4mm; margin: 3mm 0; padding: 2.5mm 3mm; border: .75pt solid #555; border-radius: 1.5mm; }
+.pr-field { display: grid; gap: .3mm; min-width: 0; }
+.pr-span-2 { grid-column: span 2; }
+.pr-span-3 { grid-column: 1 / -1; }
+.pr-field-label { font-size: 7pt; font-weight: 700; text-transform: uppercase; color: #444; letter-spacing: .04em; }
+.pr-field-value { font-size: 10pt; overflow-wrap: anywhere; }
+.pr-alert .pr-field-value { font-weight: 700; }
+
+/* Prescrição */
+.pr-body { flex: 1; padding-top: 2mm; }
+.pr-rx-group { margin-bottom: 4mm; break-inside: avoid; }
+.pr-rx-route { margin: 0 0 1.5mm; font-size: 10pt; font-weight: 700; text-decoration: underline; letter-spacing: .04em; }
+.pr-rx-list { list-style: none; margin: 0; padding: 0; }
+.pr-rx-item { margin-bottom: 3mm; break-inside: avoid; }
+.pr-rx-line { display: flex; align-items: baseline; gap: 2mm; }
+.pr-rx-num { width: 5mm; font-weight: 700; }
+.pr-rx-name { font-size: 11pt; }
+.pr-rx-dots { flex: 1; border-bottom: 1pt dotted #666; transform: translateY(-1mm); min-width: 8mm; }
+.pr-rx-qty { font-weight: 700; white-space: nowrap; }
+.pr-rx-use { margin: .8mm 0 0 7mm; font-size: 10pt; }
+
+/* Assinatura */
+.pr-sign { margin-top: auto; padding-top: 6mm; display: grid; justify-items: center; gap: 12mm; break-inside: avoid; }
+.pr-place { margin: 0; justify-self: end; font-size: 10pt; }
+.pr-sign-line { display: grid; justify-items: center; min-width: 85mm; padding-top: 1.5mm; border-top: .75pt solid #000; font-size: 9.5pt; }
+.pr-sign-hint { font-size: 7.5pt; color: #555; }
+.pr-foot { display: flex; justify-content: space-between; gap: 4mm; margin-top: 4mm; padding-top: 1.5mm; border-top: .5pt solid #999; font-size: 7.5pt; color: #444; }
+
+.pr-table { width: 100%; border-collapse: collapse; margin: 2mm 0 4mm; font-size: 9.5pt; }
+.pr-table th, .pr-table td { padding: 1.5mm 2mm; border: .5pt solid #777; text-align: left; vertical-align: top; }
+.pr-table th { background: #eee; font-size: 8pt; text-transform: uppercase; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+
+/* Solicitação de exames */
+.pr-ex-clinical { grid-template-columns: 4fr 1fr; }
+.pr-ex-table { margin: 1mm 0 3mm; font-size: 8.5pt; }
+.pr-ex-table th, .pr-ex-table td { padding: .8mm 1.5mm; }
+.pr-ex-table .pr-ex-n { width: 7mm; text-align: center; }
+.pr-ex-table .pr-ex-split { border-left: 1.5pt solid #000; }
+.pr-ex-table .pr-ex-code { width: 25mm; white-space: nowrap; }
+.pr-ex-table .pr-ex-qty { width: 11mm; text-align: center; }
+.pr-ex-note { font-size: 7.5pt; color: #333; }
+.pr-exames .pr-rx-route { margin: 3mm 0 0; }
+
+
+/* Laudos (js/laudos.js): uma folha por laudo, com altura fixa para caber em uma página.
+   A fonte do texto (--pr-laudo-font) é a maior que coube na pré-visualização. */
+.pr-laudo { height: 268mm; min-height: 0; overflow: hidden; }
+.pr-laudo .pr-title { margin: 4mm 0 1mm; font-size: 13pt; letter-spacing: .05em; }
+.pr-laudo-body { flex: 1 1 auto; min-height: 0; overflow: hidden; padding-top: 2mm; font-size: var(--pr-laudo-font, 11pt); line-height: 1.4; text-align: justify; }
+.pr-laudo-p { margin: 0; overflow-wrap: anywhere; }
+.pr-laudo-h { margin: 1.2mm 0 .8mm; font-size: 1.02em; font-weight: 700; text-align: left; }
+.pr-laudo-gap { height: .55em; }
+.pr-laudo-list { margin: 0 0 0 5mm; padding: 0; text-align: left; }
+.pr-laudo-list li { margin: 0 0 .4mm; padding-left: 1mm; }
+.pr-blank { display: inline-block; width: 32mm; border-bottom: .6pt solid #000; transform: translateY(-.6mm); }
+.pr-laudo .pr-sign { padding-top: 4mm; gap: 10mm; }
+.pr-head-compact { grid-template-columns: 24mm 1fr auto; gap: 3mm; padding-bottom: 2mm; }
+.pr-head-compact .pr-logo-hubrasil { width: 24mm; }
+.pr-head-compact .pr-logo-round { width: 11mm; height: 11mm; }
+.pr-head-compact .pr-head-text { font-size: 7.5pt; }
+.pr-head-compact .pr-head-text strong { font-size: 8.5pt; }
+.pr-laudo-compacto .pr-title { margin-top: 3mm; font-size: 12pt; }
+.pr-laudo-cont-id { margin: 2mm 0 0; padding-bottom: 1.5mm; border-bottom: .5pt solid #999; font-size: 8.5pt; font-weight: 700; }
+.pr-patient-full { grid-template-columns: repeat(4, 1fr); gap: 1mm 4mm; padding: 2mm 3mm; }
+.pr-patient-full .pr-field-value { font-size: 9pt; }
+.pr-span-full { grid-column: 1 / -1; }
+.pr-patient-compact { grid-template-columns: repeat(5, 1fr); padding: 1.5mm 2.5mm; margin: 2mm 0; }
+.pr-patient-compact .pr-field-value { font-size: 9pt; }
+
+@media print {
+  @page { size: A4 portrait; margin: 12mm 14mm; }
+
+  body.hn-printing { background: #fff !important; padding: 0 !important; }
+  body.hn-printing > *:not(.hn-print-root) { display: none !important; }
+  body.hn-printing .hn-print-root { display: block; color: #000; font-family: Arial, Helvetica, sans-serif; font-size: 10.5pt; line-height: 1.35; }
+
+  /* Receita de Controle Especial (modelo RDC 1.000/2025) */
+  .pr-rce { font-size: 9.5pt; }
+  .pr-rce-logos { display: flex; justify-content: center; align-items: center; gap: 5mm; }
+  .pr-rce-logos img { height: 11mm; width: auto; }
+  .pr-rce-title { margin: 3mm 0 3mm; text-align: center; font-size: 14pt; font-weight: 700; }
+  .pr-rce-bar { margin: 3mm 0 1.5mm; padding: .6mm; border: .75pt solid #000; text-align: center; font-size: 8.5pt; font-weight: 700; }
+  .pr-rce-line { margin: 0 0 1.2mm; font-size: 9pt; }
+  .pr-rce-line span { text-transform: uppercase; }
+  .pr-rce-line strong { text-transform: none; }
+  .pr-rce-rx { flex: 1; min-height: 50mm; padding-top: 1mm; }
+  .pr-rce-rx .pr-rx-name { font-size: 10.5pt; }
+  .pr-rce-box { margin-top: 2mm; padding: 1.5mm 2.5mm; border: .75pt solid #000; break-inside: avoid; }
+  .pr-rce-box .pr-rce-line span { font-weight: 700; }
+  .pr-rce-sign { margin: 7mm 0 1mm auto; width: 75mm; padding-top: .8mm; border-top: .75pt solid #000; text-align: center; font-size: 7.5pt; color: #444; }
+  .pr-rce-small { margin: 0 0 1.5mm; font-size: 6.5pt; font-style: italic; }
+  .pr-rce-blank { display: flex; gap: 1.5mm; }
+  .pr-rce-fill { flex: 1; border-bottom: .5pt solid #777; }
+  .pr-rce-row { display: grid; grid-template-columns: 2fr 1fr 2fr; gap: 3mm; }
+  .pr-rce-via { margin: 2mm 0 .5mm; text-align: right; font-size: 8.5pt; font-style: italic; }
+  .pr-rce-via strong { font-weight: 400; }
+  .pr-rce-via strong.is-current { font-weight: 700; text-decoration: underline; }
+  .pr-rce-printed { margin: 0; text-align: right; font-size: 7pt; font-style: italic; }
+
+  /* LME (Componente Especializado da Assistência Farmacêutica) */
+  /* O LME cabe em uma folha mesmo em papel Carta ou com margens maiores do navegador (até cerca de 245 mm úteis). */
+  @page lme { size: A4 portrait; margin: 8mm 12mm; }
+  .pr-lme { page: lme; font-size: 8pt; min-height: 0; }
+  .pr-lme > * { break-inside: avoid; page-break-inside: avoid; }
+  .lme-head { display: flex; justify-content: center; align-items: center; gap: 3mm; margin-bottom: 1.5mm; }
+  .lme-head p { margin: 0; font-size: 8pt; font-weight: 700; }
+  .lme-sus { height: 8mm; width: auto; }
+  .lme-band { margin: 0 0 .8mm; padding: .7mm; background: #000; color: #fff; text-align: center; font-size: 9pt; font-weight: 700; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .lme-band-soft { background: #bbb; color: #000; }
+  .lme-sub { margin: .5mm 0; text-align: center; font-size: 9.5pt; font-weight: 700; }
+  .lme-section { margin: 0 0 1mm; padding: .6mm; border: .75pt solid #000; border-radius: 1.5mm; text-align: center; font-size: 7.5pt; font-weight: 700; }
+  .lme-row { display: grid; gap: 1mm; margin-bottom: 1mm; }
+  .lme-r-1-3 { grid-template-columns: 1fr 3fr; }
+  .lme-r-4-1 { grid-template-columns: 4fr 1fr; }
+  .lme-r-1-4 { grid-template-columns: 1fr 4fr; }
+  .lme-r-2-1 { grid-template-columns: 2fr 1fr; }
+  .lme-r-1-1 { grid-template-columns: 1fr 1fr; }
+  .lme-row > div > .lme-box + .lme-box, .lme-row > div > .lme-row { margin-top: 1mm; margin-bottom: 0; }
+  .lme-box { display: grid; align-content: start; gap: .5mm; min-height: 8.5mm; padding: .5mm 1.6mm .8mm; border: .75pt solid #000; border-radius: 1.5mm; margin-bottom: 1mm; }
+  .lme-row > .lme-box { margin-bottom: 0; }
+  .lme-label { font-size: 6.8pt; }
+  .lme-value { min-height: 3.6mm; font-size: 9pt; font-weight: 700; font-family: "Courier New", Courier, monospace; overflow-wrap: anywhere; }
+  .lme-text { font-weight: 400; font-size: 8.5pt; line-height: 1.3; white-space: pre-wrap; }
+  .lme-tall { min-height: 19mm; }
+  .lme-sign { min-height: 15mm; }
+  .lme-small { margin: 0; font-size: 6.8pt; }
+  .lme-inline { display: flex; flex-wrap: wrap; align-items: center; gap: 1mm 3mm; }
+  .lme-grow { flex: 1; }
+  .lme-guardian { display: grid; flex: 1; min-width: 50mm; border-bottom: .5pt solid #000; text-align: center; }
+  .lme-check { display: inline-flex; align-items: center; gap: 1mm; font-size: 7.5pt; }
+  .lme-square { display: inline-grid; place-items: center; width: 3mm; height: 3mm; border: .75pt solid #000; font-size: 6.5pt; font-weight: 700; line-height: 1; }
+  .lme-grid-checks { display: grid; grid-template-columns: 1fr 1fr; gap: .6mm 3mm; }
+  .lme-filled { display: flex; min-height: 0; margin: 1.5mm 0 1.2mm; padding: 1mm 1.6mm; border-width: 1pt; }
+  .lme-filled .lme-label { font-weight: 700; font-size: 7.5pt; }
+  .lme-meds { width: 100%; border-collapse: separate; border-spacing: 0; margin-bottom: 1.2mm; border: .75pt solid #000; border-radius: 1.5mm; overflow: hidden; }
+  .lme-meds th, .lme-meds td { padding: .5mm 1mm; border-right: .5pt solid #000; border-bottom: .5pt solid #000; font-size: 7.5pt; height: 4.4mm; }
+  .lme-meds tr > :last-child { border-right: 0; }
+  .lme-meds tbody tr:last-child td { border-bottom: 0; }
+  .lme-meds th { font-weight: 700; text-align: center; }
+  .lme-meds td { font-family: "Courier New", Courier, monospace; font-size: 8.5pt; font-weight: 700; }
+  .lme-n { width: 5mm; text-align: center; font-family: Arial, sans-serif !important; }
+  .lme-q { width: 11mm; text-align: center; }
+  /* APAC: mesmo traço do LME, com as faixas e a grade do modelo do SIA/SUS. */
+  .apac-head { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 4mm; margin-bottom: 1.5mm; }
+  .apac-head .lme-head { justify-content: flex-start; margin: 0; }
+  .apac-title { margin: 0; font-size: 11pt; font-weight: 700; text-align: center; line-height: 1.25; }
+  .apac-band { margin: .8mm 0 .8mm; padding: .5mm; font-size: 8pt; }
+  .pr-apac .lme-box { min-height: 0; gap: .2mm; padding: .4mm 1.4mm .5mm; }
+  .pr-apac .lme-label { line-height: 1.1; }
+  .pr-apac .lme-value { min-height: 3mm; font-size: 8.5pt; line-height: 1.15; }
+  .pr-apac .lme-text { font-size: 8pt; line-height: 1.25; }
+  .pr-apac .lme-sign { min-height: 13mm; }
+  .apac-r-name { grid-template-columns: 5fr 1.3fr 1.2fr; }
+  .apac-r-4 { grid-template-columns: 2.2fr 1fr 1fr 1fr; }
+  .apac-r-phone { grid-template-columns: 3fr 1.4fr; }
+  .apac-r-city { grid-template-columns: 3fr 1.2fr .5fr 1fr; }
+  .apac-r-proc { grid-template-columns: 1.75fr 4fr .55fr; }
+  .apac-r-proc .lme-label, .apac-r-city .lme-label { white-space: nowrap; }
+  .apac-r-cid { grid-template-columns: 3fr 1fr 1fr 1.1fr; }
+  .apac-r-sign { grid-template-columns: 2.4fr 1fr; }
+  .apac-r-sign > div > .lme-row { margin-bottom: 1mm; }
+  .apac-r-sign > div > .lme-row:last-child, .apac-r-sign > div > .lme-box:last-child { margin-bottom: 0; }
+  .apac-notes { min-height: 15mm; }
+  .apac-period { font-size: 8pt; text-align: center; padding-top: 1mm; }
+  .lme-foot { margin: .5mm 0 0; font-size: 7.5pt; font-weight: 700; break-before: avoid; page-break-before: avoid; }
+}
+
+/* História Clínica e Evolução: folhas montadas por js/historia-clinica.js (altura fixa, registros paginados). */
+.hc-measure { position: fixed; left: -10000px; top: 0; width: 182mm; visibility: hidden; }
+.pr-hc { height: 268mm; min-height: 0; overflow: hidden; }
+.pr-hc .pr-title { margin: 4mm 0 1mm; font-size: 13pt; letter-spacing: .05em; }
+.pr-hc-filters { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5mm 4mm; margin: 0 0 2mm; padding: 2mm 3mm; border: .75pt solid #555; border-radius: 1.5mm; }
+.pr-hc-filters .pr-field-value { font-size: 9pt; }
+.pr-hc-body { flex: 1 1 auto; min-height: 0; overflow: hidden; padding-top: 1mm; font-size: 9.5pt; line-height: 1.35; }
+.pr-hc-entry { margin: 0 0 2.5mm; border: .5pt solid #999; border-radius: 1mm; padding: 0 2.5mm 1.5mm; }
+.pr-hc-head { display: flex; align-items: baseline; gap: 3mm; margin: 0 -2.5mm 1.2mm; padding: .9mm 2.5mm; background: #e9e9e9; border-bottom: .5pt solid #999; font-size: 9.5pt; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+.pr-hc-head span { font-weight: 700; }
+.pr-hc-head em { margin-left: auto; font-size: 8pt; font-style: normal; font-weight: 700; text-transform: uppercase; letter-spacing: .03em; }
+.pr-hc-p { margin: 0; overflow-wrap: anywhere; }
+.pr-hc-li { padding-left: 4mm; text-indent: -3mm; }
+.pr-hc-li::before { content: "- "; }
+.pr-hc-sub { margin-top: .6mm; font-weight: 700; }
+.pr-hc-gap { height: .5em; }
+.pr-hc-by { margin: 1.2mm 0 0; padding-top: .8mm; border-top: .5pt dotted #999; text-align: right; font-size: 8.5pt; font-style: italic; }
+.pr-hc-entry.is-cancelled .pr-hc-p { text-decoration: line-through; color: #555; }
